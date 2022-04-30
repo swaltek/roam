@@ -33,6 +33,7 @@ pip install -r requirements.txt
 python manage.py migrate
 ~~~
 **Note: I have to use psycopg2-binary. If you typically use psycopg2 and its not already added to requirements.txt, also pip install that and add it to the requirements.txt (re-freeze to include on next merge to main)**
+**Note2: You can ignore if you get a warning about the /frontend/build/static folder not existing. Doesnt impact and will be built later on**
 
 4. Load data or create a super user
 - I have an admin user created (username: admin, pw: admin, email: admin@admin.com) for us to all use but feel free to skip this and create your own super user
