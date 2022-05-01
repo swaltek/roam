@@ -7,8 +7,7 @@ r.register('users', UserViewSet, basename='user')
 
 urlpatterns = [
     path("", include(r.urls)),
-    # path('logout/', handle_logout),
-    # path('login/', handle_login),
-    # path('whoami/', who_am_i),
-    # path('reset_password/', handle_reset),
+    path('logout/', handle_logout),
+    path('login/', handle_login),
+    path('whoami/', who_am_i),
 ]
