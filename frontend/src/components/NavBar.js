@@ -55,7 +55,7 @@ const MenuLinks = ({ isOpen }) => {
         m
       >
         <MenuItem to="/">Home </MenuItem>
-        <MenuItem to="/login">Pricing </MenuItem>
+        <MenuItem to="/login">Login </MenuItem>
         <MenuItem to="/signup" isLast>
           <Button
             size="sm"
@@ -84,8 +84,9 @@ const NavBarContainer = ({ children, ...props }) => {
       w="100%"
       mb={8}
       p={8}
-      bg={["primary.500", "primary.500", "transparent", "transparent"]}
-      color={["white", "white", "primary.700", "primary.700"]}
+      bg={["transparent", "transparent", "transparent", "transparent"]}
+      color={["primary.700", "primary.700", "primary.700", "primary.700"]}
+      zIndex={9999}
       {...props}
     >
       {children}

@@ -1,12 +1,16 @@
+import { VStack } from "@chakra-ui/react";
+
 import Map from "../components/Map";
 import MostPopularSites from "../components/MostPopularSites";
 import BoondockSites from "../components/BoondockSites";
 import FeaturedParks from "../components/FeaturedParks";
 import RandomContent from "../components/RandomContent";
+import HeaderImage from "../components/HeaderImage";
 
-export const HomePage = () => {
+export const HomePage = (props) => {
   return (
-    <div>
+    <VStack>
+      <HeaderImage imageUrl="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg" />
       <section>
         <h1>Search for your next adventure.</h1>
         <form>
@@ -27,7 +31,7 @@ export const HomePage = () => {
       <FeaturedParks />
 
       <RandomContent />
-    </div>
+    </VStack>
   );
 };
 
