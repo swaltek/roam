@@ -1,0 +1,83 @@
+/* .photo1 {
+  background-image: url('../static/mountain.jpeg');
+  background-size: 460px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+
+  display: block;
+  width: 180px;
+  height: 260px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space:nowrap;
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.photo2 {
+  background-image: url('../static/paddleboard.jpeg');
+  background-size: 180px;
+  background-repeat: no-repeat;
+  background-position: 80% 30%;
+  border-radius: 4%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+
+  display: block;
+  width: 180px;
+  height: 160px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space:nowrap;
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.photo3 {
+  background-image: url('../static/rainier.jpeg');
+  background-size: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+
+  display: block;
+  width: 380px;
+  height: 260px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space:nowrap;
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.photo4 {
+  background: plum;
+  background-size: 400px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 4%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+
+  display: block;
+  width: 820px;
+  height: 260px;
+  text-decoration: none;
+  cursor: pointer;
+  overflow: hidden;
+  text-indent: 100%;
+  white-space:nowrap;
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+} */
