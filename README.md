@@ -3,9 +3,8 @@
 - Courtney Smith
 - Lyman Perrine
 - Marcin Swaltek
-- Brian Kluball
-- Amy Thomas
 - Phillip Hall
+- Suruchi Khand
 
 ## App Summary:
 **Updated: For hikers, backbackers and nomads planning their next adventure and private landowners wanting to extend the utility of their land, (Roam?) is a community website that connects private landowners with traveling adventurers looking for a simple site to stay at. Unlike other hiking or housing resource sites, this site will focus specifically on providing hikers/campers with the ability to find a place to stay that fits their budget needs and outdoor desires.**
