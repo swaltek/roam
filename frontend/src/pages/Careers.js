@@ -1,4 +1,4 @@
-export const Careers = () => {
+export const Careers = (props) => {
   return (
     <div>
       <h1>Join our team !</h1>
