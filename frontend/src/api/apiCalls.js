@@ -4,11 +4,14 @@ import apiHelpers from "./apiHelpers"
 const apiCalls = {}
 const BASE_URL = "http://localhost:8000/api" //backend in project URLS
 
-//authentication api methods
+//user/auth api methods
 apiCalls.signup = async (signupData) => {
-  return await apiHelpers.tryCatchFetch(
+  let newUser = await apiHelpers.tryCatchFetch(
     () => axios.post(`${BASE_URL}/users/`, signupData, apiHelpers.getCsrfConfig())
   )
+  if (newUser){
+    return await apiCalls.login(signupData)
+  }
 }
 
 apiCalls.login = async (loginData) => {
@@ -22,6 +25,18 @@ apiCalls.logout = async () => {
     () => axios.post(`${BASE_URL}/logout/`, null, apiHelpers.getCsrfConfig()))
 }
 
+apiCalls.deleteAccount = async (userId) => {
+  return await apiHelpers.tryCatchFetch(() => axios.delete(`${BASE_URL}users/${userId}`, apiHelpers.getCsrfConfig()))
+}
+
+apiCalls.whoAmI = async () => {
+  return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}whoami/`, apiHelpers.getCsrfConfig()))
+}
+
+apiCalls.updateUser = async (userId, data) => {
+  return await apiHelpers.tryCatchFetch(() => axios.put(`${BASE_URL}users/${userId}/`,data, apiHelpers.getCsrfConfig()))
+}
+
 //listing methods
 
 apiCalls.getAllListings = async () => {
@@ -30,7 +45,6 @@ apiCalls.getAllListings = async () => {
     () => axios.get(`${BASE_URL}/listings/`, apiHelpers.getCsrfConfig())
     )
 }
-console.log(getAllListings())
 
 apiCalls.createListing = async (listingData) => {
   return await apiHelpers.tryCatchFetch(

@@ -2,6 +2,7 @@ import "../styles/ListingForm.css";
 import * as yup from 'yup'
 import { Formik, Form } from 'formik';
 import { FormControl, FormLabel, FormErrorMessage, Button, Input, Textarea } from '@chakra-ui/react'
+import MapElement from "./SelectLocationMap";
 
 
 function ListingForm(props) {
@@ -42,6 +43,11 @@ function ListingForm(props) {
         }
         setSubmitting(false);
         resetForm({values:''})
+    }
+
+    const mapOnChange = (event, newLngLat)=>{
+        console.log(event)
+        console.log(newLngLat)
     }
 
     return (
@@ -90,82 +96,7 @@ function ListingForm(props) {
                         />
                         <FormErrorMessage>{errors.description}</FormErrorMessage>
                     </FormControl>
-
-                    {/* <Form.Group className="mb-3" controlId="formTitle">
-                        <Form.Label>Title:</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            name="title"
-                            value={values.title}
-                            placeholder="Enter a title for your site" 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isInvalid={touched.title && !!errors.title}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.title}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formPrice">
-                        <Form.Label>Price:</Form.Label>
-                        <Form.Control 
-                            type="text" 
-                            name="first_name"
-                            value={values.first_name}
-                            placeholder="Enter your first name"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isInvalid={touched.first_name && !!errors.first_name} 
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.first_name}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formLastName">
-                        <Form.Label>Last Name:</Form.Label>
-                        <Form.Control  
-                            type="text"
-                            name="last_name" 
-                            value={values.last_name}
-                            placeholder="Enter your last name" 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isInvalid={touched.last_name && !!errors.last_name} 
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.last_name}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control
-                            type="password" 
-                            name= "password"
-                            value={values.password}
-                            placeholder="Password" 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isInvalid={touched.password && !!errors.password}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password}
-                        </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formPassword2">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control
-                            type="password" 
-                            name="password2"
-                            value={values.password2}
-                            placeholder="Re-type password" 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            isInvalid={touched.password2 && !!errors.password2}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.password2}
-                        </Form.Control.Feedback>
-                    </Form.Group> */}
+                    <MapElement onChange={mapOnChange}/>
                     <Button
                         mt={4}
                         colorScheme='teal'
