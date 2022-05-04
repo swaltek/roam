@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import MinValueValidator
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class User(AbstractUser):
     #username needs to be here for django admin page functionality
@@ -15,18 +15,19 @@ class User(AbstractUser):
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
 
+LNG_VALIDATOR_MSG = "Longitiude must be between -180 and 180"
+LAT_VALIDATOR_MSG = "Latitude must be between -90 and 90"
+
 class Listing(models.Model):
     title = models.CharField(max_length=255)
     is_boondock = models.BooleanField(default=False)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='listings', null=True, blank=True)
     price = models.IntegerField(default=0, validators=[MinValueValidator(0)])
-    location = models.CharField(max_length=255) #TODO: need to refine this
+    location_lng = models.DecimalField(validators=[MinValueValidator(-180, message=LNG_VALIDATOR_MSG), MaxValueValidator(180, message=LNG_VALIDATOR_MSG)])
+    location_lat = models.DecimalField(validators=[MinValueValidator(-90, message=LAT_VALIDATOR_MSG), MaxValueValidator(90, message=LAT_VALIDATOR_MSG)])
     address = models.ForeignKey("Address", on_delete=models.CASCADE, related_name='listings', null=True, blank=True)
     amenities = models.ManyToManyField("Amenity", related_name='listings', blank=True)
     rating = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True)
-    #nearby destinations
-    #availability
-    #nearby parks
 
     def __str__(self):
         return f"{self.owner.first_name}'s {self.title}"
