@@ -100,11 +100,11 @@
 }
 
 section h4 {
-  color: white;
+  color: rgb(255, 255, 255);
   font-family: 'Roboto', sans-serif;
   font-size: 38px;
   padding-left: 10px;
-  text-shadow: 1px 1px 25px rgba(0, 0, 0, 0.995);
+  text-shadow: 2px 1px 3px black;
 }
 
 
