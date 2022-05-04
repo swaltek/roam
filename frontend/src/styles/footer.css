@@ -3,7 +3,7 @@
   width: 100%;
   position: relative;
   height: auto;
-  background-color: #f6f6f6;
+  background-color: #4c5240;
 }
 .footer .col {
   width: 190px;
@@ -21,7 +21,7 @@
   font-size: 12px;
   line-height: 17px;
   padding: 20px 0px 5px 0px;
-  color: rgba(136, 136, 136, 0.865);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: normal;
   text-transform: uppercase;
   letter-spacing: 0.250em;
@@ -32,7 +32,7 @@
   padding: 0;
 }
 .footer .col ul h6 {
-  color: #848484;
+  color: #c1c1c1;
   font-size: 14px;
   font-family: inherit;
   font-weight: bold;
@@ -47,7 +47,7 @@
   padding-right: 5px !important;
 }
 .footer .col ul h6:hover {
-  color: #626262;
+  color: #e2e2e2;
   transition: .1s;
   -webkit-transition: .1s;
   -moz-transition: .1s;
