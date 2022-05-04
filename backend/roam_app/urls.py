@@ -4,6 +4,11 @@ from .views import *
 
 r = routers.DefaultRouter()
 r.register('users', UserViewSet, basename='user')
+r.register('listings', ListingViewSet, basename='listing')
+r.register('amenities', AmenityViewSet, basename='amenity')
+r.register('reviews', ReviewViewSet, basename='review')
+r.register('reservations', ReservationViewSet, basename='reservation')
+r.register('addresses', AddressViewSet, basename='address')
 
 urlpatterns = [
     path("", include(r.urls)),
