@@ -25,7 +25,7 @@ section h4 {
   font-family: 'Roboto', sans-serif;
   font-weight: 900;
   font-size: 38px;
-  padding: 5px;
+  padding: 5px 20px;
   text-shadow: 2px 1px 3px black;
   letter-spacing: 0.05em;
 }
@@ -110,7 +110,7 @@ section h4 {
 }
 
 .container a:hover {
-  box-shadow: rgb(50, 50, 93) 0px 3px 8px -1px, rgba(0, 0, 0, 0.3) 0px 1px 2px -1px;
+  box-shadow: rgb(50, 50, 93) 0px 5px 9px -1px, rgba(0, 0, 0, 0.3) 0px 1px 2px -1px;
 }
 
 @media (max-width: 900px) {
