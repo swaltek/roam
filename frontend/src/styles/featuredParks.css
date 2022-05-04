@@ -32,6 +32,13 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  font-weight: 900;
+  padding: 10px 20px;
+  text-shadow: 2px 1px 4px black;
+  letter-spacing: 0.05em;
 }
 
 .imageContainer:hover {
@@ -57,16 +64,6 @@
   background-image: url("../static/rockymountains.jpg");
 }
 
-.parkNameheader {
-  color: rgb(255, 255, 255);
-  font-family: 'Roboto', sans-serif;
-  font-size: 28px;
-  font-weight: 900;
-  padding: 10px 20px;
-  text-shadow: 2px 1px 4px black;
-  letter-spacing: 0.05em;
-}
-
 @media (min-width: 600px) {
   .centerContent {
     grid-template-columns: repeat(2, 1fr); 
@@ -76,8 +73,6 @@
   }
   .imageContainer {
     height: 12rem;
-  }
-  .parkNameheader {
     font-size: 32px;
     text-shadow: 2px 1px 3px black;
   }
@@ -90,7 +85,7 @@
   .pageHeader { 
     font-size: 30px;
   }
-  .parkNameheader {
+  .imageContainer {
     font-size: 30px;
   }
 }
@@ -100,8 +95,6 @@
   }
   .imageContainer {
     height: 16rem;
-  }
-  .parkNameheader {
     font-size: 38px;
   }
 }
