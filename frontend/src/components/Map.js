@@ -85,6 +85,18 @@ const Map = () => {
             'icon-size': 0.25,
           }
       });
+      map.current.on('click', 'listingsLayer', (e) => {
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const id = e.features[0].properties.id;
+        const title = e.features[0].properties.title;
+        const rating = e.features[0].properties.rating;
+        new mapboxgl.Popup()
+          .setLngLat(coordinates)
+          .setHTML(`id:${id} ${title} rating:${rating}`)
+          .addTo(map.current);
+      });
+
       map.current.on('mouseenter', 'listingsLayer', () => {
         map.current.getCanvas().style.cursor = 'pointer';
       });
