@@ -24,7 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ListingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Listing
-        fields = ["id", "title", "is_boondock", "owner", "price", "location", "address", "amenities", "rating"]
+        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating"]
 
 class AmenitySerializer(serializers.ModelSerializer):
     class Meta:
