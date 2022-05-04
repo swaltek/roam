@@ -1,0 +1,13 @@
+.genericCenterContent {
+  width: 100%;
+  display: block;
+  justify-content: center;
+}
+
+.genericMainHeader {
+  font-size: 30px;
+}
+
+.heavyText {
+  font-weight: bolder;
+}

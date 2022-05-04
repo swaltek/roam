@@ -2,16 +2,22 @@
 
 .mainDiv {
   width: 100%;
+  display: block;
+}
+
+.blocksContainer {
   display: flex;
+  margin: auto;
+  width: 80%;
   justify-content: center;
-  padding: 8%;
+  padding: 2% 0% 2% 0%;
 }
 
 .container {  
   width: 80%;
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr;
-  grid-template-rows: 1fr 0.5fr 0.5fr;
+  grid-template-rows: .85fr 0.5fr 0.5fr;
   gap: 26px;
   grid-auto-flow: column dense;
   grid-template-areas:
@@ -24,7 +30,7 @@ section h4 {
   color: rgb(255, 255, 255);
   font-family: 'Roboto', sans-serif;
   font-weight: 900;
-  font-size: 38px;
+  font-size: 36px;
   padding: 5px 20px;
   text-shadow: 2px 1px 3px black;
   letter-spacing: 0.05em;
@@ -113,6 +119,30 @@ section h4 {
   box-shadow: rgb(50, 50, 93) 0px 5px 9px -1px, rgba(0, 0, 0, 0.3) 0px 1px 2px -1px;
 }
 
+.exploreHeader {
+  display: block;
+  color: black;
+  font-weight: 300;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 600px) {
+  .exploreHeader { 
+    font-size: 32px;
+  }
+  .container { 
+    width: 85%;
+  }
+}
+@media (min-width: 900px) {
+  .exploreHeader { 
+    font-size: 30px;
+  }
+}
 @media (max-width: 900px) {
   .container { 
     grid-template-columns: 1fr;
@@ -124,6 +154,7 @@ section h4 {
     "square4"
     "square5"
     "square6";
+    width: 100%;
   }
   .square4 {
     background-size: cover;
@@ -132,9 +163,25 @@ section h4 {
     background-size: cover;
   }
   section h4 {
-    font-size: 26px;
+    font-size: 24px;
   }
   .square1, .square2, .square3, .square4, .square5, .square6 {
     height: 40px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {  
+    width: 75%;
+  }
+}
+@media (min-width: 1500px) {
+  .exploreHeader { 
+    font-size: 36px;
+  }
+  .container {  
+    width: 70%;
+  }
+  section h4 {
+    font-size: 38px;
   }
 }
