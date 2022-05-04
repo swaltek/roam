@@ -1,11 +1,16 @@
+import { useState } from 'react';
 import "../styles/ListingForm.css";
 import * as yup from 'yup'
 import { Formik, Form } from 'formik';
 import { FormControl, FormLabel, FormErrorMessage, Button, Input, Textarea } from '@chakra-ui/react'
 import MapElement from "./SelectLocationMap";
+import apiCalls from '../api/apiCalls';
 
 
 function ListingForm(props) {
+    const [lat, setlat] = useState(null)
+    const [long, setlong] = useState(null)
+
     const validationSchema = yup.object().shape({
         title:          yup.string()
                             .required('A site title required'),
@@ -23,16 +28,18 @@ function ListingForm(props) {
 
     const onSubmit = async (values, { setSubmitting, resetForm })=> {
         values['is_boondock'] = props.is_boondock
-
+        values['location_lng'] = long
+        values['location_lat'] = lat
         // this block sends a post request for a new listing object or a 
         // put request for updating a listing
         if (props.new){
             console.log('creating a new listing API call')
             console.log(values)
-            // let response = await BarAPI.updateBeer(values, props.beer.id)
-            // if (response) {
-            //     navigate('/account')
-            // }
+            let response = await apiCalls.createListing(values)
+            if (response) {
+                console.log(response)
+                alert('new listing created')
+            }
         } else {
             console.log('updating a listing API call')
             console.log(values)
@@ -46,7 +53,8 @@ function ListingForm(props) {
     }
 
     const mapOnChange = (event, newLngLat)=>{
-        console.log(event)
+        setlat(newLngLat.lat)
+        setlong(newLngLat.lng)
         console.log(newLngLat)
     }
 

@@ -28,6 +28,7 @@ class Listing(models.Model):
     address = models.ForeignKey("Address", on_delete=models.CASCADE, related_name='listings', null=True, blank=True)
     amenities = models.ManyToManyField("Amenity", related_name='listings', blank=True)
     rating = models.DecimalField(max_digits=2, decimal_places=1, blank=True, null=True)
+    description = models.TextField()
 
     def __str__(self):
         return f"{self.owner.first_name}'s {self.title}"

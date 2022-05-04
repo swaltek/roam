@@ -40,7 +40,6 @@ apiCalls.updateUser = async (userId, data) => {
 //listing methods
 
 apiCalls.getAllListings = async () => {
-  console.log("In here")
   return await apiHelpers.tryCatchFetch(
     () => axios.get(`${BASE_URL}/listings/`, apiHelpers.getCsrfConfig())
     )
