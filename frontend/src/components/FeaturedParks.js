@@ -32,7 +32,6 @@ export const FeaturedParks = (props) => {
           <li className="imageContainer rockymountains">
             <Link to="/"><h4 className="parkNameheader">Rocky Mountains</h4></Link>
           </li>
-
         </ul>
       </div>
     </div>
@@ -42,6 +41,7 @@ export const FeaturedParks = (props) => {
 export default FeaturedParks;
 
 // eslint-disable-next-line
+
 {/* <li className="imageContainer yosemite">
   <a href="../pages/SearchResults.js" title="Yosemite"><h4>Yosemite</h4></a>
 </li>
