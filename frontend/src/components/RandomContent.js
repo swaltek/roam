@@ -1,5 +1,3 @@
-import "../styles/randomContent.css"
-
 const RandomContent = (props) => {
     return(
         <div>
