@@ -4,6 +4,7 @@ import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 // import { Link } from "react-router-dom"
 import Logo from "./Logo";
+import SignupPage from "../pages/SignUp";
 
 export const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -56,8 +57,8 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/">Home </MenuItem>
         <MenuItem to="/login">Login </MenuItem>
-        <MenuItem to="/signup" isLast>
-          <Button
+        <MenuItem to="/signup"  isLas>
+          <Button onClick={<SignupPage/>}
             size="sm"
             rounded="md"
             color={["primary.500", "primary.500", "white", "white"]}
