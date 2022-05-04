@@ -1,83 +1,140 @@
-/* .photo1 {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap');
+
+.mainDiv {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 8%;
+}
+
+.container {  
+  width: 80%;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 0.5fr;
+  gap: 26px;
+  grid-auto-flow: column dense;
+  grid-template-areas:
+    "square1 square2 square2"
+    "square3 square4 square6"
+    "square5 square5 square6";
+}
+
+section h4 {
+  color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-weight: 900;
+  font-size: 38px;
+  padding: 5px;
+  text-shadow: 2px 1px 3px black;
+  letter-spacing: 0.05em;
+}
+
+.square1 {
+  grid-area: square1;
   background-image: url('../static/mountain.jpeg');
-  background-size: 460px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  border-radius: 4%;
+  border-radius: 3%;
   background-clip: border-box;
   transition: background-size 0.2s;
   transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
-
-  display: block;
-  width: 180px;
-  height: 260px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space:nowrap;
   box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.photo2 {
-  background-image: url('../static/paddleboard.jpeg');
-  background-size: 180px;
+.square2 {
+  grid-area: square2;
+  background-image: url('../static/capitalreef.jpeg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 3%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.square3 {
+  grid-area: square3;
+  background-image: url('../static/glamp2.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  border-radius: 3%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.square4 {
+  grid-area: square4;
+  background-image: url('../static/dontlitter.jpg');
+  background-size: 140%;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 3%;
+  background-clip: border-box;
+  transition: background-size 0.2s;
+  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+}
+
+.square5 {
+  grid-area: square5;
+  background-image: url('../static/rainier.jpeg');
+  background-size: 100%;
   background-repeat: no-repeat;
   background-position: 80% 30%;
-  border-radius: 4%;
+  border-radius: 3%;
   background-clip: border-box;
   transition: background-size 0.2s;
   transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
-
-  display: block;
-  width: 180px;
-  height: 160px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space:nowrap;
+  height: inherit;
   box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.photo3 {
-  background-image: url('../static/rainier.jpeg');
-  background-size: 400px;
+.square6 {
+  grid-area: square6;
+  background-image: url('../static/glacier.jpeg');  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 4%;
+  background-position: 90%;
+  border-radius: 3%;
   background-clip: border-box;
   transition: background-size 0.2s;
   transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
-
-  display: block;
-  width: 380px;
-  height: 260px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space:nowrap;
+  height: 360px;
   box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
 }
 
-.photo4 {
-  background: plum;
-  background-size: 400px;
-  background-repeat: no-repeat;
-  background-position: center;
-  border-radius: 4%;
-  background-clip: border-box;
-  transition: background-size 0.2s;
-  transition-timing-function: cubic-bezier(.07,1.41,.82,1.41);
+.container a:hover {
+  box-shadow: rgb(50, 50, 93) 0px 3px 8px -1px, rgba(0, 0, 0, 0.3) 0px 1px 2px -1px;
+}
 
-  display: block;
-  width: 820px;
-  height: 260px;
-  text-decoration: none;
-  cursor: pointer;
-  overflow: hidden;
-  text-indent: 100%;
-  white-space:nowrap;
-  box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
-} */
+@media (max-width: 900px) {
+  .container { 
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+    "square1"
+    "square2"
+    "square3"
+    "square4"
+    "square5"
+    "square6";
+  }
+  .square4 {
+    background-size: cover;
+  }
+  .square5 {
+    background-size: cover;
+  }
+  section h4 {
+    font-size: 26px;
+  }
+  .square1, .square2, .square3, .square4, .square5, .square6 {
+    height: 40px;
+  }
+}
