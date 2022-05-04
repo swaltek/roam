@@ -42,8 +42,6 @@ export default FeaturedParks;
 
 // eslint-disable-next-line
 
-// eslint-disable-next-line
-
 {/* <li className="imageContainer yosemite">
   <a href="../pages/SearchResults.js" title="Yosemite"><h4>Yosemite</h4></a>
 </li>
