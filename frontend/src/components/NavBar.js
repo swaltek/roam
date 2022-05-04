@@ -57,8 +57,8 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/">Home </MenuItem>
         <MenuItem to="/login">Login </MenuItem>
-        <MenuItem to="/signup"  isLas>
-          <Button onClick={<SignupPage/>}
+        <MenuItem to="/signup"  isLast>
+          {/* <Button onClick={<SignupPage/>}
             size="sm"
             rounded="md"
             color={["primary.500", "primary.500", "white", "white"]}
@@ -68,7 +68,7 @@ const MenuLinks = ({ isOpen }) => {
             }}
           >
             Sign Up
-          </Button>
+          </Button> */}
         </MenuItem>
       </Stack>
     </Box>
