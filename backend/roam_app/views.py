@@ -26,6 +26,10 @@ class ListingViewSet(ModelViewSet):
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
+    def create(self, request, *args, **kwargs):
+        request.data['owner'] = request.user.id
+        return super().create(request, *args, **kwargs)
+
 class AmenityViewSet(ModelViewSet):
     queryset = Amenity.objects.all()
     serializer_class = AmenitySerializer
