@@ -1,5 +1,5 @@
-import "../styles/randomContent.css"
-import { Link } from "react-router-dom"
+import "../styles/randomContent.css";
+import { Link } from "react-router-dom";
 
 const RandomContent = (props) => {
     return(
