@@ -1,5 +1,4 @@
 import "./App.css";
-import AuthAPI from "./utils/auth_utils";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
