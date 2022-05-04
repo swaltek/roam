@@ -27,7 +27,7 @@ const RandomContent = (props) => {
 
 export default RandomContent;
 
-
+// eslint-disable-next-line
 {/* <a className="square1" href="../pages/Blog.js" title="blog"> <h4>Our Blog</h4> </a>
                 
 <a className="square2" href="../pages/ExpertAdvice.js"> <h4>Expert Advice</h4> </a>

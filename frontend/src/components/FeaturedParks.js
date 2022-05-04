@@ -5,9 +5,7 @@ import { Link } from "react-router-dom";
 export const FeaturedParks = (props) => {
   return (
     <div>
-      
       <h2 className="pageHeader centerContent">Featured Parks</h2>
-
       <div className="imageGrid">
         <ul className="centerContent">
 
@@ -34,17 +32,16 @@ export const FeaturedParks = (props) => {
           <li className="imageContainer rockymountains">
             <Link to="/"><h4 className="parkNameheader">Rocky Mountains</h4></Link>
           </li>
-          
+
         </ul>
       </div>
-      
     </div>
   );
 };
 
 export default FeaturedParks;
 
-
+// eslint-disable-next-line
 {/* <li className="imageContainer yosemite">
   <a href="../pages/SearchResults.js" title="Yosemite"><h4>Yosemite</h4></a>
 </li>
