@@ -25,20 +25,19 @@ const MapContainer = () => {
   );
 }
 
+const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.028770, 37.297817);//zion national park
+
 const Map = (props) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
-
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
+  const [zoom, setZoom] = useState(10.5);
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
     container: mapContainer.current,
     style: 'mapbox://styles/mapbox/streets-v11',
-    center: [lng, lat],
+    center: MAP_DEFAULT_CENTER,
     zoom: zoom
     });
   });
