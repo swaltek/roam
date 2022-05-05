@@ -25,7 +25,7 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked"]
+        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked", "description"]
 
     rating = serializers.SerializerMethodField(read_only=True)
     dates_booked = serializers.SerializerMethodField(read_only=True)
