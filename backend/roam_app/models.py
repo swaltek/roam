@@ -34,8 +34,12 @@ class Listing(models.Model):
         return f"{self.owner.first_name}'s {self.title}"
 
     def get_listing_rating(self, instance):
-        reviews = Review.objects.filter(listing=instance.id).aggregate(Avg('review'))
+        reviews = Review.objects.filter(listing=instance.id).aggregate(avg=Avg('review'))
         return reviews
+
+    def get_listing_dates_booked(self, instance):
+        all_dates = list(Reservation.objects.filter(listing=instance.id).values('date_start', 'date_end'))
+        return all_dates
     
 class Amenity(models.Model):
     name = models.CharField(max_length=255)
@@ -71,6 +75,7 @@ class Reservation(models.Model):
     date_start = models.DateField(auto_now=False, auto_now_add=False)
     date_end = models.DateField(auto_now=False, auto_now_add=False)
     total = models.DecimalField(max_digits=7, decimal_places=2)
+    num_persons = models.IntegerField(default=1, validators=[MinValueValidator(1)])
 
     def __str__(self):
         return f"{self.id} {self.traveler.first_name} {self.listing.title} reservation"

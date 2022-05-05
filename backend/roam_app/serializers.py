@@ -25,12 +25,16 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating"]
+        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked"]
 
     rating = serializers.SerializerMethodField(read_only=True)
+    dates_booked = serializers.SerializerMethodField(read_only=True)
 
     def get_rating(self, instance):
         return instance.get_listing_rating(instance)
+
+    def get_dates_booked(self, instance):
+        return instance.get_listing_dates_booked(instance)
 
 class AmenitySerializer(serializers.ModelSerializer):
     class Meta:
@@ -46,6 +50,17 @@ class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields = ["id", "traveler", "listing", "date_start", "date_end", "total"]
+
+    def create(self, validated_data):
+        dates_booked = list(Reservation.objects.filter(listing=validated_data['listing'].id).values('date_start', 'date_end'))
+        start = validated_data['date_start']
+        end = validated_data['date_end']
+        for dates in dates_booked:
+            if start > dates['date_start'] and start < dates['date_end']:
+                raise Exception('dates not available')
+            elif end >= dates['date_start'] and end <= dates['date_end']:
+                raise Exception('dates not available')
+        return super().create(validated_data)
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
