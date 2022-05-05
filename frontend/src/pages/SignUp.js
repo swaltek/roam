@@ -18,7 +18,11 @@ import {
 } from "@chakra-ui/react";
 
 const SignUp = (props) => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {
+    isOpen: isOpenSignUpModal,
+    onOpen: onOpenSignUpModal,
+    onClose: onCloseSignUpModal,
+  } = useDisclosure();
 
   // router params
   const navigate = useNavigate();
@@ -58,7 +62,7 @@ const SignUp = (props) => {
           <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
             <Box p="6">
               <Box display="flex" alignItems="baseline">
-                <Box p={6}>
+                <Box>
                   <form onSubmit={handleSignUp} method="POST">
                     <FormControl>
                       <FormLabel htmlFor="email">Email</FormLabel>
@@ -86,7 +90,7 @@ const SignUp = (props) => {
   return (
     <>
       <Button
-        onClick={onOpen}
+        onClick={onOpenSignUpModal}
         size="sm"
         rounded="md"
         color={["primary.500", "primary.500", "white", "white"]}
@@ -99,12 +103,12 @@ const SignUp = (props) => {
       </Button>
       <Modal
         isCentered
-        onClose={onClose}
-        isOpen={isOpen}
+        onClose={onCloseSignUpModal}
+        isOpen={isOpenSignUpModal}
         motionPreset="slideInBottom"
       >
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent p={5}>
           <ModalCloseButton />
           <ModalBody>{renderForm()}</ModalBody>
         </ModalContent>

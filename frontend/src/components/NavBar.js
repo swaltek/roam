@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import SignUp from "../pages/SignUp";
+import SignIn from "../pages/SignIn";
 
 export const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -31,19 +32,33 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
-  if (isButton) {
-    return <SignUp />;
-  }
+// USE THIS CODE TO CHANGE NAV ITEMS BASED ON LOGIN STATE
+// const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
+//   return (
+//     <Link to={to}>
+//       <Text display="block" {...rest}>
+//         {children}
+//       </Text>
+//     </Link>
+//   );
+// };
 
-  return (
-    <Link to={to}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
-    </Link>
-  );
-};
+// const renderNavItems = (props) => {
+//   if (props.userName === "") {
+//     return (
+//       <>
+//         <SignIn />
+//         <SignUp />
+//       </>
+//     );
+//   }
+//   return (
+//     <>
+//       <MenuItem to="/most-popular">Popular</MenuItem>
+//       <MenuItem to="/listings">Listings</MenuItem>
+//     </>
+//   );
+// };
 
 const MenuLinks = ({ isOpen }) => {
   return (
@@ -59,9 +74,12 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
         m
       >
-        <MenuItem to="/">Home </MenuItem>
-        <MenuItem to="/login">Login </MenuItem>
-        <MenuItem isButton></MenuItem>
+        {/* UNCOMMENT WHEN LOGIN STATE IS FINISHED */}
+        {/* {renderNavItems()} */}
+
+        {/* DELETE WHEN LOGIN STATE IS FINISHED */}
+        <SignIn />
+        <SignUp />
       </Stack>
     </Box>
   );
