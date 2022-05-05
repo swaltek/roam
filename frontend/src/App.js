@@ -16,6 +16,9 @@ import Legal from "./pages/Legal";
 import SignupPage from "./pages/SignUp";
 import ReservationForm from "./components/ReservationForm";
 import ReviewForm from "./components/ReviewForm";
+import AmenityForm from "./components/AmenityForm";
+import AddressForm from "./components/AddressForm";
+
 
 function App() {
   return (
@@ -27,6 +30,8 @@ function App() {
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
+        <Route path="/amenities/new" element={<AmenityForm />} />
+        <Route path="/addresses/new" element={<AddressForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/expertadvice" element={<ExpertAdvice />} />
         <Route path="/listing/:listingId" element={<Listing />} />
