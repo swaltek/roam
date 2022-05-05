@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import apiCalls from "../api/apiCalls";
-import { Button } from '@chakra-ui/react'
 import ReservationForm from "../components/ReservationForm";
 
 export const Listing = (props) => {
@@ -35,7 +34,7 @@ export const Listing = (props) => {
         <li>Calendar:</li>
         <li>{listing && listing.rating.avg}</li>
       </ul>
-      <ReservationForm />
+      <ReservationForm listing={listing}/>
     </div>
   );
 };
