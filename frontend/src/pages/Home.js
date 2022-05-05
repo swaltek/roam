@@ -7,7 +7,7 @@ import FeaturedParks from "../components/FeaturedParks";
 import RandomContent from "../components/RandomContent";
 import HeaderImage from "../components/HeaderImage";
 
-export const HomePage = (props) => {
+export const HomePage = () => {
   return (
     <VStack>
       <HeaderImage imageUrl="https://images.pexels.com/photos/9754/mountains-clouds-forest-fog.jpg" />
@@ -22,7 +22,7 @@ export const HomePage = (props) => {
         </form>
       </section>
 
-      <Map />
+      <Map loadListings/>
 
       <MostPopularSites />
 
