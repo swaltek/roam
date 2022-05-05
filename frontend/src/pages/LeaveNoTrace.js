@@ -1,5 +1,3 @@
-import "../styles/leaveNoTrace.css"
-
 export const LeaveNoTrace = () => {
   return (
     <div>

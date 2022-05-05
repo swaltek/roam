@@ -5,33 +5,29 @@
 }
 
 .centerContent {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   display: grid;
   grid-gap: 2rem;
-  padding: 2%;
-}
-
-.pageHeader {
-  display: block;
-  color: black;
-  font-weight: 300;
-  width: 80%;
-  text-align: center;
-  font-family: 'Roboto', sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.05em;
-  padding-bottom: 0%;
+  padding: 1%;
 }
 
 .imageContainer {
-  height: 8rem;
+  height: 6rem;
   border-radius: 3%;
   list-style: none;
   box-shadow: rgb(50, 50, 93) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 2px -1px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  color: rgb(255, 255, 255);
+  font-family: 'Roboto', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  padding: 10px 20px;
+  text-shadow: 2px 1px 4px black;
+  letter-spacing: 0.05em;
+  width: 100%;
 }
 
 .imageContainer:hover {
@@ -57,28 +53,29 @@
   background-image: url("../static/rockymountains.jpg");
 }
 
-.parkNameheader {
-  color: rgb(255, 255, 255);
+.pageHeader {
+  display: block;
+  color: black;
+  font-weight: 300;
+  width: 80%;
+  text-align: center;
   font-family: 'Roboto', sans-serif;
   font-size: 28px;
-  font-weight: 900;
-  padding: 10px 20px;
-  text-shadow: 2px 1px 4px black;
   letter-spacing: 0.05em;
+  padding-bottom: 0%;
 }
 
 @media (min-width: 600px) {
   .centerContent {
-    grid-template-columns: repeat(2, 1fr); 
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 85%;
   }
   .pageHeader { 
     font-size: 32px;
   }
   .imageContainer {
-    height: 12rem;
-  }
-  .parkNameheader {
-    font-size: 32px;
+    height: 8rem;
+    font-size: 28px;
     text-shadow: 2px 1px 3px black;
   }
 }
@@ -90,18 +87,25 @@
   .pageHeader { 
     font-size: 30px;
   }
-  .parkNameheader {
+  .imageContainer {
+    height: 11rem;
     font-size: 30px;
   }
 }
+@media (min-width: 1200px) {
+  .imageContainer {
+    height: 13rem;
+  }
+}
 @media (min-width: 1500px) {
+  .centerContent { 
+    max-width: 70%;
+  }
   .pageHeader { 
     font-size: 36px;
   }
   .imageContainer {
     height: 16rem;
-  }
-  .parkNameheader {
     font-size: 38px;
   }
 }
