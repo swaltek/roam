@@ -22,12 +22,14 @@ export const HomePage = () => {
           />
         </form>
       </section>
-
-      <Map loadListings/>
-
+      <section class="map-section">
+        <div className="map-content-container">
+          <Map loadListings/>
+        </div>
+      </section>
       <MostPopularSites />
 
-      <BoondockSites />
+      {/* <BoondockSites /> */}
 
       <FeaturedParks />
 
