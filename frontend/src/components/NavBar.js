@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import Logo from "./Logo";
 import SignUp from "../pages/SignUp";
 import SignIn from "../pages/SignIn";
+import "../styles/NavBar.css"
 
 export const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);

@@ -88,7 +88,7 @@ function ReservationForm(props) {
                     isLoading={props.isSubmitting}
                     type='submit'
                 >
-                    Submit
+                    Book it!
                 </Button>
             </Form>
         )}
