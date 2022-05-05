@@ -1,9 +1,10 @@
-import { Box, Button, Flex, Stack, Text, Link } from "@chakra-ui/react";
-import * as React from "react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import React from "react";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
+import SignUp from "../pages/SignUp";
 
 export const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -30,9 +31,13 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
+const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
+  if (isButton) {
+    return <SignUp />;
+  }
+
   return (
-    <Link href={to}>
+    <Link to={to}>
       <Text display="block" {...rest}>
         {children}
       </Text>
@@ -56,19 +61,7 @@ const MenuLinks = ({ isOpen }) => {
       >
         <MenuItem to="/">Home </MenuItem>
         <MenuItem to="/login">Login </MenuItem>
-        <MenuItem to="/signup" isLast>
-          <Button
-            size="sm"
-            rounded="md"
-            color={["primary.500", "primary.500", "white", "white"]}
-            bg={["white", "white", "primary.500", "primary.500"]}
-            _hover={{
-              bg: ["primary.100", "primary.100", "primary.600", "primary.600"],
-            }}
-          >
-            Sign Up
-          </Button>
-        </MenuItem>
+        <MenuItem isButton></MenuItem>
       </Stack>
     </Box>
   );
