@@ -80,6 +80,7 @@ const MenuLinks = ({ isOpen }) => {
         {/* DELETE WHEN LOGIN STATE IS FINISHED */}
         <SignIn />
         <SignUp />
+
       </Stack>
     </Box>
   );
