@@ -22,9 +22,15 @@ class UserSerializer(serializers.ModelSerializer):
         return super().update(instance, validated_data)
 
 class ListingSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Listing
         fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating"]
+
+    rating = serializers.SerializerMethodField(read_only=True)
+
+    def get_rating(self, instance):
+        return instance.get_listing_rating(instance)
 
 class AmenitySerializer(serializers.ModelSerializer):
     class Meta:
