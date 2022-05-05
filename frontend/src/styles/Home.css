@@ -28,3 +28,18 @@
 .home-searchbar-form {
     width: 100%;
 }
+
+.header-image {
+    height: 10%;
+}
+
+.map-section {
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.map-content-container{
+    width: 50%;
+}
