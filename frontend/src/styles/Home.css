@@ -1,0 +1,30 @@
+.home-searchbar-section {
+    position: absolute;
+    top: 10%;
+    background-color: rgba(255, 255, 255, 0.671);
+    width: 500px;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.home-searchbar-title {
+    font-size: large;
+    font-weight: 800;
+}
+
+.home-searchbar {
+    background-color: white;
+    border-color: rgb(73, 73, 73);
+    width: 100%;
+    text-align: center;
+}
+
+.home-searchbar-form {
+    width: 100%;
+}

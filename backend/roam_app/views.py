@@ -59,6 +59,10 @@ class ReservationViewSet(ModelViewSet):
     def get_permissions(self):
         permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+    
+    def create(self, request, *args, **kwargs):
+        request.data['traveler'] = request.user.id
+        return super().create(request, *args, **kwargs)
 
 class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()

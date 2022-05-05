@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import apiCalls from "../api/apiCalls";
-import { Button } from '@chakra-ui/react'
 import ReservationForm from "../components/ReservationForm";
 
 import Map from "../components/Map";
@@ -39,13 +38,13 @@ export const Listing = (props) => {
               {
                 (listing.location_lng && listing.location_lat)
                   ? <Map w="400px" h="200px" marker={[listing.location_lng, listing.location_lat]}/>
-                  : <span> Location unavailable for this listing :( </span>
+                  : <span> Location unavailable for this listing </span>
               }
             </li>
             <li>Calendar:</li>
             <li>{listing.rating.avg}</li>
           </ul>
-          <ReservationForm />
+          <ReservationForm listing={listing} />
       </div>
       :
       <div>
