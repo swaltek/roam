@@ -17,7 +17,7 @@ const Map = (props) => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/mswaltek/cl2t1qlnn000e14mq8j5sz8vl',
       center: props.marker || MAP_DEFAULT_CENTER,
       zoom: 10.5
     });
@@ -37,14 +37,6 @@ const Map = (props) => {
 
   const setupLoadListings = () => {
     map.current.on('load', () => {
-      map.current.loadImage(
-        'https://docs.mapbox.com/mapbox-gl-js/assets/cat.png',
-        (error, image) => {
-          if (error) throw error;
-          // Add the image to the map style.
-          map.current.addImage('cat', image);
-      });
-
       map.current.addSource('listings', {
         'type': 'geojson',
         'data': {
@@ -57,7 +49,7 @@ const Map = (props) => {
           'type': 'symbol',
           'source': 'listings',
           'layout': {
-            'icon-image': 'cat',
+            'icon-image': 'listing-marker',
             // get the title name from the source's "title" property
             'text-field': ['get', 'title'],
             'text-font': [
@@ -67,7 +59,7 @@ const Map = (props) => {
             'text-offset': [0, 1.25],
             'text-anchor': 'top',
             'icon-allow-overlap': true,
-            'icon-size': 0.25,
+            'icon-size': 1.25,
           }
       });
       map.current.on('click', 'listingsLayer', (e) => {
