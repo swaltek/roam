@@ -29,7 +29,7 @@ function App() {
         <Route path="/reservations/new" element={<ReservationForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/expertadvice" element={<ExpertAdvice />} />
-        <Route path="/popularlistings" element={<Listing />} />
+        <Route path="/listing/:listingId" element={<Listing />} />
         <Route path="/leavenotrace" element={<LeaveNoTrace />} />
         <Route path="/team" element={<Team />} />
         <Route path="/campingtips" element={<CampingTips />} />
