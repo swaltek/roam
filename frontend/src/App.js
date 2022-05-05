@@ -13,6 +13,9 @@ import Team from "./pages/Team";
 import CampingTips from "./pages/CampingTips";
 import Careers from "./pages/Careers";
 import Legal from "./pages/Legal";
+import SignupPage from "./pages/SignUp";
+import ReservationForm from "./components/ReservationForm";
+import ReviewForm from "./components/ReviewForm";
 
 function App() {
   return (
@@ -20,7 +23,10 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignupPage/>}/>
         <Route path="/listing/new" element={<CreateListing />} />
+        <Route path="/reviews/new" element={<ReviewForm />} />
+        <Route path="/reservations/new" element={<ReservationForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/expertadvice" element={<ExpertAdvice />} />
         <Route path="/listing/:listingId" element={<Listing />} />
