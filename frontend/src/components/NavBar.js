@@ -1,10 +1,11 @@
-import { Box, Button, Flex, Stack, Text, Link } from "@chakra-ui/react";
-import * as React from "react";
+import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import React from "react";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import Logo from "./Logo";
-import SignupPage from "../pages/SignUp";
+import SignUp from "../pages/SignUp";
+import SignIn from "../pages/SignIn";
 
 export const NavBar = (props) => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -31,15 +32,33 @@ const MenuToggle = ({ toggle, isOpen }) => {
   );
 };
 
-const MenuItem = ({ children, isLast, to = "/", ...rest }) => {
-  return (
-    <Link href={to}>
-      <Text display="block" {...rest}>
-        {children}
-      </Text>
-    </Link>
-  );
-};
+// USE THIS CODE TO CHANGE NAV ITEMS BASED ON LOGIN STATE
+// const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
+//   return (
+//     <Link to={to}>
+//       <Text display="block" {...rest}>
+//         {children}
+//       </Text>
+//     </Link>
+//   );
+// };
+
+// const renderNavItems = (props) => {
+//   if (props.userName === "") {
+//     return (
+//       <>
+//         <SignIn />
+//         <SignUp />
+//       </>
+//     );
+//   }
+//   return (
+//     <>
+//       <MenuItem to="/most-popular">Popular</MenuItem>
+//       <MenuItem to="/listings">Listings</MenuItem>
+//     </>
+//   );
+// };
 
 const MenuLinks = ({ isOpen }) => {
   return (
@@ -55,22 +74,13 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
         m
       >
-        <MenuItem to="/">Home </MenuItem>
-        <MenuItem to="/login">Login </MenuItem>
-        <MenuItem to="/signup"  isLast>
+        {/* UNCOMMENT WHEN LOGIN STATE IS FINISHED */}
+        {/* {renderNavItems()} */}
 
-          {/* <Button onClick={<SignupPage/>}
-            size="sm"
-            rounded="md"
-            color={["primary.500", "primary.500", "white", "white"]}
-            bg={["white", "white", "primary.500", "primary.500"]}
-            _hover={{
-              bg: ["primary.100", "primary.100", "primary.600", "primary.600"],
-            }}
-          >
-            Sign Up
-          </Button> */}
-        </MenuItem>
+        {/* DELETE WHEN LOGIN STATE IS FINISHED */}
+        <SignIn />
+        <SignUp />
+
       </Stack>
     </Box>
   );

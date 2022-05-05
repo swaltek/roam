@@ -7,7 +7,7 @@ import mapboxgl from 'mapbox-gl/dist/mapbox-gl.js';
 
 mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
-const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.028770, 37.297817);//zion national park
+const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.02877, 37.297817); //zion national park
 
 const Map = (props) => {
   const mapContainer = useRef(null);
