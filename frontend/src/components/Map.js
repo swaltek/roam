@@ -88,7 +88,7 @@ const Map = (props) => {
     apiCalls.getAllListings().then((res) => {
       let features = [];
       for(const listing of res) {
-        console.log(listing);
+        // console.log(listing);
         const feature = {
           "type": "Feature",
           "geometry" : {
@@ -100,7 +100,7 @@ const Map = (props) => {
         features.push(feature);
       }
       map.current.on('load', () => {
-        console.log('features', features);
+        // console.log('features', features);
         map.current.getSource('listings').setData({
           "type": "FeatureCollection",
           "features": features
