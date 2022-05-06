@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 const RandomContent = (props) => {
     return(
-        <div className="mainDiv">
+        <div className="rCmainDiv">
             <h2 className="exploreHeader">Explore</h2>
             <div className="blocksContainer">
-                <section className="container">
+                <section className="rCcontainer">
 
                     <Link className="square1" to="/blog"> <h4>Our Blog</h4></Link>
 
