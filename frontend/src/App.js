@@ -21,10 +21,6 @@ import AddressForm from "./components/AddressForm";
 import Account from "./pages/AccountPage/Account";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
-
-
-
 function App() {
   return (
     <Router>
