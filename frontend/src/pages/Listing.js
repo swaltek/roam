@@ -20,7 +20,6 @@ export const Listing = (props) => {
   const loadListing = async ()=>{
     let response = await apiCalls.getListingById(listingId)
     if (response){
-      console.log(response)
       setListing(response)
     } 
   }
