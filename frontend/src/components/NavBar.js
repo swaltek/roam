@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, Text, Button } from "@chakra-ui/react";
-import React from "react";
+import { useEffect, useState } from 'react';
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,8 +8,7 @@ import apiCalls from "../api/apiCalls";
 import "../styles/NavBar.css"
 
 export const NavBar = (props) => {
-  console.log(props.username);
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
@@ -50,16 +49,16 @@ const MenuLinks = ({ isOpen, props }) => {
   const doLogout = async () => {
     const data = await apiCalls.logout();
     if (data) {
-      props.setUsername("");
+      props.setUser(null);
       navigate("/");
     }
   };
 
   const renderNavItems = () => {
-    if (props.username === "") {
+    if (!props.user) {
       return (
         <>
-          <MenuItem to="signin">Sign In </MenuItem>
+          <MenuItem to="/signin">Sign In </MenuItem>
           <MenuItem to="/signup" isLast>
             <Button
               size="sm"

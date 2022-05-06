@@ -10,6 +10,7 @@ const HeaderImage = ({ imageUrl = "" }) => {
           display={"flex"}
           position={"relative"}
           width="100%"
+          zIndex={-1}
         />
       </Box>
     </div>

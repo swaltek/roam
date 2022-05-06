@@ -1,6 +1,7 @@
 import "./App.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import apiCalls from "./api/apiCalls";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -23,15 +24,27 @@ import Account from "./pages/AccountPage/Account";
 
 function App() {
   //user State
-  const [username, setUsername] = useState("");
+  const [user, setUser] = useState(null);
+
+  useEffect(()=>{
+    checkUser()
+  },[])
+
+  const checkUser = async ()=>{
+    let response = await apiCalls.whoAmI()
+    if(response.user){
+      setUser(response.user)
+    }
+    
+  }
 
   return (
     <Router>
-      <NavBar username={username} setUsername={setUsername} />
+      <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp setUsername={setUsername} />} />
-        <Route path="/signin" element={<SignIn setUsername={setUsername} />} />
+        <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
+        <Route path="/signin" element={<SignIn user={user} setUser={setUser} />} />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
