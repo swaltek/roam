@@ -22,18 +22,21 @@ function ReservationForm(props) {
   const onSubmit = async (values, {setSubmitting, resetForm})=> {
     // this adds in the listing info and the total price based on number of days
     values['listing'] = props.listing.id
-    let end = new Date(values.date_end)
-    let start = new Date(values.date_start)
-    values['total'] = props.listing.price * ((end-start)/(1000*60*60*24))
-    console.log(date)
-    console.log(values)
+    values['date_start'] = new Date(date[0]).toISOString().split('T')[0]
+    values['date_end'] = new Date(date[1]).toISOString().split('T')[0]
+    let end = date[1]
+    let start = date[0]
+    values['total'] = (props.listing.price * ((end-start)/(1000*60*60*24))).toFixed(2)
     
-    // let response = await apiCalls.createReservation(values)
-    // if (response) {
-    //   alert('new reservation created')
-    // }
-    // setSubmitting(false);
-    // resetForm({initialValues:''})
+    let response = await apiCalls.createReservation(values)
+    if (response) {
+      alert('new reservation created')
+    } else {
+      alert('error submitting reservation. try again')
+    }
+    setSubmitting(false);
+    resetForm({initialValues:''})
+    setDate(new Date())
   }
 
   return (
