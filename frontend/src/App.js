@@ -17,6 +17,9 @@ import ReservationForm from "./components/ReservationForm";
 import ReviewForm from "./components/ReviewForm";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import AmenityForm from "./components/AmenityForm";
+import AddressForm from "./components/AddressForm";
+import Account from "./pages/AccountPage/Account";
 
 function App() {
   //user State
@@ -32,6 +35,8 @@ function App() {
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
+        <Route path="/amenities/new" element={<AmenityForm />} />
+        <Route path="/addresses/new" element={<AddressForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/expertadvice" element={<ExpertAdvice />} />
         <Route path="/listing/:listingId" element={<Listing />} />
@@ -40,6 +45,12 @@ function App() {
         <Route path="/campingtips" element={<CampingTips />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/legal" element={<Legal />} />
+        <Route path="/account" element={<Account/>} />
+
+
+      
+
+
       </Routes>
       <Footer />
     </Router>

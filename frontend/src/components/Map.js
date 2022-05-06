@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Box } from '@chakra-ui/react'
 import MapContainer from './MapContainer';
 
@@ -9,57 +9,34 @@ mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_TOKEN;
 
 const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.02877, 37.297817); //zion national park
 
-const Map = () => {
+const Map = (props) => {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [listings, setListings] = useState(null);
-
-  useEffect(() => {
-    if(!map.current) return;
-    if(listings) return;
-
-    apiCalls.getAllListings().then((res) => {
-      let features = [];
-      for(const listing of res) {
-        console.log(listing);
-        const feature = {
-          "type": "Feature",
-          "geometry" : {
-            "type": "Point",
-            "coordinates": [listing.location_lng, listing.location_lat]
-          },
-          "properties" : { ...listing},
-        }
-        features.push(feature);
-      }
-      map.current.on('load', () => {
-        console.log('features', features);
-        map.current.getSource('listings').setData({
-          "type": "FeatureCollection",
-          "features": features
-        });
-      });
-    });
-  });
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: MAP_DEFAULT_CENTER,
+      style: 'mapbox://styles/mswaltek/cl2t1qlnn000e14mq8j5sz8vl',
+      center: props.marker || MAP_DEFAULT_CENTER,
       zoom: 10.5
     });
 
-    map.current.on('load', () => {
-      map.current.loadImage(
-        'https://docs.mapbox.com/mapbox-gl-js/assets/cat.png',
-        (error, image) => {
-          if (error) throw error;
-          // Add the image to the map style.
-          map.current.addImage('cat', image);
-      });
+    if(props.loadListings) setupLoadListings();
+  });
 
+  useEffect(() => {
+    if(!map.current) return;
+    if(props.loadListings) loadListings();
+    if(props.marker) {
+      new mapboxgl.Marker()
+        .setLngLat(props.marker)
+        .addTo(map.current);
+    }
+  });
+
+  const setupLoadListings = () => {
+    map.current.on('load', () => {
       map.current.addSource('listings', {
         'type': 'geojson',
         'data': {
@@ -72,7 +49,7 @@ const Map = () => {
           'type': 'symbol',
           'source': 'listings',
           'layout': {
-            'icon-image': 'cat',
+            'icon-image': 'listing-marker',
             // get the title name from the source's "title" property
             'text-field': ['get', 'title'],
             'text-font': [
@@ -82,7 +59,7 @@ const Map = () => {
             'text-offset': [0, 1.25],
             'text-anchor': 'top',
             'icon-allow-overlap': true,
-            'icon-size': 0.25,
+            'icon-size': 1.25,
           }
       });
       map.current.on('click', 'listingsLayer', (e) => {
@@ -104,10 +81,36 @@ const Map = () => {
         map.current.getCanvas().style.cursor = '';
       });
     });
-  });
+  }
+
+  const loadListings = () => {
+
+    apiCalls.getAllListings().then((res) => {
+      let features = [];
+      for(const listing of res) {
+        // console.log(listing);
+        const feature = {
+          "type": "Feature",
+          "geometry" : {
+            "type": "Point",
+            "coordinates": [listing.location_lng, listing.location_lat]
+          },
+          "properties" : { ...listing},
+        }
+        features.push(feature);
+      }
+      map.current.on('load', () => {
+        // console.log('features', features);
+        map.current.getSource('listings').setData({
+          "type": "FeatureCollection",
+          "features": features
+        });
+      });
+    });
+  }
 
   return (
-    <Box w='100%' height='500px' ref={mapContainer} className="map-container"/>
+    <Box w={ props.w || '100%'} h={ props.h || '500px' } ref={mapContainer} className="map-container"/>
   );
 };
 

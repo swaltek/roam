@@ -25,7 +25,7 @@ class ListingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Listing
-        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked"]
+        fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked", "description"]
 
     rating = serializers.SerializerMethodField(read_only=True)
     dates_booked = serializers.SerializerMethodField(read_only=True)
@@ -52,6 +52,14 @@ class ReservationSerializer(serializers.ModelSerializer):
         fields = ["id", "traveler", "listing", "date_start", "date_end", "total"]
 
     def create(self, validated_data):
+        # calculating the total for the booking
+        # get the listing
+        # calc the # of nights
+        # multiply the price by the # nights, plus any taxes
+        listing = Listing.objects.get(id=validated_data['listing'].id)
+        
+
+        # validates that the dates booked do not conflict with current bookings
         dates_booked = list(Reservation.objects.filter(listing=validated_data['listing'].id).values('date_start', 'date_end'))
         start = validated_data['date_start']
         end = validated_data['date_end']

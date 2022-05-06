@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
 import apiCalls from "../api/apiCalls";
+import "../styles/NavBar.css"
 
 export const NavBar = (props) => {
   console.log(props.username);

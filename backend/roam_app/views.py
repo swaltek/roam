@@ -1,3 +1,5 @@
+from itertools import count
+from urllib import request
 from rest_framework.viewsets import ModelViewSet
 from .serializers import *
 from .models import *
@@ -53,12 +55,18 @@ class ReviewViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class ReservationViewSet(ModelViewSet):
-    queryset = Reservation.objects.all()
     serializer_class = ReservationSerializer
+
+    def get_queryset(self):
+        return Reservation.objects.filter(traveler = self.request.user.id)
 
     def get_permissions(self):
         permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+    
+    def create(self, request, *args, **kwargs):
+        request.data['traveler'] = request.user.id
+        return super().create(request, *args, **kwargs)
 
 class AddressViewSet(ModelViewSet):
     queryset = Address.objects.all()

@@ -3,7 +3,7 @@ import { Box, Image } from "@chakra-ui/react";
 const HeaderImage = ({ imageUrl = "" }) => {
   return (
     <div className="header-image">
-      <Box>
+      <Box h={800}>
         <Image
           src={imageUrl}
           bgSize={"cover"}

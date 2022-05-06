@@ -6,36 +6,33 @@ function ReservationForm(props) {
 
   const validationSchema = yup.object().shape({
     date_start:   yup.date()
-                        .required('A Start Date is required'),
-    date_end:     yup.date().required('A End Date is required')
-                  
-                        
-});
-
+                    .required('A Start Date is required'),
+    date_end:     yup.date()
+                    .required('A End Date is required'),
+    num_persons:  yup.number('Must be a number')
+  });
 
   const initialValues = {
     date_start:  props.reservation ? props.reservation.date_start : '',
     date_end:    props.reservation ? props.reservation.date_end : '',
-    total:       props.reservation ? props.reservation.total : '',
-};
+    num_persons: props.reservation ? props.reservation.num_persons : '',
+  };
 
-const onSubmit = async (values, {setSubmitting, resetForm})=> {
-  console.log("Inside onSubmit")
-  if (props.new){
-    console.log('creating a new reservation API call')
-    console.log(initialValues)
-    let response = await apiCalls.createReservation(initialValues)
+  const onSubmit = async (values, {setSubmitting, resetForm})=> {
+    // this adds in the listing info and the total price based on number of days
+    values['listing'] = props.listing.id
+    let end = new Date(values.date_end)
+    let start = new Date(values.date_start)
+    values['total'] = props.listing.price * ((end-start)/(1000*60*60*24))
+    
+    let response = await apiCalls.createReservation(values)
     if (response) {
-      console.log(response)
       alert('new reservation created')
     }
-  } else {
-    console.log('updating API call')
-    console.log(values)
+    setSubmitting(false);
+    resetForm({initialValues:''})
   }
-  setSubmitting(false);
-  resetForm({initialValues:''})
-}
+
   return (
     <Formik validateOnBlur={true}
     validateOnChange={false} {...{initialValues, onSubmit, validationSchema }}>
@@ -73,28 +70,25 @@ const onSubmit = async (values, {setSubmitting, resetForm})=> {
                     />
                     <FormErrorMessage>{errors.date_end}</FormErrorMessage>
                 </FormControl>
-
                 <FormControl 
-                    isInvalid={touched.total && !!errors.total}
+                    isInvalid={touched.num_persons && !!errors.num_persons}
                 >
-                    <FormLabel>Total</FormLabel>
-                    <Textarea 
-                        name="total"
-                        value={values.total}
-                        placeholder="Your Total Cost" 
+                    <FormLabel>Number of visitors:</FormLabel>
+                    <Input 
+                        name="num_persons"
+                        value={values.num_persons}
+                        placeholder="How many people will be staying" 
                         onChange={handleChange}
                         onBlur={handleBlur}
                     />
-        
                 </FormControl>
-              
                 <Button
                     mt={4}
                     colorScheme='teal'
                     isLoading={props.isSubmitting}
                     type='submit'
                 >
-                    Submit
+                    Book it!
                 </Button>
             </Form>
         )}
