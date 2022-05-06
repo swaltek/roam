@@ -12,6 +12,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 
+import PasswordInput from "../components/form/PasswordInput";
+
 const SignIn = (props) => {
   // router params
   const navigate = useNavigate();
@@ -52,7 +54,7 @@ const SignIn = (props) => {
                       <FormLabel htmlFor="email">Email</FormLabel>
                       <Input id="email" placeholder="Email" />
                       <FormLabel htmlFor="password">Password</FormLabel>
-                      <Input id="password" placeholder="Password" />
+                      <PasswordInput id="password"/>
                     </FormControl>
                     <Button mt={4} bg="primary.500" color="white" type="submit">
                       Sign In
