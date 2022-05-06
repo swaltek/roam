@@ -1,16 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDisclosure } from "@chakra-ui/react";
+import apiCalls from "../api/apiCalls";
 
 import {
   Center,
   Box,
   Heading,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
   Button,
   FormControl,
   FormLabel,
@@ -20,12 +15,6 @@ import {
 import PasswordInput from "../components/form/PasswordInput";
 
 const SignIn = (props) => {
-  const {
-    isOpen: isOpenSignInModal,
-    onOpen: onOpenSignInModal,
-    onClose: onCloseSignInModal,
-  } = useDisclosure();
-
   // router params
   const navigate = useNavigate();
 
@@ -37,13 +26,10 @@ const SignIn = (props) => {
       email: evt.target.elements["email"].value,
       password: evt.target.elements["password"].value,
     };
-    const data = {};
-    console.log("LOGIN INFO:", signInData);
-    const user = {};
-    console.log(user);
-    props.setUsername(user.username);
+    const data = await apiCalls.login(signInData);
 
     if (data) {
+      props.setUsername(data.username);
       navigate("/");
     }
   };
@@ -83,30 +69,6 @@ const SignIn = (props) => {
     );
   };
 
-  return (
-    <>
-      <Button
-        onClick={onOpenSignInModal}
-        size="sm"
-        rounded="md"
-        color={["white", "white", "primary.500", "primary.500"]}
-        bg={["transparent", "transparent", "transparent", "transparent"]}
-      >
-        Sign In
-      </Button>
-      <Modal
-        isCentered
-        onClose={onCloseSignInModal}
-        isOpen={isOpenSignInModal}
-        motionPreset="slideInBottom"
-      >
-        <ModalOverlay />
-        <ModalContent p={5}>
-          <ModalCloseButton />
-          <ModalBody>{renderForm()}</ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+  return <>{renderForm()}</>;
 };
 export default SignIn;
