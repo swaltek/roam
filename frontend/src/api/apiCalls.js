@@ -41,7 +41,7 @@ apiCalls.whoAmI = async () => {
 
 apiCalls.updateUser = async (userId, data) => {
   return await apiHelpers.tryCatchFetch(() =>
-    axios.put(`${BASE_URL}/users/${userId}/`, data, apiHelpers.getCsrfConfig())
+    axios.patch(`${BASE_URL}/users/${userId}/`, data, apiHelpers.getCsrfConfig())
   );
 };
 
