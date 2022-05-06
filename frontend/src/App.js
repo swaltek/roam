@@ -18,6 +18,11 @@ import ReservationForm from "./components/ReservationForm";
 import ReviewForm from "./components/ReviewForm";
 import AmenityForm from "./components/AmenityForm";
 import AddressForm from "./components/AddressForm";
+import Account from "./pages/AccountPage/Account";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
 
 
 function App() {
@@ -40,6 +45,12 @@ function App() {
         <Route path="/campingtips" element={<CampingTips />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/legal" element={<Legal />} />
+        <Route path="/account" element={<Account/>} />
+
+
+      
+
+
       </Routes>
       <Footer />
     </Router>
