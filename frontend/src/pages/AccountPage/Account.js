@@ -1,6 +1,6 @@
 import Sidebar from "./Sidebar";
 import UserInfo from "./UserInfo";
-import "../../styles/account.css"
+import "../../styles/account.css";
 import ReservationDetails from "./ReservationDetails";
 import SavedSites from "./SavedSites"
 import PastStays from "./PastStays";
