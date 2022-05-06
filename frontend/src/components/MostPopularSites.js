@@ -12,7 +12,6 @@ export const MostPopularSites = (props) => {
 
   const loadPopularSites = async ()=>{
     let response = await apiCalls.getAllListings()
-    console.log('all listings',response)
     if (response){
       let build = []
       for (let i=0; i<response.length; i++){

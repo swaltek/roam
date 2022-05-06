@@ -1,7 +1,9 @@
-import React from "react";
+import { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import apiCalls from "../api/apiCalls";
-
+import PasswordInput from "../components/form/PasswordInput";
+import { Formik, Form } from "formik";
+import * as yup from 'yup';
 import {
   Center,
   Box,
@@ -10,29 +12,43 @@ import {
   FormControl,
   FormLabel,
   Input,
+  FormErrorMessage
 } from "@chakra-ui/react";
-
-import PasswordInput from "../components/form/PasswordInput";
 
 const SignIn = (props) => {
   // router params
   const navigate = useNavigate();
 
+  useEffect(()=>{
+    if (props.user){
+        navigate('/')
+    }
+  },[props.user])
+
+  const validationSchema = yup.object().shape({
+    email: yup.string()
+      .required('Email is required')
+      .email('Not a valid email'),
+    password: yup.string()
+      .required('Password is required')
+      .min(4, 'Password length should be at least 4 characters'),
+  })
+  const initialValues = {
+    email:'',
+    password:'',
+  };
+
   // event handlers
-  const handleSignIn = async (evt) => {
-    evt.preventDefault();
-
-    let signInData = {
-      email: evt.target.elements["email"].value,
-      password: evt.target.elements["password"].value,
-    };
-    const data = await apiCalls.login(signInData);
-
-    if (data) {
-      props.setUsername(data.username);
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    const response = await apiCalls.login(values);
+    if (response) {
+      props.setUser(response);
       navigate("/");
+      setSubmitting(false)
+      resetForm()
     }
   };
+
   const renderForm = () => {
     return (
       <Center>
@@ -49,17 +65,42 @@ const SignIn = (props) => {
             <Box p="6">
               <Box display="flex" alignItems="baseline">
                 <Box>
-                  <form onSubmit={handleSignIn} method="POST">
-                    <FormControl>
-                      <FormLabel htmlFor="email">Email</FormLabel>
-                      <Input id="email" placeholder="Email" />
-                      <FormLabel htmlFor="password">Password</FormLabel>
-                      <PasswordInput id="password"/>
-                    </FormControl>
-                    <Button mt={4} bg="primary.500" color="white" type="submit">
-                      Sign In
-                    </Button>
-                  </form>
+                  <Formik
+                    validateOnBlur={true}
+                    initialValues={initialValues}
+                    validationSchema={validationSchema}
+                    onSubmit={onSubmit}
+                    validateOnChange={false}
+                  >
+                     {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched }) => (
+                      <Form noValidate onSubmit={handleSubmit}>
+                        <FormControl id="emailGroup" isRequired isInvalid={touched.email && !!errors.email}>
+                          <FormLabel htmlFor="email">Email</FormLabel>
+                          <Input 
+                            name="email" 
+                            placeholder="Email"
+                            value={values.email} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                          <FormErrorMessage>{errors.email}</FormErrorMessage>
+                        </FormControl>
+                        <FormControl id="passwordGroup" isRequired isInvalid={touched.password && !!errors.password} >
+                          <FormLabel htmlFor="password">Password</FormLabel>
+                          <PasswordInput
+                            name="password"
+                            value={values.password} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                          <FormErrorMessage>{errors.password}</FormErrorMessage>
+                        </FormControl>
+                        <Button mt={4} bg="primary.500" color="white" type="submit" disabled={isSubmitting}>
+                          Create Account
+                        </Button>
+                      </Form>
+                     )}
+                  </Formik>
                 </Box>
               </Box>
             </Box>

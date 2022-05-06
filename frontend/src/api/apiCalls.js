@@ -29,19 +29,19 @@ apiCalls.logout = async () => {
 
 apiCalls.deleteAccount = async (userId) => {
   return await apiHelpers.tryCatchFetch(() =>
-    axios.delete(`${BASE_URL}users/${userId}`, apiHelpers.getCsrfConfig())
+    axios.delete(`${BASE_URL}/users/${userId}`, apiHelpers.getCsrfConfig())
   );
 };
 
 apiCalls.whoAmI = async () => {
   return await apiHelpers.tryCatchFetch(() =>
-    axios.get(`${BASE_URL}whoami/`, apiHelpers.getCsrfConfig())
+    axios.get(`${BASE_URL}/whoami/`, apiHelpers.getCsrfConfig())
   );
 };
 
 apiCalls.updateUser = async (userId, data) => {
   return await apiHelpers.tryCatchFetch(() =>
-    axios.put(`${BASE_URL}users/${userId}/`, data, apiHelpers.getCsrfConfig())
+    axios.put(`${BASE_URL}/users/${userId}/`, data, apiHelpers.getCsrfConfig())
   );
 };
 

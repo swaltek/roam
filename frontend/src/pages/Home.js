@@ -22,7 +22,7 @@ export const HomePage = () => {
           />
         </form>
       </section>
-      <section class="map-section">
+      <section className="map-section">
         <div className="map-content-container">
           <Map loadListings/>
         </div>

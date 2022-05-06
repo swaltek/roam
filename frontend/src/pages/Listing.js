@@ -4,8 +4,8 @@ import apiCalls from "../api/apiCalls";
 import ReservationForm from "../components/ReservationForm";
 import "../styles/ListingPage.css";
 import { Card, Button, Col } from 'react-bootstrap';
-
 import Map from "../components/Map";
+import CalendarPicker from "../components/CalendarPicker";
 
 export const Listing = (props) => {
   const params = useParams()
@@ -30,7 +30,7 @@ export const Listing = (props) => {
     { listing ?
       <div className="listing-content">
         <Col>
-          <Card style={{ width: '400px', height: '500px' }}>
+          <Card style={{ width: '400px', height: '800px' }}>
               {
                 (listing.location_lng && listing.location_lat)
                   ? <Map w="400px" h="200px" marker={[listing.location_lng, listing.location_lat]}/>
@@ -48,8 +48,8 @@ export const Listing = (props) => {
             </Card>
         </Col>
         <Col>
-          <Card style={{ width: '400px', height: '500px' }}>
-            <Card.Header>Check Availability</Card.Header>
+          <Card style={{ width: '400px', height: '800px' }}>
+            <Card.Header>Check Availability and Reserve</Card.Header>
             <Card.Body>
               <ReservationForm listing={listing} />
             </Card.Body>  
@@ -67,23 +67,3 @@ export const Listing = (props) => {
 };
 
 export default Listing;
-
-
-{/* <h1>{listing.title}</h1>
-          <img src="#" alt="" />
-          <ul>
-            <li>{listing.price}/night</li>
-            <li>Address: </li>
-            <li>Amenities</li>
-            <li>{listing.description}</li>
-            <li>Map:
-              {
-                (listing.location_lng && listing.location_lat)
-                  ? <Map w="400px" h="200px" marker={[listing.location_lng, listing.location_lat]}/>
-                  : <span> Location unavailable for this listing </span>
-              }
-            </li>
-            <li>Calendar:</li>
-            <li>{listing.rating.avg}</li>
-          </ul>
-          <ReservationForm listing={listing} /> */}
