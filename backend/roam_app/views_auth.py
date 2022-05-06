@@ -22,7 +22,7 @@ def bad_request():
 def handle_login(request):
     """User login, based on username"""
     try:
-        username = request.data.get("username")
+        username = request.data.get("email")
         password = request.data.get("password")
         if username is None or password is None:
             return Response({'error': 'Please provide both username and password'}, status=HTTP_400_BAD_REQUEST)

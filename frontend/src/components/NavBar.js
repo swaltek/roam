@@ -1,26 +1,26 @@
-import { Box, Flex, Stack, Text } from "@chakra-ui/react";
+import { Box, Flex, Stack, Text, Button } from "@chakra-ui/react";
 import React from "react";
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "./Logo";
-import SignUp from "../pages/SignUp";
-import SignIn from "../pages/SignIn";
+import apiCalls from "../api/apiCalls";
 import "../styles/NavBar.css"
 
 export const NavBar = (props) => {
+  console.log(props.username);
   const [isOpen, setIsOpen] = React.useState(false);
 
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <NavBarContainer {...props}>
+    <NavBarContainer props={props}>
       <Logo
         w="100px"
-        color={["white", "white", "primary.500", "primary.500"]}
+        color={["primary.900", "primary.900", "primary.500", "primary.500"]}
       />
       <MenuToggle toggle={toggle} isOpen={isOpen} />
-      <MenuLinks isOpen={isOpen} />
+      <MenuLinks isOpen={isOpen} props={props} />
     </NavBarContainer>
   );
 };
@@ -34,34 +34,80 @@ const MenuToggle = ({ toggle, isOpen }) => {
 };
 
 // USE THIS CODE TO CHANGE NAV ITEMS BASED ON LOGIN STATE
-// const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
-//   return (
-//     <Link to={to}>
-//       <Text display="block" {...rest}>
-//         {children}
-//       </Text>
-//     </Link>
-//   );
-// };
+const MenuItem = ({ children, isLast, isButton, to = "/", ...rest }) => {
+  return (
+    <Link to={to}>
+      <Text display="block" {...rest}>
+        {children}
+      </Text>
+    </Link>
+  );
+};
 
-// const renderNavItems = (props) => {
-//   if (props.userName === "") {
-//     return (
-//       <>
-//         <SignIn />
-//         <SignUp />
-//       </>
-//     );
-//   }
-//   return (
-//     <>
-//       <MenuItem to="/most-popular">Popular</MenuItem>
-//       <MenuItem to="/listings">Listings</MenuItem>
-//     </>
-//   );
-// };
+const MenuLinks = ({ isOpen, props }) => {
+  const navigate = useNavigate();
 
-const MenuLinks = ({ isOpen }) => {
+  const doLogout = async () => {
+    const data = await apiCalls.logout();
+    if (data) {
+      props.setUsername("");
+      navigate("/");
+    }
+  };
+
+  const renderNavItems = () => {
+    if (props.username === "") {
+      return (
+        <>
+          <MenuItem to="signin">Sign In </MenuItem>
+          <MenuItem to="/signup" isLast>
+            <Button
+              size="sm"
+              rounded="md"
+              color={["white", "white", "white", "white"]}
+              bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
+              _hover={{
+                bg: [
+                  "primary.500",
+                  "primary.500",
+                  "primary.500",
+                  "primary.500",
+                ],
+              }}
+            >
+              Create Account
+            </Button>
+          </MenuItem>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <MenuItem to="/account">Account</MenuItem>
+          <MenuItem to="/most-popular">Popular</MenuItem>
+          <MenuItem to="/listings">Listings</MenuItem>
+          <MenuItem onClick={doLogout} isLast>
+            <Button
+              size="sm"
+              rounded="md"
+              color={["white", "white", "white", "white"]}
+              bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
+              _hover={{
+                bg: [
+                  "primary.500",
+                  "primary.500",
+                  "primary.500",
+                  "primary.500",
+                ],
+              }}
+            >
+              Logout
+            </Button>
+          </MenuItem>
+        </>
+      );
+    }
+  };
   return (
     <Box
       display={{ base: isOpen ? "block" : "none", md: "block" }}
@@ -75,13 +121,7 @@ const MenuLinks = ({ isOpen }) => {
         pt={[4, 4, 0, 0]}
         m
       >
-        {/* UNCOMMENT WHEN LOGIN STATE IS FINISHED */}
-        {/* {renderNavItems()} */}
-
-        {/* DELETE WHEN LOGIN STATE IS FINISHED */}
-        <SignIn />
-        <SignUp />
-
+        {renderNavItems()}
       </Stack>
     </Box>
   );

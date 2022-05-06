@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
@@ -13,21 +13,25 @@ import Team from "./pages/Team";
 import CampingTips from "./pages/CampingTips";
 import Careers from "./pages/Careers";
 import Legal from "./pages/Legal";
-import SignupPage from "./pages/SignUp";
 import ReservationForm from "./components/ReservationForm";
 import ReviewForm from "./components/ReviewForm";
+import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import AmenityForm from "./components/AmenityForm";
 import AddressForm from "./components/AddressForm";
 import Account from "./pages/AccountPage/Account";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
+  //user State
+  const [username, setUsername] = useState("");
+
   return (
     <Router>
-      <NavBar />
+      <NavBar username={username} setUsername={setUsername} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignupPage/>}/>
+        <Route path="/signup" element={<SignUp setUsername={setUsername} />} />
+        <Route path="/signin" element={<SignIn setUsername={setUsername} />} />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />

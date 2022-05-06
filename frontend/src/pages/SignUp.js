@@ -1,16 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useDisclosure } from "@chakra-ui/react";
+import apiCalls from "../api/apiCalls";
 
 import {
   Center,
   Box,
   Heading,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalBody,
   Button,
   FormControl,
   FormLabel,
@@ -18,12 +13,6 @@ import {
 } from "@chakra-ui/react";
 
 const SignUp = (props) => {
-  const {
-    isOpen: isOpenSignUpModal,
-    onOpen: onOpenSignUpModal,
-    onClose: onCloseSignUpModal,
-  } = useDisclosure();
-
   // router params
   const navigate = useNavigate();
 
@@ -33,18 +22,15 @@ const SignUp = (props) => {
 
     let signUpData = {
       email: evt.target.elements["email"].value,
-      firstName: evt.target.elements["firstName"].value,
-      lastName: evt.target.elements["lastName"].value,
+      first_name: evt.target.elements["firstName"].value,
+      last_name: evt.target.elements["lastName"].value,
       password: evt.target.elements["password"].value,
     };
-    const data = {};
+    const data = await apiCalls.signup(signUpData);
     console.log("LOGIN INFO:", signUpData);
-    const user = {};
-    console.log(user);
-    props.setUsername(user.username);
 
     if (data) {
-      navigate("/");
+      navigate("/signin");
     }
   };
   const renderForm = () => {
@@ -87,33 +73,6 @@ const SignUp = (props) => {
     );
   };
 
-  return (
-    <>
-      <Button
-        onClick={onOpenSignUpModal}
-        size="sm"
-        rounded="md"
-        color={["primary.500", "primary.500", "white", "white"]}
-        bg={["white", "white", "primary.500", "primary.500"]}
-        _hover={{
-          bg: ["primary.100", "primary.100", "primary.600", "primary.600"],
-        }}
-      >
-        Sign Up
-      </Button>
-      <Modal
-        isCentered
-        onClose={onCloseSignUpModal}
-        isOpen={isOpenSignUpModal}
-        motionPreset="slideInBottom"
-      >
-        <ModalOverlay />
-        <ModalContent p={5}>
-          <ModalCloseButton />
-          <ModalBody>{renderForm()}</ModalBody>
-        </ModalContent>
-      </Modal>
-    </>
-  );
+  return <>{renderForm()}</>;
 };
 export default SignUp;
