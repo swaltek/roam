@@ -63,99 +63,96 @@ const SignUp = (props) => {
     }
   };
 
-  const renderForm = () => {
-    return (
-      <Center>
-        <div>
-          <Heading
-            fontWeight={600}
-            fontSize={{ base: "xl", sm: "xl", md: "2xl" }}
-            lineHeight={"110%"}
-          >
-            Sign Up
-          </Heading>
-          <br />
-          <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-            <Box p="6">
-              <Box display="flex" alignItems="baseline">
-                  <Formik
-                    validateOnBlur={true}
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
-                    onSubmit={onSubmit}
-                    validateOnChange={false}
-                  >
-                     {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched }) => (
-                      <Form noValidate onSubmit={handleSubmit}>
-                        <FormControl isRequired isInvalid={touched.email && !!errors.email}>
-                          <FormLabel htmlFor="email">Email</FormLabel>
-                          <Input 
-                            name="email" 
-                            placeholder="Email"
-                            value={values.email} 
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                          />
-                          <FormErrorMessage>{errors.email}</FormErrorMessage>
-                        </FormControl>
-                        <FormControl isRequired isInvalid={touched.first_name && !!errors.first_name} >
-                          <FormLabel htmlFor="first_name">First Name</FormLabel>
+  return (
+    <Center>
+      <div>
+        <Heading
+          fontWeight={600}
+          fontSize={{ base: "xl", sm: "xl", md: "2xl" }}
+          lineHeight={"110%"}
+        >
+          Sign Up
+        </Heading>
+        <br />
+        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+          <Box p="6">
+            <Box display="flex" alignItems="baseline">
+                <Formik
+                  validateOnBlur={true}
+                  initialValues={initialValues}
+                  validationSchema={validationSchema}
+                  onSubmit={onSubmit}
+                  validateOnChange={false}
+                >
+                    {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched }) => (
+                    <Form noValidate onSubmit={handleSubmit}>
+                      <FormControl isRequired isInvalid={touched.email && !!errors.email}>
+                        <FormLabel htmlFor="email">Email</FormLabel>
+                        <Input 
+                          name="email" 
+                          placeholder="Email"
+                          value={values.email} 
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <FormErrorMessage>{errors.email}</FormErrorMessage>
+                      </FormControl>
+                      <FormControl isRequired isInvalid={touched.first_name && !!errors.first_name} >
+                        <FormLabel htmlFor="first_name">First Name</FormLabel>
+                        <Input
+                          name="first_name"
+                          placeholder="First Name"
+                          value={values.first_name} 
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                        <FormErrorMessage>{errors.first_name}</FormErrorMessage>
+                      </FormControl>
+                      <FormControl isRequired isInvalid={touched.last_name && !!errors.last_name} >
+                          <FormLabel htmlFor="last_name">Last Name</FormLabel>
                           <Input
-                            name="first_name"
-                            placeholder="First Name"
-                            value={values.first_name} 
+                            name="last_name"
+                            placeholder="Last Name" 
+                            value={values.last_name} 
                             onChange={handleChange}
                             onBlur={handleBlur}
                           />
-                          <FormErrorMessage>{errors.first_name}</FormErrorMessage>
+                          <FormErrorMessage>{errors.last_name}</FormErrorMessage>
                         </FormControl>
-                        <FormControl isRequired isInvalid={touched.last_name && !!errors.last_name} >
-                            <FormLabel htmlFor="last_name">Last Name</FormLabel>
-                            <Input
-                              name="last_name"
-                              placeholder="Last Name" 
-                              value={values.last_name} 
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                            <FormErrorMessage>{errors.last_name}</FormErrorMessage>
-                          </FormControl>
-                          <FormControl isRequired isInvalid={touched.password && !!errors.password} >
-                            <FormLabel htmlFor="password">Password</FormLabel>
-                            <PasswordInput
-                              name="password"
-                              value={values.password} 
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                            <FormErrorMessage>{errors.password}</FormErrorMessage>
-                          </FormControl>
-                          <FormControl isRequired isInvalid={touched.password2 && !!errors.password2}>
-                            <FormLabel htmlFor="password2">Verify Password</FormLabel>
-                            <Input
-                              name="password2"
-                              type='password'
-                              placeholder="Verify Password"
-                              value={values.password2} 
-                              onChange={handleChange}
-                              onBlur={handleBlur}
-                            />
-                            <FormErrorMessage>{errors.password2}</FormErrorMessage>
+                        <FormControl isRequired isInvalid={touched.password && !!errors.password} >
+                          <FormLabel htmlFor="password">Password</FormLabel>
+                          <PasswordInput
+                            name="password"
+                            value={values.password} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                          <FormErrorMessage>{errors.password}</FormErrorMessage>
                         </FormControl>
-                        <Button mt={4} bg="primary.500" color="white" type="submit" disabled={isSubmitting}>
-                          Create Account
-                        </Button>
-                      </Form>
-                     )}
-                  </Formik>
-              </Box>
+                        <FormControl isRequired isInvalid={touched.password2 && !!errors.password2}>
+                          <FormLabel htmlFor="password2">Verify Password</FormLabel>
+                          <Input
+                            name="password2"
+                            type='password'
+                            placeholder="Verify Password"
+                            value={values.password2} 
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                          />
+                          <FormErrorMessage>{errors.password2}</FormErrorMessage>
+                      </FormControl>
+                      <Button mt={4} bg="primary.500" color="white" type="submit" disabled={isSubmitting}>
+                        Create Account
+                      </Button>
+                    </Form>
+                    )}
+                </Formik>
             </Box>
           </Box>
-        </div>
-      </Center>
-    );
-  };
-
-  return <>{renderForm()}</>;
+        </Box>
+      </div>
+    </Center>
+  );
 };
+
 export default SignUp;
