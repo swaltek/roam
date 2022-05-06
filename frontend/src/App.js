@@ -25,26 +25,32 @@ import Account from "./pages/AccountPage/Account";
 function App() {
   //user State
   const [user, setUser] = useState(null);
+  console.log(user);
 
-  useEffect(()=>{
-    checkUser()
-  },[])
+  useEffect(() => {
+    checkUser();
+  }, []);
 
-  const checkUser = async ()=>{
-    let response = await apiCalls.whoAmI()
-    if(response.user){
-      setUser(response.user)
+  const checkUser = async () => {
+    let response = await apiCalls.whoAmI();
+    if (response.user) {
+      setUser(response.user);
     }
-    
-  }
+  };
 
   return (
     <Router>
       <NavBar user={user} setUser={setUser} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signup" element={<SignUp user={user} setUser={setUser} />} />
-        <Route path="/signin" element={<SignIn user={user} setUser={setUser} />} />
+        <Route
+          path="/signup"
+          element={<SignUp user={user} setUser={setUser} />}
+        />
+        <Route
+          path="/signin"
+          element={<SignIn user={user} setUser={setUser} />}
+        />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
@@ -58,12 +64,10 @@ function App() {
         <Route path="/campingtips" element={<CampingTips />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/legal" element={<Legal />} />
-        <Route path="/account" element={<Account/>} />
-
-
-      
-
-
+        <Route
+          path="/account"
+          element={<Account user={user} setUser={setUser} />}
+        />
       </Routes>
       <Footer />
     </Router>
