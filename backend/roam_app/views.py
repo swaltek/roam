@@ -65,7 +65,8 @@ class ReservationViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
     
     def create(self, request, *args, **kwargs):
-        request.data['traveler'] = request.user.id
+        if not request.data['traveler']:
+            request.data['traveler'] = request.user.id
         return super().create(request, *args, **kwargs)
 
 class AddressViewSet(ModelViewSet):
