@@ -49,7 +49,11 @@ class ReviewSerializer(serializers.ModelSerializer):
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
-        fields = ["id", "traveler", "listing", "date_start", "date_end", "total"]
+        fields = ["id", "traveler", "listing", "date_start", "date_end", "total", "listing_name"]
+    listing_name = serializers.SerializerMethodField(read_only=True)
+
+    def get_listing_name(self, instance):
+        return instance.get_listing_name(instance)
 
     def create(self, validated_data):
         # validates that the dates booked do not conflict with current bookings

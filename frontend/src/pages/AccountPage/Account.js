@@ -1,56 +1,49 @@
 import Sidebar from "./Sidebar";
 import UserInfo from "./UserInfo";
-import "../../styles/account.css"
+import "../../styles/account.css";
 import ReservationDetails from "./ReservationDetails";
 import SavedSites from "./SavedSites";
 import PastStays from "./PastStays";
 
-function Account(){
-
-
-return (
-  <div className="container">
-    <div> 
-         <Sidebar/>
-    </div>
-    <div className="row">
-
-      <div className="row">
-          <UserInfo/>
+function Account(props) {
+  return (
+    <div class="container">
+      <div>
+        <Sidebar />
       </div>
-      <hr/>
-      <br/>
+      <div class="row">
+        <div class="row align-items-start">
+          <div class="col">
+            <UserInfo user={props.user} setUser={props.user} />
+          </div>
+        </div>
+        <hr />
+        <br />
 
-    <div className="row">
-      
-        <ReservationDetails/>
-      
+        <div class="row align-items-center">
+          <div class="col">
+            <ReservationDetails />
+          </div>
+        </div>
+        <hr />
+        <br />
+
+        <div class="row align-items-end">
+          <div class="col">
+            <SavedSites />
+          </div>
+        </div>
+        <hr />
+        <br />
+
+        <div class="row align-items-end">
+          <div class="col">
+            <PastStays />
+          </div>
+        </div>
+      </div>
     </div>
-    <hr/>
-    <br/>
-
-    <div className="row">
-      
-        <SavedSites />
-
-    </div>
-    <hr/>
-    <br/>
-
-
-    <div className="row">
-      
-        <PastStays/>
-    
-    </div>
-
-    
-
-    </div>
-
-  </div>
-
-)
+  );
 }
 
-export default Account;   
+export default Account;
