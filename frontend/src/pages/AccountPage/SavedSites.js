@@ -1,19 +1,21 @@
-// import apiCalls from "../api/apiCalls";
+
+import React from "react";
 
 function SavedSites(props){
-  console.log(props)
   return (
-    <div className="saved sites">
+    <div className="container">
       <h2> SavedSites</h2>
-      <div>
-        <div className="card-columns col-sm-4">
-          <div className="card" style={{"width" :" 200px"}}>
-            <div className="card-body">
-            <h4 className="card-title">Site 1</h4>
-            <p className="card-text">Some example text some example text. John Doe is an architect and engineer</p>
-            </div>
-          </div>
-        </div>
+      <div className="card-columns col-me-4">
+        <React.Fragment>  
+          {props.user.favorite_listings.length > 0 && Object.keys(props.user.favorite_listings).map((key, index) => (
+              <div className="card" key={key} style={{"width" :" 200px"}}>
+                <div className="card-body">
+                  <h4 className="card-title">{props.user.first_name}</h4>
+                  <p className="card-text">{props.user.favorite_listings[key]}</p>
+                </div>
+              </div>
+            ))}
+            </React.Fragment>
       </div>
     </div>
   
