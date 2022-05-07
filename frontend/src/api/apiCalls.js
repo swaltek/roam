@@ -47,10 +47,40 @@ apiCalls.updateUser = async (userId, data) => {
 
 //listing methods
 
+// this returns all listings in the database
 apiCalls.getAllListings = async () => {
   return await apiHelpers.tryCatchFetch(() =>
     axios.get(`${BASE_URL}/listings/`, apiHelpers.getCsrfConfig())
   );
+};
+
+// this will filter listings based on search terms in the search bar
+// arguements: to use this you must pass in a string of one or more words separated by spaces. it will clean out any special characters(,./{}....) in case the user passes a string of other characters with the words
+// example: apicalls.getListingSearchBar('campsite FL')
+apiCalls.getListingsSearchBar = async (str) => {
+  let newstr = str.replace(/[^a-zA-Z0-9 ]/g,'')
+  let options = apiHelpers.getCsrfConfig()
+  options['params']={'filter':'search'}
+  let searchStr = newstr.split(' ')
+  for (let i=0; i<searchStr.length; i++){
+    options['params'][`search${i+1}`]=searchStr[i]
+  }
+  return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}/listings/`, options));
+};
+
+// this will filter listings and return 10 listings with ratings greater than/equal to a 4 star rating
+apiCalls.getListingsPopular = async () => {
+  let options = apiHelpers.getCsrfConfig()
+  options['params']={'filter':'popular'}
+  return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}/listings/`, options));
+};
+
+//this will filter listings by a string passed in which should be all or part of a park name and match it to each listings 'near_park" attribute
+apiCalls.getListingsByPark = async (park) => {
+  let options = apiHelpers.getCsrfConfig()
+  options['params']={'filter':'park'}
+  options['params']['park']=park
+  return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}/listings/`, options));
 };
 
 apiCalls.createListing = async (listingData) => {

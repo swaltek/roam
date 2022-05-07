@@ -9,7 +9,7 @@ import '../styles/Calendar.css';
 import 'react-calendar/dist/Calendar.css';
 
 function ReservationForm(props) {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState();
 
   const validationSchema = yup.object().shape({
     num_persons:  yup.number('Must be a number'),
