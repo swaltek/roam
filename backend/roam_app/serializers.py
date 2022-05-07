@@ -1,6 +1,8 @@
+from venv import create
 from rest_framework import serializers
 from django.contrib.auth.hashers import make_password
 from .models import *
+from statistics import mean
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,11 +29,7 @@ class ListingSerializer(serializers.ModelSerializer):
         model = Listing
         fields = ["id", "title", "is_boondock", "owner", "price", "location_lng", "location_lat", "address", "amenities", "rating", "dates_booked", "description"]
 
-    rating = serializers.SerializerMethodField(read_only=True)
     dates_booked = serializers.SerializerMethodField(read_only=True)
-
-    def get_rating(self, instance):
-        return instance.get_listing_rating(instance)
 
     def get_dates_booked(self, instance):
         return instance.get_listing_dates_booked(instance)
@@ -44,7 +42,16 @@ class AmenitySerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ["id", "traveler", "listing", "review_text"]
+        fields = ["id", "traveler", "listing", "review_text", "review"]
+
+    def create(self, validated_data):
+        listing = validated_data['listing']
+        listing_reviews = list(Review.objects.filter(listing=listing.id).values_list('review', flat=True))
+        rate = validated_data['review']
+        listing_reviews.append(rate)
+        listing.rating = mean(listing_reviews)
+        listing.save()
+        return super().create(validated_data)
 
 class ReservationSerializer(serializers.ModelSerializer):
     class Meta:

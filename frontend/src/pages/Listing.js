@@ -29,7 +29,7 @@ export const Listing = (props) => {
     { listing ?
       <div className="listing-content">
         <Col>
-          <Card style={{ width: '400px', height: '800px' }}>
+          <Card style={{ width: '400px', height: '600px' }}>
               {
                 (listing.location_lng && listing.location_lat)
                   ? <Map w="400px" h="200px" marker={[listing.location_lng, listing.location_lat]}/>
@@ -47,7 +47,7 @@ export const Listing = (props) => {
             </Card>
         </Col>
         <Col>
-          <Card style={{ width: '400px', height: '800px' }}>
+          <Card style={{ width: '400px', height: '600px' }}>
             <Card.Header>Check Availability and Reserve</Card.Header>
             <Card.Body>
               <ReservationForm listing={listing} />

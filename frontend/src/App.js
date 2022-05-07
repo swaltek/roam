@@ -25,7 +25,6 @@ import Account from "./pages/AccountPage/Account";
 function App() {
   //user State
   const [user, setUser] = useState(null);
-  console.log(user);
 
   useEffect(() => {
     checkUser();
@@ -64,9 +63,7 @@ function App() {
         <Route path="/campingtips" element={<CampingTips />} />
         <Route path="/careers" element={<Careers />} />
         <Route path="/legal" element={<Legal />} />
-        <Route
-          path="/account"
-          element={<Account user={user} setUser={setUser} />}
+        <Route path="/account" element={<Account user={user} setUser={setUser} />}
         />
       </Routes>
       <Footer />
