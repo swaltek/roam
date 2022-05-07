@@ -2,48 +2,46 @@ import Sidebar from "./Sidebar";
 import UserInfo from "./UserInfo";
 import "../../styles/account.css"
 import ReservationDetails from "./ReservationDetails";
-import SavedSites from "./SavedSites"
+import SavedSites from "./SavedSites";
 import PastStays from "./PastStays";
 
 function Account(){
 
 
 return (
-  <div class="container">
+  <div className="container">
     <div> 
          <Sidebar/>
     </div>
-    <div class="row">
+    <div className="row">
 
-      <div class="row align-items-start">
-        <div class="col">
+      <div className="row">
           <UserInfo/>
-        </div>
       </div>
       <hr/>
       <br/>
 
-    <div class="row align-items-center">
-      <div class="col">
+    <div className="row">
+      
         <ReservationDetails/>
-      </div>
+      
     </div>
     <hr/>
     <br/>
 
-    <div class="row align-items-end">
-      <div class="col">
-        <SavedSites/>
-      </div>
+    <div className="row">
+      
+        <SavedSites />
+
     </div>
     <hr/>
     <br/>
 
 
-    <div class="row align-items-end">
-      <div class="col">
+    <div className="row">
+      
         <PastStays/>
-      </div>
+    
     </div>
 
     
