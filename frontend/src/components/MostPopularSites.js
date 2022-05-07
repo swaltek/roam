@@ -2,13 +2,14 @@ import { useState, useEffect } from 'react';
 import apiCalls from "../api/apiCalls";
 import { Box, Heading, Text, HStack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import FavoriteButton from './FavoriteButton';
 
 export const MostPopularSites = (props) => {
   const [popularSites, setPopularSites] = useState([])
 
   useEffect(()=>{
     loadPopularSites()
-  },[])
+  },[props.user])
 
   const loadPopularSites = async ()=>{
     let response = await apiCalls.getListingsPopular()
@@ -16,15 +17,17 @@ export const MostPopularSites = (props) => {
       let build = []
       for (let i=0; i<response.length; i++){
         build.push(
-          <Link key={`link-${response[i].id}`} to={`/listing/${response[i].id}`}>
-            <Box className='box neutral' key={`card-${response[i].id}`} p={5} shadow='md' borderWidth='.5px' borderRadius='3%'>
-              <Heading fontSize='xl'>{response[i].title}</Heading>
+          <Box className='box neutral' key={`card-${response[i].id}`} p={5} shadow='md' borderWidth='.5px' borderRadius='3%'>
+            { props.user && <FavoriteButton user={props.user} setUser={props.setUser} listingId={response[i].id}/>}
+            <Link key={`link-${response[i].id}`} to={`/listing/${response[i].id}`}>
+              <Heading fontSize='xl'>
+                {response[i].title}
+              </Heading>
               <Text mt={4}>{response[i].description}</Text>
-            </Box>
-          </Link>
+            </Link>
+          </Box>
         )
       }
-      //console.log(build)
       setPopularSites(build)
     }
   }
@@ -39,4 +42,4 @@ export const MostPopularSites = (props) => {
   );
 };
   
-  export default MostPopularSites;
+export default MostPopularSites;
