@@ -39,6 +39,25 @@ apiCalls.whoAmI = async () => {
   );
 };
 
+//to add a new listing to favorites, pass in the logged in user(from app state value) and the id of the listing to add
+apiCalls.addToFavoriteListings = async (user, newListingId) =>{
+  let i = user.favorite_listings.indexOf(newListingId)
+  if (i === -1){
+    return apiCalls.updateUser(user.id, {'favorite_listings': [...user.favorite_listings, newListingId]})
+  } else {
+    return 'listing already in favorites'
+  }
+}
+
+apiCalls.removeFromFavoriteListings = async (user, listingId) =>{
+  let i = user.favorite_listings.indexOf(listingId)
+  if (i > -1){
+    user.favorite_listings.splice(i,1)
+    return apiCalls.updateUser(user.id, {'favorite_listings': user.favorite_listings})
+  }
+  return 'listing not in favorites'
+}
+
 apiCalls.updateUser = async (userId, data) => {
   return await apiHelpers.tryCatchFetch(() =>
     axios.patch(`${BASE_URL}/users/${userId}/`, data, apiHelpers.getCsrfConfig())
