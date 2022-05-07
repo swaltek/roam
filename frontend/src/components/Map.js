@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
 import MapContainer from './MapContainer';
 
@@ -11,7 +12,10 @@ const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.02877, 37.297817); //zion na
 
 const Map = (props) => {
   const mapContainer = useRef(null);
+  const mapPopup = useRef(null);
   const map = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -23,6 +27,11 @@ const Map = (props) => {
     });
 
     if(props.loadListings) setupLoadListings();
+
+    mapPopup.current = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
   });
 
   useEffect(() => {
@@ -33,7 +42,7 @@ const Map = (props) => {
         .setLngLat(props.marker)
         .addTo(map.current);
     }
-  });
+  }, [map, props]);
 
   const setupLoadListings = () => {
     map.current.on('load', () => {
@@ -51,34 +60,31 @@ const Map = (props) => {
           'layout': {
             'icon-image': 'listing-marker',
             // get the title name from the source's "title" property
-            'text-field': ['get', 'title'],
-            'text-font': [
-              'Open Sans Semibold',
-              'Arial Unicode MS Bold'
-            ],
             'text-offset': [0, 1.25],
-            'text-anchor': 'top',
             'icon-allow-overlap': true,
-            'icon-size': 1.25,
+            'icon-size': 1,
           }
       });
+
       map.current.on('click', 'listingsLayer', (e) => {
-        // Copy coordinates array.
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const id = e.features[0].properties.id;
-        const title = e.features[0].properties.title;
-        const rating = e.features[0].properties.rating;
-        new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(`id:${id} ${title} rating:${rating}`)
-          .addTo(map.current);
+        navigate(`/listing/${e.features[0].properties.id}`);
       });
 
-      map.current.on('mouseenter', 'listingsLayer', () => {
+      map.current.on('mouseenter', 'listingsLayer', (e) => {
         map.current.getCanvas().style.cursor = 'pointer';
-      });
+
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const title = e.features[0].properties.title;
+        const rating = e.features[0].properties.rating;
+        mapPopup.current.setLngLat(coordinates)
+          .setHTML(`<h1><strong>${title}</strong></h1> <h2>${rating.avg ? `\n rating ${rating.avg}/5` : '\n no ratings'}<h2>`)
+          .addTo(map.current);
+        });
+
       map.current.on('mouseleave', 'listingsLayer', () => {
         map.current.getCanvas().style.cursor = '';
+        mapPopup.current.remove();
       });
     });
   }
@@ -95,7 +101,7 @@ const Map = (props) => {
             "type": "Point",
             "coordinates": [listing.location_lng, listing.location_lat]
           },
-          "properties" : { ...listing},
+          "properties" : { 'hover': false ,...listing},
         }
         features.push(feature);
       }
