@@ -25,14 +25,24 @@ class ListingViewSet(ModelViewSet):
 
     def get_queryset(self):
         if self.request.query_params:
-            filtr = self.request.query_params.get('filter')
+            query_params = self.request.query_params;
+            filtr = query_params.get('filter')
             if filtr == 'search':
-                return Listing.objects.filter(reduce(operator.or_, (Q(title__icontains=self.request.query_params.get(x)) for x in list(self.request.query_params))))
+                return Listing.objects.filter(reduce(operator.or_, (Q(title__icontains=query_params.get(x)) for x in list(query_params))))
             elif filtr == 'popular':
                 return Listing.objects.filter(rating__gte=4)[0:10]
             elif filtr == 'park':
-                park = self.request.query_params.get('park')
+                park = query_params.get('park')
                 return Listing.objects.filter(near_park__icontains=park)
+            elif filtr == 'distance':
+                # TODO
+                search_point = (query_params.get('point_lng'), query_params.get('point_lat'))
+                distance = query_params.get('distance')
+                listings =  Listing.objects.all()
+
+                listings_matching_query = []
+                for listing in listings:
+                    listing_point = (listing.location_lng, listings.location_lat)
             else: 
                 return Listing.objects.all()
         else: 
