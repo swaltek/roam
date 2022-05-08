@@ -3,7 +3,6 @@ import { Formik, Form } from 'formik';
 import { useState } from 'react';
 import apiCalls from '../api/apiCalls';
 import * as yup from 'yup'
-import CalendarPicker from './CalendarPicker';
 import Calendar from 'react-calendar';
 import '../styles/Calendar.css';
 import 'react-calendar/dist/Calendar.css';

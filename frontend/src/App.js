@@ -41,15 +41,9 @@ function App() {
     <Router>
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route
-          path="/signup"
-          element={<SignUp user={user} setUser={setUser} />}
-        />
-        <Route
-          path="/signin"
-          element={<SignIn user={user} setUser={setUser} />}
-        />
+        <Route path="/" element={<Home user={user} setUser={setUser}/>} />
+        <Route path="/signup" element={<SignUp user={user} setUser={setUser} />}/>
+        <Route path="/signin" element={<SignIn user={user} setUser={setUser} />} />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
@@ -57,7 +51,7 @@ function App() {
         <Route path="/addresses/new" element={<AddressForm />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/expertadvice" element={<ExpertAdvice />} />
-        <Route path="/listing/:listingId" element={<Listing />} />
+        <Route path="/listing/:listingId" element={<Listing user={user} setUser={setUser}/>} />
         <Route path="/leavenotrace" element={<LeaveNoTrace />} />
         <Route path="/team" element={<Team />} />
         <Route path="/campingtips" element={<CampingTips />} />
