@@ -101,6 +101,15 @@ apiCalls.getListingsByPark = async (park) => {
   return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}/listings/`, options));
 };
 
+apiCalls.getListingsNearPoint = async (point, distance) => {
+  let options = apiHelpers.getCsrfConfig()
+  options['params']={'filter':'distance'}
+  options['params']['point_lng']=point[0]
+  options['params']['point_lat']=point[1]
+  options['params']['distance']=distance
+  return await apiHelpers.tryCatchFetch(() => axios.get(`${BASE_URL}/listings/`, options));
+}
+
 apiCalls.createListing = async (listingData) => {
   return await apiHelpers.tryCatchFetch(() =>
     axios.post(`${BASE_URL}/listings/`, listingData, apiHelpers.getCsrfConfig())

@@ -21,13 +21,14 @@ const  Listing = ({data}) => {
 
 const ListingSearch = () => {
   const { state } = useLocation();
-  //const [searchRadius, setSearchRadius ] = useState(50);
+  const [searchRadius, setSearchRadius ] = useState(50);
   const [listings, setListings] = useState(null);
   console.log(state);
 
   useEffect(() => {
     if(listings) return;
-    apiCalls.getAllListings().then((data) => {
+    apiCalls.getListingsNearPoint(state.center, searchRadius).then((data) => {
+      console.log("data", data);
       setListings(data);
     });
   });
