@@ -79,3 +79,21 @@ class AddressViewSet(ModelViewSet):
         else: 
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+
+@csrf_exempt
+@api_view(["POST"])
+@permission_classes((AllowAny,))
+def handle_save_listing(request):
+    """Saving you favorite listing"""
+    try:
+        userId = request.data.get("userId")
+        listingId = request.data.get("listingId")
+        if userId is None or listingId is None:
+            return Response({'error': 'Please provide both userId and listingId'}, status=HTTP_400_BAD_REQUEST)
+        # save the listing
+        # add code
+    
+    except Exception as e:
+        return error_on_request(str(e))
+    
+    return bad_request()
