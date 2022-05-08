@@ -30,7 +30,7 @@ function Account(props) {
 
         <div class="row align-items-end">
           <div class="col">
-            <SavedSites />
+            <SavedSites user={props.user} setUser={props.user} />
           </div>
         </div>
         <hr />
