@@ -39,7 +39,7 @@ const ListingSearch = () => {
         gap={0}
       >
         <GridItem colSpan={5}>
-          <Map w="100%" loadListings origin={state.center}/>
+          <Map w="100%" loadListings origin={state.center} marker={state.center}/>
         </GridItem>
         <GridItem colSpan={1}>
           <Heading fontSize='xl'>Listing locations near{/* within {searchRadius} miles of */}{state.place_name}</Heading>
