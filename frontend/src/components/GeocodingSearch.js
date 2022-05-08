@@ -20,7 +20,7 @@ const Search = (props) => {
     geocoder.current = new MapboxGeocoder({
       accessToken: mapboxgl.accessToken,
       mapboxgl: mapboxgl,
-      types: 'country,region,place,postcode,locality,neighborhood'
+      types: 'country,region,place,postcode,locality,neighborhood,poi'
     })
 
     geocoder.current.addTo('#geocoderContainer');
