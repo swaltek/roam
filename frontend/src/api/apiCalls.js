@@ -6,7 +6,6 @@ const BASE_URL = "http://localhost:8000/api"; //backend in project URLS
 
 //user/auth api methods
 apiCalls.signup = async (signupData) => {
-  console.log(signupData);
   let newUser = await apiHelpers.tryCatchFetch(() =>
     axios.post(`${BASE_URL}/users/`, signupData, apiHelpers.getCsrfConfig())
   );
@@ -41,21 +40,21 @@ apiCalls.whoAmI = async () => {
 
 //to add a new listing to favorites, pass in the logged in user(from app state value) and the id of the listing to add
 apiCalls.addToFavoriteListings = async (user, newListingId) =>{
-  let i = user.favorite_listings.indexOf(newListingId)
-  if (i === -1){
+  let i = user.favorite_listings.indexOf(Number(newListingId))
+  if (i == -1){
     return apiCalls.updateUser(user.id, {'favorite_listings': [...user.favorite_listings, newListingId]})
   } else {
-    return 'listing already in favorites'
+    return null
   }
 }
 
 apiCalls.removeFromFavoriteListings = async (user, listingId) =>{
-  let i = user.favorite_listings.indexOf(listingId)
+  let i = user.favorite_listings.indexOf(Number(listingId))
   if (i > -1){
     user.favorite_listings.splice(i,1)
     return apiCalls.updateUser(user.id, {'favorite_listings': user.favorite_listings})
   }
-  return 'listing not in favorites'
+  return null
 }
 
 apiCalls.updateUser = async (userId, data) => {
