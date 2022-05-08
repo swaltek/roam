@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
 import MapContainer from './MapContainer';
 
@@ -11,7 +12,10 @@ const MAP_DEFAULT_CENTER = new mapboxgl.LngLat(-113.02877, 37.297817); //zion na
 
 const Map = (props) => {
   const mapContainer = useRef(null);
+  const mapPopup = useRef(null);
   const map = useRef(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (map.current) return; // initialize map only once
@@ -23,6 +27,11 @@ const Map = (props) => {
     });
 
     if(props.loadListings) setupLoadListings();
+
+    mapPopup.current = new mapboxgl.Popup({
+        closeButton: false,
+        closeOnClick: false
+      });
   });
 
   useEffect(() => {
@@ -33,52 +42,98 @@ const Map = (props) => {
         .setLngLat(props.marker)
         .addTo(map.current);
     }
-  });
+  }, [map, props]);
 
   const setupLoadListings = () => {
     map.current.on('load', () => {
       map.current.addSource('listings', {
-        'type': 'geojson',
-        'data': {
-          'type': 'FeatureCollection',
-          'features': [],
+        type: 'geojson',
+        cluster: true,
+        clusterMaxZoom: 14, // Max zoom to cluster points on
+        clusterRadius: 50,
+        data: {
+          type: 'FeatureCollection',
+          features: [],
         }
       });
+
       map.current.addLayer({
-          'id': 'listingsLayer',
-          'type': 'symbol',
-          'source': 'listings',
-          'layout': {
-            'icon-image': 'listing-marker',
-            // get the title name from the source's "title" property
-            'text-field': ['get', 'title'],
-            'text-font': [
-              'Open Sans Semibold',
-              'Arial Unicode MS Bold'
+        id: 'clusters',
+        type: 'circle',
+        source: 'listings',
+        filter: ['has', 'point_count'],
+        paint: {
+          // Use step expressions (https://docs.mapbox.com/mapbox-gl-js/style-spec/#expressions-step)
+          // with three steps to implement three types of circles:
+          //   * Blue, 20px circles when point count is less than 100
+          //   * Yellow, 30px circles when point count is between 100 and 750
+          //   * Pink, 40px circles when point count is greater than or equal to 750
+          'circle-color': [
+              'step',
+              ['get', 'point_count'],
+              '#51bbd6',
+              100,
+              '#f1f075',
+              750,
+              '#f28cb1'
             ],
-            'text-offset': [0, 1.25],
-            'text-anchor': 'top',
-            'icon-allow-overlap': true,
-            'icon-size': 1.25,
-          }
-      });
-      map.current.on('click', 'listingsLayer', (e) => {
-        // Copy coordinates array.
-        const coordinates = e.features[0].geometry.coordinates.slice();
-        const id = e.features[0].properties.id;
-        const title = e.features[0].properties.title;
-        const rating = e.features[0].properties.rating;
-        new mapboxgl.Popup()
-          .setLngLat(coordinates)
-          .setHTML(`id:${id} ${title} rating:${rating}`)
-          .addTo(map.current);
+          'circle-radius': [
+            'step',
+              ['get', 'point_count'],
+              20,
+              100,
+              30,
+              750,
+              40
+          ]
+        }
       });
 
-      map.current.on('mouseenter', 'listingsLayer', () => {
-        map.current.getCanvas().style.cursor = 'pointer';
+      map.current.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'listings',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': '{point_count_abbreviated}',
+          'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+          'text-size': 12
+        }
       });
-      map.current.on('mouseleave', 'listingsLayer', () => {
+
+      map.current.addLayer({
+          id: 'unclustered-listing',
+          type: 'symbol',
+          source: 'listings',
+        filter: ['!', ['has', 'point_count']],
+          layout: {
+            'icon-image': 'listing-marker',
+            // get the title name from the sources "title" property
+            'text-offset': [0, 1.25],
+            'icon-allow-overlap': true,
+            'icon-size': 1,
+          }
+      });
+
+      map.current.on('click', 'unclustered-listing', (e) => {
+        navigate(`/listing/${e.features[0].properties.id}`);
+      });
+
+      map.current.on('mouseenter', 'unclustered-listing', (e) => {
+        map.current.getCanvas().style.cursor = 'pointer';
+
+        // Copy coordinates array.
+        const coordinates = e.features[0].geometry.coordinates.slice();
+        const title = e.features[0].properties.title;
+        const rating = e.features[0].properties.rating;
+        mapPopup.current.setLngLat(coordinates)
+          .setHTML(`<h1><strong>${title}</strong></h1> <h2>${rating.avg ? `\n rating ${rating.avg}/5` : '\n no ratings'}<h2>`)
+          .addTo(map.current);
+        });
+
+      map.current.on('mouseleave', 'unclustered-listing', () => {
         map.current.getCanvas().style.cursor = '';
+        mapPopup.current.remove();
       });
     });
   }
@@ -95,7 +150,7 @@ const Map = (props) => {
             "type": "Point",
             "coordinates": [listing.location_lng, listing.location_lat]
           },
-          "properties" : { ...listing},
+          "properties" : { 'hover': false ,...listing},
         }
         features.push(feature);
       }

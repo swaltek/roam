@@ -29,13 +29,11 @@ class Listing(models.Model):
     address = models.ForeignKey("Address", on_delete=models.CASCADE, related_name='listings', null=True, blank=True)
     amenities = models.ManyToManyField("Amenity", related_name='listings', blank=True)
     description = models.TextField()
+    rating = models.DecimalField(default=None, null=True, blank=True, max_digits=2, decimal_places=1)
+    near_park = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
         return f"{self.owner.first_name}'s {self.title}"
-
-    def get_listing_rating(self, instance):
-        reviews = Review.objects.filter(listing=instance.id).aggregate(avg=Avg('review'))
-        return reviews
 
     def get_listing_dates_booked(self, instance):
         all_dates = list(Reservation.objects.filter(listing=instance.id).values('date_start', 'date_end'))

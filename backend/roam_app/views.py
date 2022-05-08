@@ -5,6 +5,9 @@ from .serializers import *
 from .models import *
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from .views_auth import *
+import operator
+from django.db.models import Q
+from functools import reduce
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -18,8 +21,22 @@ class UserViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class ListingViewSet(ModelViewSet):
-    queryset = Listing.objects.all()
     serializer_class = ListingSerializer
+
+    def get_queryset(self):
+        if self.request.query_params:
+            filtr = self.request.query_params.get('filter')
+            if filtr == 'search':
+                return Listing.objects.filter(reduce(operator.or_, (Q(title__icontains=self.request.query_params.get(x)) for x in list(self.request.query_params))))
+            elif filtr == 'popular':
+                return Listing.objects.filter(rating__gte=4)[0:10]
+            elif filtr == 'park':
+                park = self.request.query_params.get('park')
+                return Listing.objects.filter(near_park__icontains=park)
+            else: 
+                return Listing.objects.all()
+        else: 
+            return Listing.objects.all()
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:
