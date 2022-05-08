@@ -9,6 +9,8 @@ import operator
 from django.db.models import Q
 from functools import reduce
 
+from geopy.distance import geodesic
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -42,7 +44,12 @@ class ListingViewSet(ModelViewSet):
 
                 listings_matching_query = []
                 for listing in listings:
+                    # TODO below line throwing ERROR, not sure how to get listing out of queryset
                     listing_point = (listing.location_lng, listings.location_lat)
+
+                    print( geodesic(search_point, listing_point).miles )
+                    if geodesic(search_point, listing_point).miles <= distance:
+                        listings_matching_query.append(listing)
             else: 
                 return Listing.objects.all()
         else: 
