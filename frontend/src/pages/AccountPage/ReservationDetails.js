@@ -22,7 +22,8 @@ function ReservationDetails(){
 
 
   const renderReservations = () => {
-    return reservations.map((reservation) => {
+    return reservations.map((reservation, index) => {
+
       const handleDeleteReservation = async () => {
         const data = await apiCalls.deleteReservationById(reservation.id)
         if (data) {
@@ -34,7 +35,7 @@ function ReservationDetails(){
       }
 
       return (
-        <div className="box neutral2 padding text-center ">
+        <div key={`res_${index}`} className="box neutral2 padding text-center ">
             <h4 className="heavyText genericSecondaryHeader">{reservation.listing_name}</h4>
             <h4>{reservation.date_start}</h4>
             <h4>{reservation.date_end}</h4>
