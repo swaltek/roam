@@ -19,7 +19,6 @@ export const HomePage = (props) => {
         <h1 className="home-searchbar-title">Your next adventure awaits...</h1>
         <form className="home-searchbar-form">
           <Search onSearch={(e, searchData) => {
-            console.log('e', e);
             navigate(`/listing/search`,
               {
                 state: searchData,
