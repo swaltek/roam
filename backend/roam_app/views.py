@@ -9,7 +9,8 @@ import operator
 from django.db.models import Q
 from functools import reduce
 
-from geopy.distance import geodesic
+from django.db import models
+from django.db.models.expressions import RawSQL
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -21,6 +22,31 @@ class UserViewSet(ModelViewSet):
         else: 
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+
+def get_listings_nearby_coords(lat, long, distance):
+    lat_field = 'location_lat'
+    lng_field = 'location_lng'
+
+    # Great circle distance formula
+    gcd_formula = f"6371 * acos(least(greatest(\
+    cos(radians(%s)) * cos(radians({lat_field})) \
+    * cos(radians({lng_field}) - radians(%s)) + \
+    sin(radians(%s)) * sin(radians({lat_field})) \
+    , -1), 1))"
+
+    distance_raw_sql = RawSQL(
+        gcd_formula
+        ,(lat, long, lat)
+    )
+
+    query_selector = Listing.objects.all() \
+            .annotate(distance=distance_raw_sql) \
+            .order_by('distance')
+
+    query_selector = query_selector.filter(distance__lt=distance)
+    return query_selector
+
+
 
 class ListingViewSet(ModelViewSet):
     serializer_class = ListingSerializer
@@ -37,19 +63,10 @@ class ListingViewSet(ModelViewSet):
                 park = query_params.get('park')
                 return Listing.objects.filter(near_park__icontains=park)
             elif filtr == 'distance':
-                # TODO
-                search_point = (query_params.get('point_lng'), query_params.get('point_lat'))
+                lng = query_params.get('point_lng')
+                lat = query_params.get('point_lat')
                 distance = query_params.get('distance')
-                listings =  Listing.objects.all()
-
-                listings_matching_query = []
-                for listing in listings:
-                    # TODO below line throwing ERROR, not sure how to get listing out of queryset
-                    listing_point = (listing.location_lng, listings.location_lat)
-
-                    print( geodesic(search_point, listing_point).miles )
-                    if geodesic(search_point, listing_point).miles <= distance:
-                        listings_matching_query.append(listing)
+                return get_listings_nearby_coords(lat,lng,distance)
             else: 
                 return Listing.objects.all()
         else: 
