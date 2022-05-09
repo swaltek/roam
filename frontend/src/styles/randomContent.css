@@ -179,7 +179,8 @@ section h4 {
     font-size: 36px;
   }
   .rCcontainer {  
-    width: 70%;
+    width: 80%;
+    grid-gap: 2.5rem;
   }
   section h4 {
     font-size: 38px;

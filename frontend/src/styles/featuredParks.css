@@ -99,7 +99,7 @@
 }
 @media (min-width: 1500px) {
   .centerContent { 
-    max-width: 80%;
+    max-width: 82%;
   }
   .pageHeader { 
     font-size: 36px;
@@ -109,7 +109,7 @@
     font-size: 38px;
   }
   .centerContent {
-    grid-gap: 3rem;
+    grid-gap: 2.5rem;
     padding: 1.2%;
   }
 }
