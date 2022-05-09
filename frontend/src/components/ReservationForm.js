@@ -11,7 +11,6 @@ function ReservationForm(props) {
   const [date, setDate] = useState();
   const [minDate, setMinDate] = useState(new Date())
   const [maxDate, setMaxDate] = useState(null)
-  const [startDate, setStartDate] = useState(null)
 
   const validationSchema = yup.object().shape({
     num_persons:  yup.number('Must be a number'),
@@ -77,7 +76,6 @@ function ReservationForm(props) {
         onChange={setDate}
         selectRange={true}
         value={date} 
-        activeStartDate={startDate}
         minDate={minDate}
         maxDate={maxDate}
         minDetail='year'
