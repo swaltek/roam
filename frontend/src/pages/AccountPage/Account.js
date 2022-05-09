@@ -4,6 +4,7 @@ import "../../styles/account.css";
 import ReservationDetails from "./ReservationDetails";
 import SavedSites from "./SavedSites";
 import PastStays from "./PastStays";
+import MySites from "./MySites";
 
 function Account(props) {
   return (
@@ -39,6 +40,14 @@ function Account(props) {
         <div class="row align-items-end">
           <div class="col">
             <PastStays />
+          </div>
+        </div>
+        <hr />
+        <br />
+
+        <div class="row align-items-end">
+          <div class="col">
+            <MySites user={props.user}/>
           </div>
         </div>
       </div>
