@@ -29,9 +29,9 @@ function Account(props) {
         <hr />
         <br />
 
-        <div class="row align-items-end">
-          <div class="col">
-            <SavedSites user={props.user} setUser={props.user} listing={props.listing}/>
+        <div className="row align-items-end">
+          <div className="col">
+            <SavedSites user={props.user} setUser={props.user} />
           </div>
         </div>
         <hr />
@@ -44,7 +44,6 @@ function Account(props) {
         </div>
         <hr />
         <br />
-
         <div class="row align-items-end">
           <div class="col">
             <MySites user={props.user}/>
