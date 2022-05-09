@@ -9,6 +9,9 @@ import 'react-calendar/dist/Calendar.css';
 
 function ReservationForm(props) {
   const [date, setDate] = useState();
+  const [minDate, setMinDate] = useState(new Date())
+  const [maxDate, setMaxDate] = useState(null)
+  const [startDate, setStartDate] = useState(null)
 
   const validationSchema = yup.object().shape({
     num_persons:  yup.number('Must be a number'),
@@ -38,15 +41,50 @@ function ReservationForm(props) {
     setDate(new Date())
   }
 
+  const disabledDates = (date, view)=>{
+    if (props.listing && props.listing.dates_booked){
+      return props.listing.dates_booked.indexOf(date.toISOString().split('T')[0]) > -1
+    }
+  }
+
+  const limitDates = (value, event)=>{
+    let newMin = null
+    let newMax = null
+
+    for (let i=0; i<props.listing.dates_booked.length; i++){
+      if (props.listing.dates_booked[i] < value.toISOString().split('T')[0] && props.listing.dates_booked[i] > new Date().toISOString().split('T')[0]){       
+        newMin = props.listing.dates_booked[i]
+      } else if ( props.listing.dates_booked[i] > value.toISOString().split('T')[0] ){
+        newMax = props.listing.dates_booked[i]
+        if (newMin){
+          setMinDate(new Date(newMin))
+        }        
+        setMaxDate(new Date(newMax))
+        return
+      }
+    }
+  }
+
+  const resetCalendar = ()=>{
+    setDate(null)
+    setMaxDate(null)
+    setMinDate(new Date())
+  }
+
   return (
     <>
     <Calendar
         onChange={setDate}
         selectRange={true}
         value={date} 
-        minDate={new Date()} 
+        activeStartDate={startDate}
+        minDate={minDate}
+        maxDate={maxDate}
         minDetail='year'
+        tileDisabled={({date, view})=>disabledDates(date, view)}
+        onClickDay={(value, event) => limitDates(value, event)}
     />
+    <Button onClick={resetCalendar}>Reset Dates</Button>
     <Formik 
         validateOnBlur={true} 
         validateOnChange={false} 
