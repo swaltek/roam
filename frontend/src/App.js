@@ -22,6 +22,7 @@ import SignIn from "./pages/SignIn";
 import AmenityForm from "./components/AmenityForm";
 import AddressForm from "./components/AddressForm";
 import Account from "./pages/AccountPage/Account";
+import EditListing from "./pages/EditListing";
 
 function App() {
   //user State
@@ -47,6 +48,7 @@ function App() {
         <Route path="/signin" element={<SignIn user={user} setUser={setUser} />} />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route path="/listing/:listingId" element={<Listing user={user} setUser={setUser}/>} />
+        <Route path="/listing/:listingId/edit" element={<EditListing />} />
         <Route path="/listing/search/" element={<ListingSearch />}/>
 
         <Route path="/reviews/new" element={<ReviewForm />} />

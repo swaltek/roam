@@ -17,6 +17,13 @@
     align-items: center; */
 }
 
+.new-listing-content {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    min-height: 80%;
+    padding: 20px;
+}
+
 .listing-col1 {
     padding-right: 0 !important;
 }

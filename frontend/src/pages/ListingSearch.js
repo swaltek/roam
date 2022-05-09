@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom';
 import { useState, useEffect  } from 'react';
 import {
-  HStack,
+  VStack,
   Grid, GridItem,
   Box,
   Heading,
@@ -9,51 +9,71 @@ import {
 } from "@chakra-ui/react";
 import apiCalls from '../api/apiCalls';
 import Map from '../components/Map';
+//import Search from '../components/GeocodingSearch.js';
 
 const  Listing = ({data}) => {
   return(
-    <Box w="100%">
+    <Box shadow='s' borderWidth='2px' borderRadius='md' >
       <Heading fontSize='l'>{data.title}</Heading>
-      <Text>{data.rating}</Text>
+      <Text mt={4}>{data.rating || "This site has no ratings!"}</Text>
     </Box>
   );
 }
 
 const ListingSearch = () => {
-  const { state } = useLocation();
-  const [searchRadius, setSearchRadius ] = useState(50);
+  let { state } = useLocation();
+  //const [searchRadius, setSearchRadius ] = useState(100);
   const [listings, setListings] = useState(null);
-  console.log(state);
+  console.log('state', state);
 
   useEffect(() => {
-    if(listings) return;
-    apiCalls.getListingsNearPoint(state.center, searchRadius).then((data) => {
-      console.log("data", data);
-      setListings(data);
-    });
+    //if( listings ) return;
+    //apiCalls.getListingsNearPoint(state.center, 50).then((data) => {
+    //  setListings(data);
+    //});
   });
 
+  const handleMapMoveend = (_e, map) => {
+    const features = map.queryRenderedFeatures({layers: ['unclustered-listing']});
+    let viewingListings = [];
+    for(const feature of features){
+      viewingListings.push(feature.properties);
+    }
+    if (viewingListings.length >= 1){
+      setListings(viewingListings);
+    } else {
+      setListings(null);
+    }
+  }
+
   return (
+    <div>
       <Grid
         templateColumns='repeat(6, 1fr)'
         gap={0}
       >
         <GridItem colSpan={5}>
-          <Map w="100%" loadListings origin={state.center} marker={state.center}/>
+          <Map w="100%" loadListings origin={state.center} onMoveend={handleMapMoveend}/>
         </GridItem>
         <GridItem colSpan={1}>
-          <Heading fontSize='xl'>Listing locations within {searchRadius} miles of {state.place_name}</Heading>
-        <hr/>
-        { listings && 
-        <span>
-            { listings.map((data) => {
-              return (<Listing key={data.id} data={data}/>)
+          <VStack>
+            { listings
+              ?
+              <span>
+                { listings.map((data) => {
+                    return (<Listing key={data.id} data={data}/>)
+                  }
+                )}
+              </span>
+              :
+              <span>
+                <h1>No listings in this area!</h1>
+              </span>
             }
-            )}
-        </span>
-        }
+          </VStack>
         </GridItem>
       </Grid>
+      </div>
   );
 }
 
