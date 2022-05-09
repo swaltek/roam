@@ -23,7 +23,7 @@ LAT_VALIDATOR_MSG = "Latitude must be between -90 and 90"
 class Listing(models.Model):
     title = models.CharField(max_length=255)
     is_boondock = models.BooleanField(default=False)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='listings', null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_listings', null=True, blank=True)
     price = models.IntegerField(default=0, validators=[MinValueValidator(0)])
     location_lng = models.DecimalField(null=True, max_digits=20, decimal_places=17,validators=[MinValueValidator(-180, message=LNG_VALIDATOR_MSG), MaxValueValidator(180, message=LNG_VALIDATOR_MSG)])
     location_lat = models.DecimalField(null=True, max_digits=20, decimal_places=17,validators=[MinValueValidator(-90, message=LAT_VALIDATOR_MSG), MaxValueValidator(90, message=LAT_VALIDATOR_MSG)])
