@@ -22,7 +22,7 @@ const Map = (props) => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: 'mapbox://styles/mswaltek/cl2t1qlnn000e14mq8j5sz8vl',
-      center: props.marker || MAP_DEFAULT_CENTER,
+      center: props.origin || props.marker || MAP_DEFAULT_CENTER,
       zoom: 10.5
     });
 
@@ -127,7 +127,7 @@ const Map = (props) => {
         const title = e.features[0].properties.title;
         const rating = e.features[0].properties.rating;
         mapPopup.current.setLngLat(coordinates)
-          .setHTML(`<h1><strong>${title}</strong></h1> <h2>${rating.avg ? `\n rating ${rating.avg}/5` : '\n no ratings'}<h2>`)
+          .setHTML(`<h1><strong>${title}</strong></h1> <h2>${rating ? `\n rating ${rating}/5` : '\n no ratings'}<h2>`)
           .addTo(map.current);
         });
 
