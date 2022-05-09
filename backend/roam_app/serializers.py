@@ -7,7 +7,7 @@ from statistics import mean
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "email", "password", "first_name", "last_name", "favorite_listings"]
+        fields = ["id", "email", "password", "first_name", "last_name", "favorite_listings", "owned_listings"]
         extra_kwargs = {
             'password': {'write_only': True},
         }

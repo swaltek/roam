@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "../styles/ListingForm.css";
 import * as yup from 'yup'
 import { Formik, Form } from 'formik';
@@ -10,6 +11,14 @@ import apiCalls from '../api/apiCalls';
 function ListingForm(props) {
     const [lat, setlat] = useState(null)
     const [long, setlong] = useState(null)
+    const navigate = useNavigate();
+
+    useEffect(()=>{
+        if (props.listing){
+            setlat(props.listing.location_lat)
+            setlong(props.listing.location_lng)
+        }
+    },[props.listing])
 
     const validationSchema = yup.object().shape({
         title:          yup.string()
@@ -41,12 +50,11 @@ function ListingForm(props) {
                 alert('new listing created')
             }
         } else {
-            console.log('updating a listing API call')
-            console.log(values)
-            // let response = await BarAPI.newBeer(values)
-            // if (response) {
-            //     navigate('/account')
-            // }
+            let response = await apiCalls.updateListingById(props.listing.id, values)
+            if (response) {
+                alert('updated')
+                navigate('/account')
+            }
         }
         setSubmitting(false);
         resetForm({values:''})
@@ -104,11 +112,12 @@ function ListingForm(props) {
                         />
                         <FormErrorMessage>{errors.description}</FormErrorMessage>
                     </FormControl>
+                    <FormLabel>Put a pin on your site's location:</FormLabel>
                     <MapElement onChange={mapOnChange}/>
                     <Button
                         mt={4}
                         colorScheme='teal'
-                        isLoading={props.isSubmitting}
+                        disabled={isSubmitting}
                         type='submit'
                     >
                         Submit

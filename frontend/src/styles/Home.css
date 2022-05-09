@@ -1,7 +1,6 @@
 .home-searchbar-section {
     position: absolute;
-    top: 7%;
-    background-color: rgba(255, 255, 255, 0.671);
+    top: 6%;
     width: 500px;
     height: 100px;
     display: flex;
@@ -13,9 +12,27 @@
     padding-right: 10px;
 }
 
+@media (max-width: 600px) {
+    .home-searchbar-section {
+        top: 3%;
+        width: 85%;
+    }
+    .home-searchbar-title {
+        display: none;
+    }
+  }
+
+@media (min-width: 1200px) {
+    .home-searchbar-section {
+        top: 7%;
+    }
+}
+
 .home-searchbar-title {
-    font-size: large;
+    font-size: 26px;
     font-weight: 800;
+    padding-bottom: 18px;
+    color: #4c5240;
 }
 
 .home-searchbar {

@@ -9,6 +9,9 @@ import operator
 from django.db.models import Q
 from functools import reduce
 
+from django.db import models
+from django.db.models.expressions import RawSQL
+
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
@@ -20,19 +23,50 @@ class UserViewSet(ModelViewSet):
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
 
+def get_listings_nearby_coords(lat, long, distance):
+    lat_field = 'location_lat'
+    lng_field = 'location_lng'
+
+    # Great circle distance formula
+    gcd_formula = f"6371 * acos(least(greatest(\
+    cos(radians(%s)) * cos(radians({lat_field})) \
+    * cos(radians({lng_field}) - radians(%s)) + \
+    sin(radians(%s)) * sin(radians({lat_field})) \
+    , -1), 1))"
+
+    distance_raw_sql = RawSQL(
+        gcd_formula
+        ,(lat, long, lat)
+    )
+
+    query_selector = Listing.objects.all() \
+            .annotate(distance=distance_raw_sql) \
+            .order_by('distance')
+
+    query_selector = query_selector.filter(distance__lt=distance)
+    return query_selector
+
+
+
 class ListingViewSet(ModelViewSet):
     serializer_class = ListingSerializer
 
     def get_queryset(self):
         if self.request.query_params:
-            filtr = self.request.query_params.get('filter')
+            query_params = self.request.query_params;
+            filtr = query_params.get('filter')
             if filtr == 'search':
-                return Listing.objects.filter(reduce(operator.or_, (Q(title__icontains=self.request.query_params.get(x)) for x in list(self.request.query_params))))
+                return Listing.objects.filter(reduce(operator.or_, (Q(title__icontains=query_params.get(x)) for x in list(query_params))))
             elif filtr == 'popular':
                 return Listing.objects.filter(rating__gte=4)[0:10]
             elif filtr == 'park':
-                park = self.request.query_params.get('park')
+                park = query_params.get('park')
                 return Listing.objects.filter(near_park__icontains=park)
+            elif filtr == 'distance':
+                lng = query_params.get('point_lng')
+                lat = query_params.get('point_lat')
+                distance = query_params.get('distance')
+                return get_listings_nearby_coords(lat,lng,distance)
             else: 
                 return Listing.objects.all()
         else: 
@@ -101,3 +135,5 @@ class AddressViewSet(ModelViewSet):
         else: 
             permission_classes = [IsAuthenticated]
         return [permission() for permission in permission_classes]
+
+

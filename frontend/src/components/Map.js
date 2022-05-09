@@ -46,6 +46,9 @@ const Map = (props) => {
 
   const setupLoadListings = () => {
     map.current.on('load', () => {
+      map.current.on('moveend', (e) => {
+        props.onMoveend(e, map.current);
+      });
       map.current.addSource('listings', {
         type: 'geojson',
         cluster: true,
@@ -143,7 +146,6 @@ const Map = (props) => {
     apiCalls.getAllListings().then((res) => {
       let features = [];
       for(const listing of res) {
-        // console.log(listing);
         const feature = {
           "type": "Feature",
           "geometry" : {
@@ -155,7 +157,6 @@ const Map = (props) => {
         features.push(feature);
       }
       map.current.on('load', () => {
-        // console.log('features', features);
         map.current.getSource('listings').setData({
           "type": "FeatureCollection",
           "features": features

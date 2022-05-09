@@ -22,6 +22,7 @@ import SignIn from "./pages/SignIn";
 import AmenityForm from "./components/AmenityForm";
 import AddressForm from "./components/AddressForm";
 import Account from "./pages/AccountPage/Account";
+import EditListing from "./pages/EditListing";
 
 function App() {
   //user State
