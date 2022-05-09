@@ -14,7 +14,7 @@ function Account(props) {
       <div class="row">
         <div class="row align-items-start">
           <div class="col">
-            <UserInfo user={props.user} setUser={props.user} />
+            <UserInfo user={props.user} setUser={props.setUser} />
           </div>
         </div>
         <hr />
