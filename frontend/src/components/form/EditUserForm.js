@@ -44,7 +44,7 @@ const EditUserForm = (props) => {
       setSubmitting(false);
       resetForm();
       props.onClose();
-      navigate("/account");
+      // navigate("/account");
     }
   };
 

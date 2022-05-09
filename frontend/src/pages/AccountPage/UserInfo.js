@@ -29,7 +29,7 @@ const UserInfo = (props) => {
             </div>
             <div className="col-sm-9">
               <p className="text-muted mb-0">
-                {props.user.first_name} {props.user.last_name}
+                {props.user && props.user.first_name} {props.user && props.user.last_name}
               </p>
             </div>
           </div>
@@ -39,7 +39,7 @@ const UserInfo = (props) => {
               <p className="mb-0">Email</p>
             </div>
             <div className="col-sm-9">
-              <p className="text-muted mb-0">{props.user.email}</p>
+              <p className="text-muted mb-0">{props.user && props.user.email}</p>
             </div>
           </div>
           <hr />

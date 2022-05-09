@@ -7,11 +7,11 @@ function SavedSites(props){
       <h2> SavedSites</h2>
       <div className="card-columns col-me-4">
         <React.Fragment>  
-          {props.user.favorite_listings.length > 0 && Object.keys(props.user.favorite_listings).map((key, index) => (
+          {props.user && props.user.favorite_listings.length > 0 && Object.keys(props.user.favorite_listings).map((key, index) => (
               <div className="card" key={key} style={{"width" :" 200px"}}>
                 <div className="card-body">
-                  <h4 className="card-title">{props.user.first_name}</h4>
-                  <p className="card-text">{props.user.favorite_listings[key]}</p>
+                  <h4 className="card-title">{props.user && props.user.first_name}</h4>
+                  <p className="card-text">{props.user && props.user.favorite_listings[key]}</p>
                 </div>
               </div>
             ))}
