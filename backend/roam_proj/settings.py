@@ -92,23 +92,23 @@ WSGI_APPLICATION = 'roam_proj.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 #lyman's settings
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'roam_db',
-#         'USER': 'postgres',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'roam_db',
+        'USER': 'postgres',
+        'PASSWORD': '12qwaszx',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'roam_db',
+#     }
+# }
 
 
 # Password validation
