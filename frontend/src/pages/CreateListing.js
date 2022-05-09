@@ -4,8 +4,10 @@ import ListingForm from "../components/ListingForm";
 function CreateListing(props) {
     
     return (
-        <div className="new-listing-page">
-            <ListingForm is_boondock={false} new={true}/>
+        <div className="listing-page">
+            <div className="new-listing-content">
+                <ListingForm is_boondock={false} new={true}/>
+            </div>
         </div>
     )
 }

@@ -17,7 +17,6 @@ export const FavoriteButton = (props) => {
 
   const addFavorite = async ()=>{
     let response = await apiCalls.addToFavoriteListings(props.user, props.listingId)
-    console.log(response)
     if (response) {
       props.setUser(response)
     }
