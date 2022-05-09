@@ -1,4 +1,3 @@
-import Sidebar from "./Sidebar";
 import UserInfo from "./UserInfo";
 import "../../styles/account.css";
 import ReservationDetails from "./ReservationDetails";
@@ -9,9 +8,6 @@ import MySites from "./MySites";
 function Account(props) {
   return (
     <div className="container">
-      <div>
-        <Sidebar />
-      </div>
       <div className="row">
         <div className="row align-items-start">
           <div className="col">
