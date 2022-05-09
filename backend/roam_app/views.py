@@ -61,8 +61,13 @@ class AmenityViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
 class ReviewViewSet(ModelViewSet):
-    queryset = Review.objects.all()
     serializer_class = ReviewSerializer
+
+    def get_queryset(self):
+        if self.request.query_params and 'listing_id' in self.request.query_params:
+            return Review.objects.filter(listing=self.request.query_params['listing_id'])
+        else:
+            return Review.objects.all()
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

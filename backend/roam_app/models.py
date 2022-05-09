@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db.models import Avg
+from datetime import timedelta
 
 class User(AbstractUser):
     #username needs to be here for django admin page functionality
@@ -36,7 +37,14 @@ class Listing(models.Model):
         return f"{self.owner.first_name}'s {self.title}"
 
     def get_listing_dates_booked(self, instance):
-        all_dates = list(Reservation.objects.filter(listing=instance.id).values('date_start', 'date_end'))
+        all_dates = []
+        date_pairs = list(Reservation.objects.filter(listing=instance.id).values('date_start', 'date_end'))
+        for pair in date_pairs:
+            start = pair['date_start']
+            while start <= pair['date_end']:
+                all_dates.append(start)
+                start = start + timedelta(days = 1)
+        all_dates.sort()
         return all_dates
     
 class Amenity(models.Model):
