@@ -18,7 +18,8 @@ export const Footer = () => {
           <h1>Products</h1>
           <ul>
             <Link to="/blog"><h6>Outdoor Podcast</h6></Link>
-            <Link to="/expertadvice"><h6>Expert Advice</h6></Link>
+            <Link to="/listing"><h6>Listings</h6></Link>
+
           </ul>
         </div>
         <div className="col">
@@ -45,6 +46,7 @@ export const Footer = () => {
         <div className="col">
           <h1>© 2022 ROAM, Inc. All rights reserved. ROAM and the ROAM logo are trademarks of ROAM, Inc.</h1>
         </div>
+        
         <div className="clearfix"></div>
       </div>
   </div>

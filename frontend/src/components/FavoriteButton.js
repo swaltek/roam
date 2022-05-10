@@ -9,9 +9,9 @@ export const FavoriteButton = (props) => {
   const renderFavoriteButton = ()=>{
     let i = props.user.favorite_listings.indexOf(Number(props.listingId))
     if (i > -1){
-      return <button id="favorite-button-on" onClick={removeFavorite}><img id='fav-button-icon' src={heart}/></button>
+      return <button id="favorite-button-on" onClick={removeFavorite}><img alt="heart" id='fav-button-icon' src={heart}/></button>
     } else {
-      return <button id="favorite-button-on" onClick={addFavorite}><img id='fav-button-icon' src={emptyHeart}/></button>
+      return <button id="favorite-button-on" onClick={addFavorite}><img alt="heart" id='fav-button-icon' src={emptyHeart}/></button>
     }
   }
 

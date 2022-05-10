@@ -7,6 +7,53 @@
   text-align: center;
 }
 
+.genericCenterContentArticles {
+  width: 70%;
+  display: block;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+}
+
+.genArticleHeader {
+  display: block;
+  color: #4c5240;
+  font-weight: 300;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 36px;
+  letter-spacing: 0.05em;
+  padding: 20px;
+}
+
+.genParagraphText {
+  display: block;
+  color: #4c5240;
+  font-weight: 300;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 26px;
+  letter-spacing: 0.05em;
+  padding: 20px;
+}
+
+.genArticleImg {
+  width: 450px;
+}
+
+.genLogoLink {
+  width: 200px;
+  padding: 20px;
+  margin: auto;
+}
+
+.genericText {
+  font-size: 26px;
+  list-style-type: none;
+}
+
 .centerBlockElement {
   justify-content: center;
   align-items: center;
@@ -36,10 +83,12 @@
 
 .genericMainHeader {
   font-size: 30px;
+  color: #4c5240;
 }
 
 .genericSecondaryHeader {
   font-size: 22px;
+  color: #4c5240;
 }
 
 .heavyText {
@@ -73,6 +122,10 @@
 
 .padding {
   padding: 15px;
+}
+
+.marginBottom {
+  margin-bottom: 40px;
 }
 
 .button-4 {
