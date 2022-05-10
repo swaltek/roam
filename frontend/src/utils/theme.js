@@ -16,6 +16,7 @@ const colors = {
     100: "#FFFFFF",
     200: "#F9F9F9",
   },
+  red: "#BB5C5C",
 };
 
 const customTheme = extendTheme({ colors });

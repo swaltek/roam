@@ -1,14 +1,6 @@
-import {
-  Box,
-  Button,
-  Image,
-  Badge,
-  Stack,
-  Flex,
-  Spacer,
-} from "@chakra-ui/react";
+import { Box, Button, Image, Badge, Stack } from "@chakra-ui/react";
 
-function ListingCard({
+function ReservationCard({
   imageUrl,
   imageAlt = "Roam placeholder image",
   name = "We couldn't find a name",
@@ -16,9 +8,6 @@ function ListingCard({
   startDate,
   endDate,
   key,
-  buttonText,
-  buttonBgColor,
-  buttonTextColor,
   buttonClick,
 }) {
   return (
@@ -32,8 +21,8 @@ function ListingCard({
       <Image src={imageUrl} alt={imageAlt} />
       <Box p="6">
         <Stack>
-          <Box display="flex" alignItems="baseline">
-            <Badge borderRadius="full" px="2" colorScheme="teal">
+          <Box display="flex">
+            <Badge borderRadius="full" px="2" backgroundColor={["primary.100"]}>
               Dates
             </Badge>
             <Box
@@ -56,23 +45,17 @@ function ListingCard({
             {name}
           </Box>
 
-          <Flex>
-            <Box>total: {price}</Box>
-            <Spacer />
-            <Box>
-              <Button
-                onClick={buttonClick}
-                color={[{ buttonTextColor }]}
-                bg={[{ buttonBgColor }]}
-              >
-                {buttonText}
-              </Button>
-            </Box>
-          </Flex>
+          <Box>total: {price}</Box>
+
+          <Box>
+            <Button onClick={buttonClick} color={["white"]} bg={["red"]}>
+              Cancel
+            </Button>
+          </Box>
         </Stack>
       </Box>
     </Box>
   );
 }
 
-export default ListingCard;
+export default ReservationCard;
