@@ -35,6 +35,7 @@ if DEBUG:  # Allows split development on local machine
     INSTALLED_APPS += ["corsheaders"]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware", #corsheaders should be above all the others
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -161,3 +162,6 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'roam_app.User'
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'

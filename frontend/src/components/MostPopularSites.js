@@ -34,7 +34,7 @@ export const MostPopularSites = (props) => {
 
   return (
     <div>
-      <h1 className="pageHeader centerContent">Most Popular Camping Sites!</h1>
+      <h1 className="pageHeader centerContent">Most Popular</h1>
       <HStack spacing={8}>
         { popularSites }
       </HStack>

@@ -30,7 +30,7 @@ function PastStays(){
             <h4 className="heavyText genericSecondaryHeader">{reservation.listing_name}</h4>
             <h4>{reservation.date_start}</h4>
             <h4>{reservation.date_end}</h4>
-            <h4>{reservation.total}</h4>
+            <h4>${reservation.total}</h4>
         </div>
       )
     })
