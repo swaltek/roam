@@ -1,69 +1,91 @@
-// import { Box } from '@chakra-ui/react'
-// function ReservationCard({imageUrl, imageAlt, listingName, reservationPrice, startDate, endDate }) {
+import {
+  Box,
+  Button,
+  Image,
+  Badge,
+  Stack,
+  Flex,
+  Spacer,
+} from "@chakra-ui/react";
 
-//   return (
-//     <Box maxW='sm' borderWidth='1px' borderRadius='lg' overflow='hidden'>
-//       <Image src={imageUrl} alt={imageAlt} />
+import { AiFillStar } from "react-icons/ai";
 
-//       <Box p='6'>
-//         <Box display='flex' alignItems='baseline'>
-//           <Box
-//             color='gray.500'
-//             fontWeight='semibold'
-//             letterSpacing='wide'
-//             fontSize='xs'
-//             textTransform='uppercase'
-//             ml='2'
-//           >
-//             {property.beds} beds &bull; {property.baths} baths
-//           </Box>
-//         </Box>
+function ListingCard({
+  imageUrl,
+  imageAlt = "Roam placeholder image",
+  name = "We couldn't find a name",
+  price,
+  key,
+  buttonText = "Click Me",
+  buttonClick,
+  rating,
+  is_boondock,
+  nearPark,
+}) {
+  return (
+    <Box
+      key={key}
+      maxW="sm"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+    >
+      <Image src={imageUrl} alt={imageAlt} />
+      <Box p="6">
+        <Stack>
+          <Box display="flex" alignItems="baseline">
+            <Badge borderRadius="full" px="2" colorScheme="teal">
+              {{ is_boondock } ? "BoonDock" : "Roam Listing"}
+              Dates
+            </Badge>
+            <Box
+              color="gray.500"
+              fontWeight="semibold"
+              letterSpacing="wide"
+              fontSize="xs"
+              ml="2"
+            >
+              Nearest Park: {nearPark}
+            </Box>
+          </Box>
+          <Box
+            mt="1"
+            fontWeight="semibold"
+            as="h4"
+            lineHeight="tight"
+            isTruncated
+          >
+            {name}
+          </Box>
 
-//         <Box
-//           mt='1'
-//           fontWeight='semibold'
-//           as='h4'
-//           lineHeight='tight'
-//           isTruncated
-//         >
-//           {property.title}
-//         </Box>
+          <Box display="flex" mt="2" alignItems="center">
+            {Array(5)
+              .fill("")
+              .map((_, i) => (
+                <AiFillStar
+                  key={i}
+                  color={i < { rating } ? "teal.500" : "gray.300"}
+                />
+              ))}
+          </Box>
 
-//         <Box>
-//           {property.formattedPrice}
-//           <Box as='span' color='gray.600' fontSize='sm'>
-//             / wk
-//           </Box>
-//         </Box>
+          <Flex>
+            <Box>price: {price}</Box>
+            <Spacer />
+            <Box>
+              <Button
+                onClick={buttonClick}
+                color={["white"]}
+                bg={["primary.500"]}
+              >
+                {buttonText}
+              </Button>
+            </Box>
+          </Flex>
+        </Stack>
+      </Box>
+    </Box>
+  );
+}
 
-//         <Box display='flex' mt='2' alignItems='center'>
-//           {Array(5)
-//             .fill('')
-//             .map((_, i) => (
-//               <StarIcon
-//                 key={i}
-//                 color={i < property.rating ? 'teal.500' : 'gray.300'}
-//               />
-//             ))}
-//           <Box as='span' ml='2' color='gray.600' fontSize='sm'>
-//             {property.reviewCount} reviews
-//           </Box>
-//         </Box>
-//       </Box>
-//     </Box>
-//   )
-// }
-
-// export default ReservationCard;
-
-
-// const property = {
-//   imageUrl: 'https://bit.ly/2Z4KKcF',
-//   imageAlt: 'Rear view of modern home with pool',
-//   beds: 3,
-//   baths: 2,
-//   title: 'Modern home in city center in the heart of historic Los Angeles',
-//   formattedPrice: '$1,900.00',
-//   reviewCount: 34,
-//   rating: 4,
-// }
+export default ListingCard;
