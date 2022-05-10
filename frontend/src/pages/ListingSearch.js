@@ -5,7 +5,8 @@ import {
   Grid, GridItem,
   Box,
   Heading,
-  Text
+  Text,
+  Spinner
 } from "@chakra-ui/react";
 import apiCalls from '../api/apiCalls';
 import Map from '../components/Map';
@@ -23,7 +24,7 @@ const  Listing = ({data}) => {
 const ListingSearch = () => {
   let { state } = useLocation();
   //const [searchRadius, setSearchRadius ] = useState(100);
-  const [listings, setListings] = useState(null);
+  const [listings, setListings] = useState(undefined);
   console.log('state', state);
 
   useEffect(() => {
@@ -32,8 +33,8 @@ const ListingSearch = () => {
     //  setListings(data);
     //});
   });
-
-  const handleMapMoveend = (_e, map) => {
+  
+  const populateListingsWithFeatures = async (map) => {
     const features = map.queryRenderedFeatures({layers: ['unclustered-listing']});
     let viewingListings = [];
     for(const feature of features){
@@ -53,7 +54,10 @@ const ListingSearch = () => {
         gap={0}
       >
         <GridItem colSpan={5}>
-          <Map w="100%" loadListings origin={state.center} onMoveend={handleMapMoveend}/>
+          <Map w="100%" h="80vh" loadListings origin={state.center}
+          onMove={() => setListings(undefined) }
+          onIdle={(_e, map) => populateListingsWithFeatures(map)}
+          />
         </GridItem>
         <GridItem colSpan={1}>
           <VStack>
@@ -66,9 +70,11 @@ const ListingSearch = () => {
                 )}
               </span>
               :
-              <span>
-                <h1>No listings in this area!</h1>
-              </span>
+                listings === undefined 
+                ?
+                  <Spinner />
+                :
+                <h1> No listings in this area! </h1>
             }
           </VStack>
         </GridItem>

@@ -29,9 +29,17 @@ const Map = (props) => {
     if(props.loadListings) setupLoadListings();
 
     mapPopup.current = new mapboxgl.Popup({
-        closeButton: false,
-        closeOnClick: false
-      });
+      closeButton: false,
+      closeOnClick: false
+    });
+
+    map.current.on('move', (e) => {
+      props.onMove && props.onMove(e, map.current);
+    });
+
+    map.current.on('idle', (e) => {
+      props.onIdle && props.onIdle(e, map.current);
+    });
   });
 
   useEffect(() => {
@@ -46,9 +54,6 @@ const Map = (props) => {
 
   const setupLoadListings = () => {
     map.current.on('load', () => {
-      map.current.on('moveend', (e) => {
-        props.onMoveend(e, map.current);
-      });
       map.current.addSource('listings', {
         type: 'geojson',
         cluster: true,
