@@ -50,6 +50,7 @@ function ReservationDetails(){
         <div>
           <div className="padding">
             <div>
+              <h1 className="exploreHeader">Current Reservations</h1>
               { renderReservations() }
             </div>
           </div>

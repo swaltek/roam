@@ -7,45 +7,30 @@ import MySites from "./MySites";
 
 function Account(props) {
   return (
-    <div className="container">
-      <div className="row">
-        <div className="row align-items-start">
-          <div className="col">
-            <UserInfo user={props.user} setUser={props.setUser} />
-          </div>
-        </div>
-        <hr />
-        <br />
+    <div className="container centerBlockElement">
+      
+      <h1 className="fullWidth exploreHeader">Account Details</h1>
 
-        <div className="row align-items-center">
-          <div className="col">
-            <ReservationDetails />
-          </div>
-        </div>
-        <hr />
-        <br />
-
-        <div className="row align-items-end">
-          <div className="col">
-            <SavedSites user={props.user} setUser={props.user} />
-          </div>
-        </div>
-        <hr />
-        <br />
-
-        <div className="row align-items-end">
-          <div className="col">
-            <PastStays />
-          </div>
-        </div>
-        <hr />
-        <br />
-        <div class="row align-items-end">
-          <div class="col">
-            <MySites user={props.user}/>
-          </div>
-        </div>
+      <div className="fullWidth">
+        <UserInfo user={props.user} setUser={props.setUser} />
       </div>
+
+      <div className="fullWidth ">
+        <ReservationDetails />
+      </div>
+
+      <div className="fullWidth ">
+        <SavedSites user={props.user} setUser={props.user}/>
+      </div>
+
+      <div className="fullWidth ">
+        <PastStays />
+      </div>
+
+      <div class="fullWidth ">
+        <MySites user={props.user}/>
+      </div>
+
     </div>
   );
 }

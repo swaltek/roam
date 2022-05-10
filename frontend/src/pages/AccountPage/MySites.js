@@ -30,15 +30,15 @@ function MySites(props){
             <div key={`ownlist-${listing.id}`} className="box neutral2 padding text-center ">
                 <h4 className="heavyText genericSecondaryHeader">{listing.title}</h4>
                 <h4>{`$${listing.price}`}</h4>
-                <Link to={`/listing/${listing.id}/edit`}><Button>Edit</Button></Link>
+                <Link className='button-4' to={`/listing/${listing.id}/edit`}>Edit</Link>
             </div>
         )})
         
     }
 
     return (
-      <div className="container">
-        <h1>Sites I've Listed</h1>
+      <div className="container exploreHeader">
+        <h1>My Properties</h1>
         { props.user && renderOwnerListings()}
     </div>
 )
