@@ -39,7 +39,12 @@ function MySites(props){
     return (
       <div className="container">
         <h1>Sites I've Listed</h1>
-        { props.user && renderOwnerListings()}
+        <div className='row'>
+        <Link to={`/listing/new`}><Button>Create New Listing</Button></Link>
+        </div>
+        <div>{ props.user && renderOwnerListings()}
+        </div>
+        
     </div>
 )
 }
