@@ -25,7 +25,7 @@ const Search = (props) => {
 
     geocoder.current.addTo('#geocoderContainer');
     geocoder.current.on('result', (e) => {
-      props.onSearch(e, e.result);
+      props.onSearch && props.onSearch(e, e.result);
     });
   });
 
