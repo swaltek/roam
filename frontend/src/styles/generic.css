@@ -13,6 +13,7 @@
   margin: auto;
 }
 
+
 .genericMainHeader {
   font-size: 30px;
 }
@@ -23,6 +24,7 @@
 
 .heavyText {
   font-weight: bolder;
+  color: #4c5240;
 }
 
 .genericIconSize {
@@ -38,7 +40,7 @@
 }
 
 .imgsize {
-  height: 200px;
+  width: 300px;
 }
 
 .neutral {
