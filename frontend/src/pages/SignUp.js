@@ -74,7 +74,7 @@ const SignUp = (props) => {
           Sign Up
         </Heading>
         <br />
-        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Box className="marginBottom" maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
           <Box p="6">
             <Box display="flex" alignItems="baseline">
                 <Formik

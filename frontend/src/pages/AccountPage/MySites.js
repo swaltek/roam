@@ -3,7 +3,6 @@ import apiCalls from "../../api/apiCalls";
 import { Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 function MySites(props) {
   const [ownListings, setOwnListings] = useState([]);
 
