@@ -53,6 +53,10 @@ function App() {
         />
         <Route path="/listing/new" element={<CreateListing />} />
         <Route
+          path="/listing/:listingId/edit"
+          element={<EditListing />}
+        />
+        <Route
           path="/listing/:listingId"
           element={<Listing user={user} setUser={setUser} />}
         />

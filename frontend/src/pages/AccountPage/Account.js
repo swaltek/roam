@@ -4,6 +4,8 @@ import ReservationDetails from "./ReservationDetails";
 import SavedSites from "./SavedSites";
 import PastStays from "./PastStays";
 import MySites from "./MySites";
+import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 function Account(props) {
   return (
