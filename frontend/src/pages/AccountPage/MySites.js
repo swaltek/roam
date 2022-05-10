@@ -42,11 +42,17 @@ function MySites(props) {
     });
   };
 
-  return (
-    <div className="container exploreHeader">
-      <h1>My Properties</h1>
-      {props.user && renderOwnerListings()}
+    return (
+
+        <div className="container exploreHeader">
+        <h1>My Properties</h1>
+        <div className='row'>
+        <Link to={`/listing/new`}><Button>Create New Listing</Button></Link>
+        </div>
+        <div>{ props.user && renderOwnerListings()}
+        </div>
     </div>
-  );
+  
+)
 }
 export default MySites;
