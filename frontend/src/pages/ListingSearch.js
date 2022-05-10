@@ -28,7 +28,7 @@ const ListingSearch = () => {
   let { state } = useLocation();
   //const [searchRadius, setSearchRadius ] = useState(100);
   const { isOpen, onToggle } = useDisclosure();
-  const [origin, setOrigin] = useState(state.center);
+  const [origin, setOrigin] = useState(state ? state.center : [-119.5383, 37.8651]);//default to yosemite
   const [listings, setListings] = useState(undefined);
 
   useEffect(() => {
