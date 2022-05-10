@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect, useRef  } from 'react';
 import {
   VStack,
   Grid,
@@ -13,7 +13,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Map from '../components/Map';
-//import Search from '../components/GeocodingSearch.js';
+import Search from '../components/GeocodingSearch.js';
 
 const  Listing = ({data}) => {
   return(
@@ -28,6 +28,7 @@ const ListingSearch = () => {
   let { state } = useLocation();
   //const [searchRadius, setSearchRadius ] = useState(100);
   const { isOpen, onToggle } = useDisclosure();
+  const [origin, setOrigin] = useState(state.center);
   const [listings, setListings] = useState(undefined);
 
   useEffect(() => {
@@ -38,6 +39,7 @@ const ListingSearch = () => {
   });
   
   const populateListingsWithFeatures = async (map) => {
+    console.log('loading features');
     const features = map.queryRenderedFeatures({layers: ['unclustered-listing']});
     let viewingListings = [];
     for(const feature of features){
@@ -52,22 +54,24 @@ const ListingSearch = () => {
 
   return (
     <div>
+      <Search onSearch={(_e, data) => setOrigin(data.center)}/>
       <Button onClick={onToggle}>{ isOpen ? 'Hide Listings': 'Expand Listings'}</Button>
       <Box
         style={{
           position: 'relative',
         }}
       >
-        <Map w="100%" h="80vh" loadListings origin={state.center}
-        onMove={() => setListings(undefined) }
-        onIdle={(_e, map) => populateListingsWithFeatures(map)}
+        <Map
+          w="100%" h="80vh" loadListings origin={origin}
+          onMove={() => setListings(undefined) }
+          onIdle={(_e, map) => populateListingsWithFeatures(map)}
         />
         <Slide
           direction='left'
           in={isOpen}
           style={{
             position: 'absolute',
-            width: '30%',
+            width: '25%',
             right: 0,
             zIndex: 10
           }}>
@@ -77,7 +81,9 @@ const ListingSearch = () => {
               mt='4'
               bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
               rounded='md'
-              shadow='md'>
+              shadow='md'
+              h='95%'
+            >
               { listings
                 ?
                 <span>

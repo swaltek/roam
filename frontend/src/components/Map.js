@@ -18,6 +18,13 @@ const Map = (props) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if( !map.current ) return;
+    console.log('new origin', props.origin);
+    map.current.flyTo({ center: props.origin });
+    ;
+  }, [props.origin]);
+
+  useEffect(() => {
     if (map.current) return; // initialize map only once
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
