@@ -46,8 +46,6 @@ def get_listings_nearby_coords(lat, long, distance):
     query_selector = query_selector.filter(distance__lt=distance)
     return query_selector
 
-
-
 class ListingViewSet(ModelViewSet):
     serializer_class = ListingSerializer
 
