@@ -8,18 +8,19 @@ import {
   Spacer,
 } from "@chakra-ui/react";
 
+import { AiFillStar } from "react-icons/ai";
+
 function ListingCard({
   imageUrl,
   imageAlt = "Roam placeholder image",
   name = "We couldn't find a name",
   price,
-  startDate,
-  endDate,
   key,
-  buttonText,
-  buttonBgColor,
-  buttonTextColor,
+  buttonText = "Click Me",
   buttonClick,
+  rating,
+  is_boondock,
+  nearPark,
 }) {
   return (
     <Box
@@ -34,6 +35,7 @@ function ListingCard({
         <Stack>
           <Box display="flex" alignItems="baseline">
             <Badge borderRadius="full" px="2" colorScheme="teal">
+              {{ is_boondock } ? "BoonDock" : "Roam Listing"}
               Dates
             </Badge>
             <Box
@@ -43,7 +45,7 @@ function ListingCard({
               fontSize="xs"
               ml="2"
             >
-              {startDate} - {endDate}
+              Nearest Park: {nearPark}
             </Box>
           </Box>
           <Box
@@ -56,14 +58,25 @@ function ListingCard({
             {name}
           </Box>
 
+          <Box display="flex" mt="2" alignItems="center">
+            {Array(5)
+              .fill("")
+              .map((_, i) => (
+                <AiFillStar
+                  key={i}
+                  color={i < { rating } ? "teal.500" : "gray.300"}
+                />
+              ))}
+          </Box>
+
           <Flex>
-            <Box>total: {price}</Box>
+            <Box>price: {price}</Box>
             <Spacer />
             <Box>
               <Button
                 onClick={buttonClick}
-                color={[{ buttonTextColor }]}
-                bg={[{ buttonBgColor }]}
+                color={["white"]}
+                bg={["primary.500"]}
               >
                 {buttonText}
               </Button>
