@@ -40,6 +40,9 @@ export const Listing = (props) => {
                   <Card.Title>{listing.title}</Card.Title>
                   <Card.Text>
                     {listing.description}
+                    <br/>
+                    <br/>
+                    <img src={listing.image}/>
                   </Card.Text>
                 </Card.Body>  
                 <Card.Body>
