@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;900&display=swap');
+
 .genericCenterContent {
   width: 100%;
   display: block;
@@ -13,6 +15,24 @@
   margin: auto;
 }
 
+.exploreHeader {
+  display: block;
+  color: #4c5240;
+  font-weight: 300;
+  width: 100%;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 28px;
+  letter-spacing: 0.05em;
+}
+
+.borderr{
+  border:1px solid black;
+}
+
+.fullWidth {
+  width: 100%;
+}
 
 .genericMainHeader {
   font-size: 30px;
