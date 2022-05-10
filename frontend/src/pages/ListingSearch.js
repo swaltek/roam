@@ -2,13 +2,16 @@ import { useLocation } from 'react-router-dom';
 import { useState, useEffect  } from 'react';
 import {
   VStack,
-  Grid, GridItem,
+  Grid,
+  GridItem,
   Box,
   Heading,
   Text,
-  Spinner
+  Spinner,
+  Button,
+  Slide,
+  useDisclosure,
 } from "@chakra-ui/react";
-import apiCalls from '../api/apiCalls';
 import Map from '../components/Map';
 //import Search from '../components/GeocodingSearch.js';
 
@@ -24,8 +27,8 @@ const  Listing = ({data}) => {
 const ListingSearch = () => {
   let { state } = useLocation();
   //const [searchRadius, setSearchRadius ] = useState(100);
+  const { isOpen, onToggle } = useDisclosure();
   const [listings, setListings] = useState(undefined);
-  console.log('state', state);
 
   useEffect(() => {
     //if( listings ) return;
@@ -49,36 +52,50 @@ const ListingSearch = () => {
 
   return (
     <div>
-      <Grid
-        templateColumns='repeat(6, 1fr)'
-        gap={0}
+      <Button onClick={onToggle}>{ isOpen ? 'Hide Listings': 'Expand Listings'}</Button>
+      <Box
+        style={{
+          position: 'relative',
+        }}
       >
-        <GridItem colSpan={5}>
-          <Map w="100%" h="80vh" loadListings origin={state.center}
-          onMove={() => setListings(undefined) }
-          onIdle={(_e, map) => populateListingsWithFeatures(map)}
-          />
-        </GridItem>
-        <GridItem colSpan={1}>
-          <VStack>
-            { listings
-              ?
-              <span>
-                { listings.map((data) => {
-                    return (<Listing key={data.id} data={data}/>)
-                  }
-                )}
-              </span>
-              :
-                listings === undefined 
+        <Map w="100%" h="80vh" loadListings origin={state.center}
+        onMove={() => setListings(undefined) }
+        onIdle={(_e, map) => populateListingsWithFeatures(map)}
+        />
+        <Slide
+          direction='left'
+          in={isOpen}
+          style={{
+            position: 'absolute',
+            width: '30%',
+            right: 0,
+            zIndex: 10
+          }}>
+            <VStack
+              p='40px'
+              color='white'
+              mt='4'
+              bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
+              rounded='md'
+              shadow='md'>
+              { listings
                 ?
-                  <Spinner />
+                <span>
+                  { listings.map((data) => {
+                      return (<Listing key={data.id} data={data}/>)
+                    }
+                  )}
+                </span>
                 :
-                <h1> No listings in this area! </h1>
-            }
+                  listings === undefined 
+                  ?
+                    <Spinner />
+                  :
+                  <h1> No listings in this area! </h1>
+              }
           </VStack>
-        </GridItem>
-      </Grid>
+        </Slide>
+      </Box>
       </div>
   );
 }
