@@ -14,13 +14,6 @@ import EditUserForm from "../../components/form/EditUserForm";
 const UserInfo = (props) => {
   return (
     <div className="container">
-      <h1>Account Details</h1>
-      <hr />
-      <br></br>
-      <h3> User Information</h3>
-      <br></br>
-      <br></br>
-
       <div className="card mb-4">
         <div className="card-body">
           <div className="row">
@@ -43,6 +36,7 @@ const UserInfo = (props) => {
             </div>
           </div>
           <hr />
+          <br></br>
           <div className="justify-content-center">
             <EditUserInfoModal user={props.user} setUser={props.setUser} />
           </div>
