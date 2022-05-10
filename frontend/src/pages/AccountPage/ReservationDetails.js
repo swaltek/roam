@@ -50,7 +50,20 @@ function ReservationDetails() {
     });
   };
 
+<<<<<<< HEAD
   return <Grid autoRows={"auto"}>{renderReservations()}</Grid>;
+=======
+  return (
+        <div>
+          <div className="padding">
+            <div>
+              <h1 className="exploreHeader">Current Reservations</h1>
+              { renderReservations() }
+            </div>
+          </div>
+        </div>
+  )
+>>>>>>> e0232fe800a40a2aada46981e03e9f110e3160f5
 }
 
 export default ReservationDetails;

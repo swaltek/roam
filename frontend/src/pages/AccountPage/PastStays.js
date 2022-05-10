@@ -38,6 +38,7 @@ function PastStays(){
 
   return (
     <div className="padding">
+      <h1 className="exploreHeader">Past Stays</h1>
       { loadPastReservations() }
     </div>
   )
