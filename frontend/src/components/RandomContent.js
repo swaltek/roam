@@ -16,7 +16,7 @@ const RandomContent = (props) => {
 
                     <Link className="square4" to="/leavenotrace"> <h4>Leave No Trace</h4></Link>
 
-                    <Link className="square5" to="/campingtips"> <h4>5 Camping Tips</h4></Link>
+                    <Link className="square5" to="/campingtips"> <h4>Camping Tips</h4></Link>
 
                     <Link className="square6" to="/team"> <h4>Contact Us</h4></Link>
 

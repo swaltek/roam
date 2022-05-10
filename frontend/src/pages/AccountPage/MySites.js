@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import apiCalls from '../../api/apiCalls';
-import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function MySites(props){

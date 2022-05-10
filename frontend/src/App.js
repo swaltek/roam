@@ -8,7 +8,6 @@ import Footer from "./components/Footer";
 import CreateListing from "./pages/CreateListing";
 import ListingSearch from "./pages/ListingSearch";
 import Blog from "./pages/Blog";
-import ExpertAdvice from "./pages/ExpertAdvice";
 import Listing from "./pages/Listing";
 import LeaveNoTrace from "./pages/LeaveNoTrace";
 import Team from "./pages/Team";
@@ -58,13 +57,11 @@ function App() {
           element={<Listing user={user} setUser={setUser} />}
         />
         <Route path="/listing/search/" element={<ListingSearch />} />
-
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
         <Route path="/amenities/new" element={<AmenityForm />} />
         <Route path="/addresses/new" element={<AddressForm />} />
         <Route path="/blog" element={<Blog />} />
-        <Route path="/expertadvice" element={<ExpertAdvice />} />
         <Route path="/leavenotrace" element={<LeaveNoTrace />} />
         <Route path="/team" element={<Team />} />
         <Route path="/campingtips" element={<CampingTips />} />
