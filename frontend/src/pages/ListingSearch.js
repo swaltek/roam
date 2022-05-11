@@ -1,9 +1,7 @@
-import { useLocation } from 'react-router-dom';
-import { useState, useEffect, useRef  } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import {
   VStack,
-  Grid,
-  GridItem,
   Box,
   Heading,
   Text,
@@ -13,22 +11,15 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Map from '../components/Map';
-import Search from '../components/GeocodingSearch.js';
-
-const  Listing = ({data}) => {
-  return(
-    <Box shadow='s' borderWidth='2px' borderRadius='md' >
-      <Heading fontSize='l'>{data.title}</Heading>
-      <Text mt={4}>{data.rating || "This site has no ratings!"}</Text>
-    </Box>
-  );
-}
+import Search from '../components/GeocodingSearch';
+import ListingCard from '../components/ListingCard';
 
 const ListingSearch = () => {
   let { state } = useLocation();
+  let navigate = useNavigate();
   //const [searchRadius, setSearchRadius ] = useState(100);
   const { isOpen, onToggle } = useDisclosure();
-  const [origin, setOrigin] = useState(state.center);
+  const [origin, setOrigin] = useState(state ? state.center : [-119.5383, 37.8651]);//default to yosemite
   const [listings, setListings] = useState(undefined);
 
   useEffect(() => {
@@ -69,26 +60,40 @@ const ListingSearch = () => {
         <Slide
           direction='left'
           in={isOpen}
+          maxW='sm'
           style={{
             position: 'absolute',
-            width: '25%',
+            width: '35%',
             right: 0,
-            zIndex: 10
+            zIndex: 5 
           }}>
             <VStack
               p='40px'
               color='white'
-              mt='4'
               bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
-              rounded='md'
-              shadow='md'
-              h='95%'
+              h='100%'
+              style={{
+                'overflow-y': 'scroll',
+                'overflow-x': 'hidden',
+                overflow: 'auto',
+              }}
             >
               { listings
                 ?
                 <span>
                   { listings.map((data) => {
-                      return (<Listing key={data.id} data={data}/>)
+                      console.log(data);
+                      return (
+                        <ListingCard
+                          key={data.id}
+                          name={data.title}
+                          price={data.price}
+                          listingId={data.id}
+                          is_boondock={data.is_boondock}
+                          buttonClick={() => {
+                            navigate(`/listing/${data.id}`)
+                          }}
+                        />)
                     }
                   )}
                 </span>
