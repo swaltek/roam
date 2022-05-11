@@ -45,7 +45,9 @@ function ReservationCard({
             {name}
           </Box>
 
-          <Box>total: {price}</Box>
+          <Box color="green" pr={20}>
+            total: {price}
+          </Box>
 
           <Box>
             <Button onClick={buttonClick} color={["white"]} bg={["red"]}>
