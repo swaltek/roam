@@ -30,7 +30,7 @@ const Map = (props) => {
       container: mapContainer.current,
       style: 'mapbox://styles/mswaltek/cl2t1qlnn000e14mq8j5sz8vl',
       center: props.origin || props.marker || MAP_DEFAULT_CENTER,
-      zoom: 10.5
+      zoom: 10.5,
     });
 
     if(props.loadListings) setupLoadListings();
@@ -47,7 +47,7 @@ const Map = (props) => {
     map.current.on('idle', (e) => {
       props.onIdle && props.onIdle(e, map.current);
     });
-  });
+  })
 
   useEffect(() => {
     if(!map.current) return;
@@ -126,7 +126,7 @@ const Map = (props) => {
             // get the title name from the sources "title" property
             'text-offset': [0, 1.25],
             'icon-allow-overlap': true,
-            'icon-size': 1,
+            'icon-size': 0.25,
           }
       });
 
