@@ -66,6 +66,7 @@ function ListingCard({
             as="h4"
             lineHeight="tight"
             isTruncated
+            color="black"
           >
             {name}
           </Box>
