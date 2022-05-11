@@ -1,20 +1,24 @@
 import { VStack } from "@chakra-ui/react";
+<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import "../styles/Home.css"
+=======
+import { useNavigate } from "react-router-dom";
+import "../styles/Home.css";
+import Map from "../components/Map";
 import Search from "../components/GeocodingSearch";
 import MostPopularSites from "../components/MostPopularSites";
-//import BoondockSites from "../components/BoondockSites";
 import FeaturedParks from "../components/FeaturedParks";
 import RandomContent from "../components/RandomContent";
 import HeaderImage from "../components/HeaderImage";
-import background from "../static/camper.webp"
+import background from "../static/camper.webp";
 
 export const HomePage = (props) => {
   const navigate = useNavigate();
 
   return (
     <VStack>
-      <HeaderImage imageUrl={ background } />
+      <HeaderImage imageUrl={background} />
       <section className="home-searchbar-section">
         <h1 className="home-searchbar-title">Your next adventure awaits...</h1>
         <form className="home-searchbar-form">
@@ -23,7 +27,8 @@ export const HomePage = (props) => {
               {
                 state: searchData,
               });
-          }}/>
+            }}
+          />
         </form>
       </section>
       <MostPopularSites user={props.user} setUser={props.setUser}/>

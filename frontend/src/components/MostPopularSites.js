@@ -1,45 +1,52 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import apiCalls from "../api/apiCalls";
-import { Box, Heading, Text, HStack } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
-import FavoriteButton from './FavoriteButton';
+import { HStack } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
+import ListingCard from "./ListingCard";
+import defaultImage from "../static/branding/listing-default-image.png";
 
 export const MostPopularSites = (props) => {
-  const [popularSites, setPopularSites] = useState([])
+  const [popularSites, setPopularSites] = useState([]);
+  const navigate = useNavigate();
 
-  useEffect(()=>{
-    loadPopularSites()
-  },[props.user])
+  useEffect(() => {
+    loadPopularSites();
+  }, [props.user]);
 
-  const loadPopularSites = async ()=>{
-    let response = await apiCalls.getListingsPopular()
-    if (response){
-      let build = []
-      for (let i=0; i<response.length; i++){
-        build.push(
-          <Box className='box neutral' key={`card-${response[i].id}`} p={5} shadow='md' borderWidth='.5px' borderRadius='3%'>
-            { props.user && <FavoriteButton user={props.user} setUser={props.setUser} listingId={response[i].id}/>}
-            <Link key={`link-${response[i].id}`} to={`/listing/${response[i].id}`}>
-              <Heading fontSize='xl'>
-                {response[i].title}
-              </Heading>
-              <Text mt={4}>{response[i].description}</Text>
-            </Link>
-          </Box>
-        )
-      }
-      setPopularSites(build)
-    }
-  }
+  const loadPopularSites = async () => {
+    let data = await apiCalls.getListingsPopular();
+    console.log(data);
+    setPopularSites(data ? data : []);
+  };
+
+  const renderPopularSites = () => {
+    return popularSites.map((site) => {
+      return (
+        <ListingCard
+          listingId={site.id}
+          user={props.user}
+          setUser={props.setUser}
+          imageUrl={defaultImage}
+          key={site.id}
+          name={site.title}
+          is_boondock={site.is_boondock}
+          nearPark={site.near_park}
+          price={site.price}
+          buttonText="Book Now"
+          buttonClick={() => navigate(`/listing/${site.id}`)}
+        />
+      );
+    });
+  };
 
   return (
     <div>
       <h1 className="pageHeader centerContent">Most Popular</h1>
-      <HStack spacing={8}>
-        { popularSites }
+      <HStack pt={10} pb={10} spacing={8}>
+        {renderPopularSites()}
       </HStack>
     </div>
   );
 };
-  
+
 export default MostPopularSites;

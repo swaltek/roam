@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "../styles/ListingForm.css";
 import * as yup from 'yup'
-import { Formik, Form } from 'formik';
+import { Formik, Form,Field } from "formik";
 import { FormControl, FormLabel, FormErrorMessage, Button, Input, Textarea } from '@chakra-ui/react'
 import MapElement from "./SelectLocationMap";
 import apiCalls from '../api/apiCalls';
@@ -33,6 +33,7 @@ function ListingForm(props) {
         title:          props.listing ? props.listing.title : '',
         price:          props.listing ? props.listing.price : '',
         description:    props.listing ? props.listing.description : '',
+        image:          props.listing ? props.listing.image : ''
     };
 
     const onSubmit = async (values, { setSubmitting, resetForm })=> {
@@ -42,12 +43,21 @@ function ListingForm(props) {
         // this block sends a post request for a new listing object or a 
         // put request for updating a listing
         if (props.new){
-            console.log('creating a new listing API call')
-            console.log(values)
-            let response = await apiCalls.createListing(values)
+
+            let form_data = new FormData();        
+            if (values.file[0]){
+                form_data.append("image", values.file[0]);
+            }
+            form_data.append("title", values.title);
+            form_data.append("description", values.description);
+            form_data.append("is_boondock", values.is_boondock);
+            form_data.append("location_lat", values.location_lat);
+            form_data.append("location_lng", values.location_lng);
+            form_data.append("price", values.price);
+            let response = await apiCalls.createListing(form_data)
             if (response) {
                 console.log(response)
-                alert('new listing created')
+                alert('New Listing Created')
             }
         } else {
             let response = await apiCalls.updateListingById(props.listing.id, values)
@@ -66,10 +76,11 @@ function ListingForm(props) {
         console.log(newLngLat)
     }
 
+
     return (
         <Formik validateOnBlur={true}
         validateOnChange={false} {...{initialValues, onSubmit, validationSchema }}>
-            {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched }) => (
+            {({ handleSubmit, handleBlur, handleChange, values, errors, isSubmitting, touched ,setFieldValue }) => (
                 <Form noValidate onSubmit={handleSubmit}>
                     <FormControl 
                         isRequired 
@@ -112,6 +123,21 @@ function ListingForm(props) {
                         />
                         <FormErrorMessage>{errors.description}</FormErrorMessage>
                     </FormControl>
+
+                    <FormControl 
+                        isRequired 
+                        isInvalid={touched.image && !!errors.image}
+                    >
+                        <FormLabel>Image:</FormLabel>
+                                <input id="file" name="file" 
+                                type="file" 
+                                onChange={(event) => {
+                                setFieldValue("file", event.currentTarget.files);
+                                }} />
+                        <FormErrorMessage>{errors.image}</FormErrorMessage>
+                    </FormControl>
+
+
                     <FormLabel>Put a pin on your site's location:</FormLabel>
                     <MapElement onChange={mapOnChange}/>
                     <Button

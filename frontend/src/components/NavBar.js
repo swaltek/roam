@@ -1,5 +1,5 @@
 import { Box, Flex, Stack, Text, Button } from "@chakra-ui/react";
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiMenu } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";

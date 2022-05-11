@@ -11,6 +11,8 @@ from functools import reduce
 
 from django.db import models
 from django.db.models.expressions import RawSQL
+from rest_framework.parsers import MultiPartParser, FormParser
+
 
 class UserViewSet(ModelViewSet):
     queryset = User.objects.all()
@@ -48,6 +50,7 @@ def get_listings_nearby_coords(lat, long, distance):
 
 class ListingViewSet(ModelViewSet):
     serializer_class = ListingSerializer
+    parser_classes = (MultiPartParser, FormParser)
 
     def get_queryset(self):
         if self.request.query_params:
@@ -78,7 +81,9 @@ class ListingViewSet(ModelViewSet):
         return [permission() for permission in permission_classes]
 
     def create(self, request, *args, **kwargs):
+        request.data._mutable = True
         request.data['owner'] = request.user.id
+        request.data._mutable = False
         return super().create(request, *args, **kwargs)
 
 class AmenityViewSet(ModelViewSet):

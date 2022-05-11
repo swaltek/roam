@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import apiCalls from "../../api/apiCalls";
 import React from "react";
-import { Card, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 function SavedSites(props){
