@@ -1,11 +1,8 @@
 import { VStack } from "@chakra-ui/react";
-<<<<<<< HEAD
 import { useNavigate } from 'react-router-dom';
 import "../styles/Home.css"
-=======
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
-import Map from "../components/Map";
 import Search from "../components/GeocodingSearch";
 import MostPopularSites from "../components/MostPopularSites";
 import FeaturedParks from "../components/FeaturedParks";
