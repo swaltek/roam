@@ -17,19 +17,17 @@ export const HomePage = (props) => {
       <section className="home-searchbar-section">
         <h1 className="home-searchbar-title">Your next adventure awaits...</h1>
         <form className="home-searchbar-form">
-          <Search onSearch={(_e, searchData) => {
-            navigate(`/listing/search`,
-              {
+          <Search
+            onSearch={(_e, searchData) => {
+              navigate(`/listing/search`, {
                 state: searchData,
               });
             }}
           />
         </form>
       </section>
-      <MostPopularSites user={props.user} setUser={props.setUser}/>
-
+      <MostPopularSites user={props.user} setUser={props.setUser} />
       <FeaturedParks />
-
       <RandomContent />
     </VStack>
   );

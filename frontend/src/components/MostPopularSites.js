@@ -3,6 +3,7 @@ import apiCalls from "../api/apiCalls";
 import { HStack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import ListingCard from "./ListingCard";
+import HeadingText from "./HeadingText";
 
 export const MostPopularSites = (props) => {
   const [popularSites, setPopularSites] = useState([]);
@@ -38,12 +39,12 @@ export const MostPopularSites = (props) => {
   };
 
   return (
-    <div>
-      <h1 className="pageHeader centerContent">Most Popular</h1>
+    <>
+      <HeadingText pt="5" text="Most Popular" />
       <HStack pt={10} pb={10} spacing={8}>
         {renderPopularSites()}
       </HStack>
-    </div>
+    </>
   );
 };
 
