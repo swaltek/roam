@@ -83,7 +83,7 @@ const MenuLinks = ({ isOpen, props }) => {
       return (
         <>
           <MenuItem to="/account">Account</MenuItem>
-          <MenuItem to="/most-popular">Popular</MenuItem>
+          <MenuItem to="/listing/search">Listings</MenuItem>
           <MenuItem to="/listing/search">Listings</MenuItem>
           <MenuItem onClick={doLogout} isLast>
             <Button
