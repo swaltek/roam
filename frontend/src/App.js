@@ -51,7 +51,7 @@ function App() {
           path="/signin"
           element={<SignIn user={user} setUser={setUser} />}
         />
-        <Route path="/listing/new" element={<CreateListing />} />
+        <Route path="/listing/new" element={<CreateListing user={user} setUser={setUser} />} />
         <Route
           path="/listing/:listingId/edit"
           element={<EditListing />}
@@ -60,7 +60,7 @@ function App() {
           path="/listing/:listingId"
           element={<Listing user={user} setUser={setUser} />}
         />
-        <Route path="/listing/search/" element={<ListingSearch />} />
+        <Route path="/listing/search/" element={<ListingSearch user={user} setUser={setUser} />} />
         <Route path="/reviews/new" element={<ReviewForm />} />
         <Route path="/reservations/new" element={<ReservationForm />} />
         <Route path="/amenities/new" element={<AmenityForm />} />
