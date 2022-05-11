@@ -59,6 +59,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = ["id", "email", "password", "first_name", "last_name", "favorite_listings", "owned_listings"]
         extra_kwargs = {
             'password': {'write_only': True},
+            'owned_listings': {'read_only': True},
         }
 
     # Additional functionality added: when creating users, hash the plaintext password before saving object
