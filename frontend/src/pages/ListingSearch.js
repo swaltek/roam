@@ -60,19 +60,21 @@ const ListingSearch = () => {
         <Slide
           direction='left'
           in={isOpen}
-          maxW='sm'
           style={{
+            width: 'auto',
             position: 'absolute',
-            width: '35%',
             right: 0,
-            zIndex: 5 
+            zIndex: 5,
+            'pointer-events': 'none',
           }}>
             <VStack
-              p='40px'
+              p='15px'
               color='white'
               bg={["primary.900", "primary.900", "primary.900", "primary.900"]}
+              maxW='sm'
               h='100%'
               style={{
+                'pointer-events': 'auto',
                 'overflow-y': 'scroll',
                 'overflow-x': 'hidden',
                 overflow: 'auto',
@@ -84,16 +86,21 @@ const ListingSearch = () => {
                   { listings.map((data) => {
                       console.log(data);
                       return (
-                        <ListingCard
-                          key={data.id}
-                          name={data.title}
-                          price={data.price}
-                          listingId={data.id}
-                          is_boondock={data.is_boondock}
-                          buttonClick={() => {
-                            navigate(`/listing/${data.id}`)
-                          }}
-                        />)
+                        <Box
+                          p='10px'
+                        >
+                          <ListingCard
+                            key={data.id}
+                            name={data.title}
+                            price={data.price}
+                            listingId={data.id}
+                            is_boondock={data.is_boondock}
+                            buttonClick={() => {
+                              navigate(`/listing/${data.id}`)
+                            }}
+                          />
+                        </Box>
+                          )
                     }
                   )}
                 </span>
