@@ -1,6 +1,4 @@
 import { VStack } from "@chakra-ui/react";
-import { useNavigate } from 'react-router-dom';
-import "../styles/Home.css"
 import { useNavigate } from "react-router-dom";
 import "../styles/Home.css";
 import Search from "../components/GeocodingSearch";
