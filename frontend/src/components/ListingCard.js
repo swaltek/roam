@@ -6,9 +6,10 @@ import {
   Stack,
   Flex,
   Spacer,
+  Text,
 } from "@chakra-ui/react";
 
-import { AiFillStar } from "react-icons/ai";
+import FavoriteButton from "./FavoriteButton";
 
 function ListingCard({
   imageUrl,
@@ -18,9 +19,9 @@ function ListingCard({
   key,
   buttonText = "Click Me",
   buttonClick,
-  rating,
   is_boondock,
   nearPark,
+  ...props
 }) {
   return (
     <Box
@@ -33,20 +34,30 @@ function ListingCard({
       <Image src={imageUrl} alt={imageAlt} />
       <Box p="6">
         <Stack>
+          {props.user && (
+            <FavoriteButton
+              user={props.user}
+              setUser={props.setUser}
+              listingId={props.listingId}
+            />
+          )}
           <Box display="flex" alignItems="baseline">
             <Badge borderRadius="full" px="2" colorScheme="teal">
-              {{ is_boondock } ? "BoonDock" : "Roam Listing"}
-              Dates
+              {is_boondock ? "BoonDock" : "Roam Listing"}
             </Badge>
-            <Box
-              color="gray.500"
-              fontWeight="semibold"
-              letterSpacing="wide"
-              fontSize="xs"
-              ml="2"
-            >
-              Nearest Park: {nearPark}
-            </Box>
+            {nearPark ? (
+              <Box
+                color="gray.500"
+                fontWeight="semibold"
+                letterSpacing="wide"
+                fontSize="xs"
+                ml="2"
+              >
+                Near: {nearPark}
+              </Box>
+            ) : (
+              <Box></Box>
+            )}
           </Box>
           <Box
             mt="1"
@@ -58,19 +69,10 @@ function ListingCard({
             {name}
           </Box>
 
-          <Box display="flex" mt="2" alignItems="center">
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <AiFillStar
-                  key={i}
-                  color={i < { rating } ? "teal.500" : "gray.300"}
-                />
-              ))}
-          </Box>
-
           <Flex>
-            <Box>price: {price}</Box>
+            <Box color="green" pr={20}>
+              price: ${price}
+            </Box>
             <Spacer />
             <Box>
               <Button
