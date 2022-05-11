@@ -6,10 +6,10 @@ import {
   Stack,
   Flex,
   Spacer,
-  Text,
 } from "@chakra-ui/react";
 
 import FavoriteButton from "./FavoriteButton";
+import defaultImage from "../static/branding/listing-default-image.png";
 
 function ListingCard({
   imageUrl,
@@ -30,8 +30,9 @@ function ListingCard({
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      bg="white"
     >
-      <Image src={imageUrl} alt={imageAlt} />
+      <Image src={imageUrl || defaultImage} alt={imageAlt} />
       <Box p="6">
         <Stack>
           {props.user && (
