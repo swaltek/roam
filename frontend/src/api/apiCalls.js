@@ -112,7 +112,11 @@ apiCalls.getListingsNearPoint = async (point, distance) => {
 
 apiCalls.createListing = async (listingData) => {
   return await apiHelpers.tryCatchFetch(() =>
-    axios.post(`${BASE_URL}/listings/`, listingData, apiHelpers.getCsrfConfig())
+    axios.post(`${BASE_URL}/listings/`, listingData, apiHelpers.getCsrfConfig(), {
+      headers:{
+        "Content-Type": "multipart/form-data"
+      }
+    })
   );
 };
 
