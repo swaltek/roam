@@ -26,7 +26,7 @@ function Account(props) {
       </div>
 
       <div className="fullWidth ">
-        <PastStays />
+        <PastStays user={props.user} />
       </div>
 
       <div class="fullWidth ">
