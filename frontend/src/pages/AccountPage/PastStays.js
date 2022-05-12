@@ -1,9 +1,11 @@
 import apiCalls from "../../api/apiCalls";
 import { useEffect, useState } from "react";
-import { Text } from "@chakra-ui/react";
+import { Grid, GridItem, Text } from "@chakra-ui/react";
 import HeadingText from "../../components/HeadingText";
+import PastStaysCard from "../../components/PastStaysCard";
+import image from "../../static/branding/listing-default-image.png";
 
-function PastStays() {
+function PastStays(props) {
   const current = new Date();
   const today = `${current.getFullYear()}-${
     current.getMonth() + 1
@@ -30,33 +32,24 @@ function PastStays() {
   const loadPastReservations = () => {
     return pastReservations.map((reservation, index) => {
       return (
-        <div
-          className="box neutral2 padding text-center "
-          key={`past_res_${index}`}
-        >
-          <h4 className="heavyText genericSecondaryHeader">
-            {reservation.listing_name}
-          </h4>
-          <h4>{reservation.date_start}</h4>
-          <h4>{reservation.date_end}</h4>
-          <h4>${reservation.total}</h4>
-        </div>
+        <GridItem p={5}>
+          <PastStaysCard
+            key={reservation.id}
+            imageUrl={image}
+            name={reservation.listing_name}
+            startDate={reservation.date_start}
+            endDate={reservation.date_end}
+            price={reservation.total}
+          />
+        </GridItem>
       );
     });
-  };
-
-  const renderContent = () => {
-    if (pastReservations === []) {
-      return <Text>You havn't made any bookings Yet!</Text>;
-    } else {
-      return <>{loadPastReservations()}</>;
-    }
   };
 
   return (
     <>
       <HeadingText text="Past Stays" />
-      {renderContent()}
+      <Grid autoRows={"auto"}>{props.user && loadPastReservations()}</Grid>
     </>
   );
 }
