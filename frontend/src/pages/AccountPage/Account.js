@@ -4,14 +4,14 @@ import ReservationDetails from "./ReservationDetails";
 import SavedSites from "./SavedSites";
 import PastStays from "./PastStays";
 import MySites from "./MySites";
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import HeadingText from "../../components/HeadingText";
 
 function Account(props) {
   return (
     <div className="container centerBlockElement">
-      
-      <h1 className="fullWidth exploreHeader">Account Details</h1>
+      <HeadingText pt="2" text="Account Details" />
 
       <div className="fullWidth">
         <UserInfo user={props.user} setUser={props.setUser} />
@@ -22,7 +22,7 @@ function Account(props) {
       </div>
 
       <div className="fullWidth ">
-        <SavedSites user={props.user} setUser={props.user}/>
+        <SavedSites user={props.user} setUser={props.user} />
       </div>
 
       <div className="fullWidth ">
@@ -30,9 +30,8 @@ function Account(props) {
       </div>
 
       <div class="fullWidth ">
-        <MySites user={props.user}/>
+        <MySites user={props.user} />
       </div>
-
     </div>
   );
 }

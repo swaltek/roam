@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import apiCalls from "../../api/apiCalls";
-import { Card, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { Grid, GridItem, VStack, Button } from "@chakra-ui/react";
+import ListingCard from "../../components/ListingCard";
+import HeadingText from "../../components/HeadingText";
 
 function MySites(props) {
   const [ownListings, setOwnListings] = useState([]);
-
+  const navigate = useNavigate();
   useEffect(() => {
     if (props.user) {
       loadOwnListings();
@@ -28,31 +30,29 @@ function MySites(props) {
   const renderOwnerListings = () => {
     return ownListings.map((listing) => {
       return (
-        <div
-          key={`ownlist-${listing.id}`}
-          className="box neutral2 padding text-center "
-        >
-          <h4 className="heavyText genericSecondaryHeader">{listing.title}</h4>
-          <h4>{`$${listing.price}`}</h4>
-          <Link className="button-4" to={`/listing/${listing.id}/edit`}>
-            Edit
-          </Link>
-        </div>
+        <GridItem p={5}>
+          <ListingCard
+            key={listing.key}
+            price={listing.price}
+            name={listing.title}
+            buttonText="Edit"
+            buttonClick={() => navigate(`/listing/${listing.id}/edit`)}
+          />
+        </GridItem>
       );
     });
   };
 
-    return (
-
-        <div className="container exploreHeader">
-        <h1>My Properties</h1>
-        <div className='row'>
-        <Link to={`/listing/new`}><Button>Create New Listing</Button></Link>
-        </div>
-        <div>{ props.user && renderOwnerListings()}
-        </div>
-    </div>
-  
-)
+  return (
+    <VStack pb={10}>
+      <HeadingText text="My Listings" />
+      <Grid autoRows={"auto"}>{props.user && renderOwnerListings()}</Grid>
+      <Link to={`/listing/new`}>
+        <Button color="white" bgColor={["primary.900"]}>
+          Create New Listing
+        </Button>
+      </Link>
+    </VStack>
+  );
 }
 export default MySites;

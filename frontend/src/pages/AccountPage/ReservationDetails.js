@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ReservationCard from "../../components/ReservationCard";
 import imageURL from "../../static/branding/listing-default-image.png";
 import { Grid, GridItem } from "@chakra-ui/react";
+import HeadingText from "../../components/HeadingText";
 
 function ReservationDetails() {
   const [reservations, setReservations] = useState([]);
@@ -35,7 +36,7 @@ function ReservationDetails() {
       };
 
       return (
-        <GridItem>
+        <GridItem p={5}>
           <ReservationCard
             key={reservation.id}
             name={reservation.listing_name}
@@ -50,7 +51,12 @@ function ReservationDetails() {
     });
   };
 
-  return <Grid autoRows={"auto"}>{renderReservations()}</Grid>;
+  return (
+    <>
+      <HeadingText text="Current Bookings" />
+      <Grid autoRows={"auto"}>{renderReservations()}</Grid>
+    </>
+  );
 }
 
 export default ReservationDetails;
