@@ -132,7 +132,11 @@ apiCalls.updateListingById = async (listingId, listingData) => {
     axios.patch(
       `${BASE_URL}/listings/${listingId}/`,
       listingData,
-      apiHelpers.getCsrfConfig()
+      apiHelpers.getCsrfConfig(),{
+        headers:{
+          "Content-Type": "multipart/form-data"
+        }
+      }
     )
   );
 };

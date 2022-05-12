@@ -58,11 +58,22 @@ function ListingForm(props) {
             if (response) {
                 console.log(response)
                 alert('New Listing Created')
+                navigate('/account')
             }
         } else {
-            let response = await apiCalls.updateListingById(props.listing.id, values)
+            let update_form_data = new FormData();  
+            update_form_data.append("image", values.file[0]);
+
+            update_form_data.append("title", values.title);
+            update_form_data.append("description", values.description);
+            update_form_data.append("is_boondock", values.is_boondock);
+            update_form_data.append("location_lat", values.location_lat);
+            update_form_data.append("location_lng", values.location_lng);
+            update_form_data.append("price", values.price);
+
+            let response = await apiCalls.updateListingById(props.listing.id, update_form_data)
             if (response) {
-                alert('updated')
+                alert('Updated')
                 navigate('/account')
             }
         }
