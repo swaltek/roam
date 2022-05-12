@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react';
 import {
   VStack,
   Box,
-  Heading,
-  Text,
   Spinner,
   Button,
   Slide,
@@ -14,7 +12,7 @@ import Map from '../components/Map';
 import Search from '../components/GeocodingSearch';
 import ListingCard from '../components/ListingCard';
 
-const ListingSearch = () => {
+const ListingSearch = (props) => {
   let { state } = useLocation();
   let navigate = useNavigate();
   //const [searchRadius, setSearchRadius ] = useState(100);
@@ -90,11 +88,14 @@ const ListingSearch = () => {
                           p='10px'
                         >
                           <ListingCard
+                            user={props.user}
+                            setUser={props.setUser}
                             key={data.id}
                             name={data.title}
                             price={data.price}
                             listingId={data.id}
                             is_boondock={data.is_boondock}
+                            buttonText="View"
                             buttonClick={() => {
                               navigate(`/listing/${data.id}`)
                             }}
