@@ -32,6 +32,7 @@ export const MostPopularSites = (props) => {
           nearPark={site.near_park}
           price={site.price}
           buttonText="Book Now"
+          imageUrl={site.image}
           buttonClick={() => navigate(`/listing/${site.id}`)}
         />
       );

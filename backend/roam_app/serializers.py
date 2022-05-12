@@ -83,9 +83,7 @@ class ListingSerializer(serializers.ModelSerializer):
     image = Base64ImageField(
         max_length=None, use_url=True,
     )
-
-
-
+    
     def get_dates_booked(self, instance):
         return instance.get_listing_dates_booked(instance)
 

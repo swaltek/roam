@@ -15,6 +15,7 @@ function ReservationDetails() {
   const loadReservations = async () => {
     const data = await apiCalls.getAllReservations();
     setReservations(data ? data : []);
+    console.log(data)
   };
 
   const removeReservation = (deleteReservationById) => {
@@ -40,7 +41,7 @@ function ReservationDetails() {
           <ReservationCard
             key={reservation.id}
             name={reservation.listing_name}
-            imageUrl={imageURL}
+            imageUrl={reservation.image}
             startDate={reservation.date_start}
             endDate={reservation.date_end}
             price={reservation.total}

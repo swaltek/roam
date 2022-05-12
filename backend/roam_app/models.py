@@ -33,7 +33,7 @@ class Listing(models.Model):
     description = models.TextField()
     rating = models.DecimalField(default=None, null=True, blank=True, max_digits=2, decimal_places=1)
     near_park = models.CharField(max_length=255, null=True, blank=True)
-    image = models.ImageField(upload_to='listing_images')
+    image = models.ImageField(upload_to='listing_images', blank=True, null=True)
 
     def __str__(self):
         return f"{self.owner.first_name}'s {self.title}"

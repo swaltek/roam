@@ -35,6 +35,7 @@ function MySites(props) {
             key={listing.key}
             price={listing.price}
             name={listing.title}
+            imageUrl={listing.image}
             buttonText="Edit"
             buttonClick={() => navigate(`/listing/${listing.id}/edit`)}
           />

@@ -1,6 +1,7 @@
 import { FormControl, FormLabel, FormErrorMessage, Button, Input, Textarea } from '@chakra-ui/react'
 import { Formik, Form } from 'formik';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import apiCalls from '../api/apiCalls';
 import * as yup from 'yup'
 import Calendar from 'react-calendar';
@@ -8,6 +9,7 @@ import '../styles/Calendar.css';
 import 'react-calendar/dist/Calendar.css';
 
 function ReservationForm(props) {
+  const navigate = useNavigate();
   const [date, setDate] = useState();
   const [minDate, setMinDate] = useState(new Date())
   const [maxDate, setMaxDate] = useState(null)
@@ -38,6 +40,7 @@ function ReservationForm(props) {
     setSubmitting(false);
     resetForm({initialValues:''})
     setDate(new Date())
+    navigate("/account")
   }
 
   const disabledDates = (date, view)=>{

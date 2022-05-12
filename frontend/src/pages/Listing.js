@@ -63,7 +63,7 @@ export const Listing = (props) => {
             </Card>
           </Col>
           </Row>
-        <Row>
+        {/* <Row>
           <Col>
             <Card>
               <Card.Header>Reviews</Card.Header>
@@ -72,7 +72,7 @@ export const Listing = (props) => {
               </Card.Body>
             </Card>
           </Col>
-        </Row>  
+        </Row>   */}
       </div>
       :
       <div>

@@ -1,4 +1,5 @@
 import { Box, Button, Image, Badge, Stack } from "@chakra-ui/react";
+import defaultImage from "../static/branding/listing-default-image.png";
 
 function ReservationCard({
   imageUrl,
@@ -18,7 +19,7 @@ function ReservationCard({
       borderRadius="lg"
       overflow="hidden"
     >
-      <Image src={imageUrl} alt={imageAlt} />
+      <Image src={imageUrl || defaultImage} alt={imageAlt} />
       <Box p="6">
         <Stack>
           <Box display="flex">
