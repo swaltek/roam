@@ -36,6 +36,7 @@ function SavedSites(props) {
             key={listing.key}
             price={listing.price}
             name={listing.title}
+            imageUrl={listing.image}
             buttonText="See Listing"
             buttonClick={() => navigate(`/listing/${listing.id}`)}
           />

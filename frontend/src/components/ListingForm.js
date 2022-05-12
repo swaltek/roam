@@ -44,7 +44,8 @@ function ListingForm(props) {
         // put request for updating a listing
         if (props.new){
 
-            let form_data = new FormData();        
+            let form_data = new FormData(); 
+            console.log(values.file)       
             if (values.file[0]){
                 form_data.append("image", values.file[0]);
             }
