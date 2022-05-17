@@ -32,7 +32,7 @@ function ListingCard({
       overflow="hidden"
       bg="white"
     >
-      <Image src={imageUrl || defaultImage} alt={imageAlt} />
+      <Image src={imageUrl || defaultImage} alt={imageAlt}  bgSize="cover" width="400px" minWidth="300px" minHeight="100px" height="250px"/>
       <Box p="6">
         <Stack>
           {props.user && (
