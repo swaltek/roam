@@ -151,13 +151,13 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATIC_ROOT = './static'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "../frontend/build/static"), # your static files folder (where react builds to)
-]
+STATIC_ROOT = '../frontend/build/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_DIRS = [
+#    os.path.join(BASE_DIR, "../frontend/build/static"), # your static files folder (where react builds to)
+#]
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
