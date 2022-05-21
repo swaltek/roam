@@ -176,7 +176,7 @@ LOGGING = {
  'handlers': {
      'logfile': {
              'class': 'logging.handlers.WatchedFileHandler',
-             'filename': os.getenv('DJANGO_LOG_LOCATION', '/logs/django.log'),
+             'filename': os.getenv('DJANGO_LOG_LOCATION', '/home/django.log'),
          }
  },
  'loggers': {
