@@ -171,3 +171,25 @@ AUTH_USER_MODEL = 'roam_app.User'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+LOGGING = {
+ 'version': 1,
+ 'disable_existing_loggers': False,
+ 'filters': {
+     'require_debug_false': {
+         '()': 'django.utils.log.RequireDebugFalse'
+         }
+     },
+ 'handlers': {
+     'logfile': {
+             'class': 'logging.handlers.WatchedFileHandler',
+             'filename': '.\\myapp.log'
+         }
+ },
+ 'loggers': {
+         'django': {
+             'handlers': ['logfile'],
+             'level': 'ERROR',
+             'propagate': False,
+         }
+     }
+ }
