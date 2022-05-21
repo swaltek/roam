@@ -36,6 +36,7 @@ if DEBUG:  # Allows split development on local machine
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware", #corsheaders should be above all the others
+    "whitenoise.middleware.WhiteNoiseMiddleWare"
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -155,6 +156,8 @@ STATIC_ROOT = './static'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "../frontend/build/static"), # your static files folder (where react builds to)
 ]
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
