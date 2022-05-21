@@ -98,22 +98,16 @@ WSGI_APPLICATION = 'roam_proj.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#lyman's settings
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'roam_db',
-#         'USER': 'postgres',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'roam_db',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.getenv('DBNAME', 'roam_db'),
+        'USER': os.getenv('DBUSER', ''),
+        'PASSWORD':  os.getenv('DBPASS', ''),
+        'HOST': os.getenv('DBHOST', 'localhost'),
+        'PORT': '5432',
     }
 }
 
@@ -182,7 +176,7 @@ LOGGING = {
  'handlers': {
      'logfile': {
              'class': 'logging.handlers.WatchedFileHandler',
-             'filename': '.\\myapp.log'
+             'filename': os.getenv('DJANGO_LOG_LOCATION', '/logs/django.log'),
          }
  },
  'loggers': {
