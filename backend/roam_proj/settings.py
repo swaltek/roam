@@ -36,7 +36,7 @@ if DEBUG:  # Allows split development on local machine
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware", #corsheaders should be above all the others
-    "whitenoise.middleware.WhiteNoiseMiddleWare"
+    "whitenoise.middleware.WhiteNoiseMiddleware"
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
