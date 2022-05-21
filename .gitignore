@@ -20,6 +20,8 @@ db.sqlite3
 # production
 /build
 
+*.log
+
 # misc
 .DS_Store
 .env.local

@@ -168,6 +168,7 @@ AUTH_USER_MODEL = 'roam_app.User'
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
 LOGGING = {
  'version': 1,
  'disable_existing_loggers': False,
@@ -179,7 +180,7 @@ LOGGING = {
  'handlers': {
      'logfile': {
              'class': 'logging.handlers.WatchedFileHandler',
-             'filename': os.getenv('DJANGO_LOG_LOCATION', '/home/django.log'),
+             'filename': os.getenv('LOG_FILE', '/home/django.log'),
          }
  },
  'loggers': {
