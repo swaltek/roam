@@ -2,7 +2,7 @@ import axios from "axios";
 import apiHelpers from "./apiHelpers";
 
 const apiCalls = {};
-const BASE_URL = "http://localhost:8000/api"; //backend in project URLS
+const BASE_URL = "https://roam.azurewebsites.net/api"; //backend in project URLS
 
 //user/auth api methods
 apiCalls.signup = async (signupData) => {
